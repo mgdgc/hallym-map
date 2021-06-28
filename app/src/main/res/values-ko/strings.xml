@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">나의 한림 찾기</string>
+
+    <!--  MainActivity  -->
+    <string name="bottom_nav_current">지도</string>
+    <string name="bottom_nav_my_place">내 장소</string>
+    <string name="bottom_nav_recommend">시설</string>
+    <string name="bottom_nav_more">더보기</string>
+
+    <!--  ApplicationPermissionManager  -->
+    <string name="permission_deny">거부</string>
+    <string name="permission_allow">허용</string>
+    <string name="permission_location">위치</string>
+    <string name="permission_location_explain">&lt;app_name&gt;은 사용자에게 정확한 위치 정보를 제공하기 위해 위치 정보 권한을 요청합니다.</string>
+
+    <!--  MoreFragment  -->
+    <string name="more_user_default_name">사용자</string>
+    <string name="more_section_application">애플리케이션</string>
+    <string name="more_licenses">오픈소스 라이선스</string>
+    <string name="more_section_data">데이터 관리</string>
+    <string name="more_privacy_policy">개인정보처리정책</string>
+    <string name="more_delete_favorite">내 장소 삭제</string>
+    <string name="more_delete_all">모든 데이터 삭제</string>
+    <string name="more_section_report">문의</string>
+    <string name="more_report_issue">버그 신고</string>
+    <string name="more_report_place">장소 수정/ 추가 요청</string>
+
+    <!--  Content descriptions  -->
+    <string name="des_main_fab">찾기 버튼</string>
+    <string name="des_map_kakao">카카오맵</string>
+    <string name="des_row_more_user_img">사용자 사진</string>
+    <string name="des_row_section_button">섹션 버튼</string>
+</resources>

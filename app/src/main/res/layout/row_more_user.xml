@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutRowMoreUser"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/Theme.HallymMap.RecyclerViewSingle">
+
+    <ImageView
+        android:id="@+id/imgRowMoreUserEdit"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        android:padding="8dp"
+        android:elevation="2dp"
+        android:src="@drawable/baseline_edit_24"
+        android:theme="@style/Theme.HallymMap.ImageButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/imgRowMoreUser"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/des_row_more_user_img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/txtRowMoreUserContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/imgRowMoreUser"
+        app:layout_constraintTop_toBottomOf="@+id/txtRowMoreUserName"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Contents">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtRowMoreUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textSize="16sp"
+        android:theme="@style/Theme.HallymMap.PrimaryTextView"
+        app:layout_constraintBottom_toTopOf="@+id/txtRowMoreUserContent"
+        app:layout_constraintLeft_toRightOf="@+id/imgRowMoreUser"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="First Last Name">
+
+    </TextView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

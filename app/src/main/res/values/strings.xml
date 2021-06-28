@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">HallymMap</string>
+
+    <!--  MainActivity  -->
+    <string name="bottom_nav_current">Map</string>
+    <string name="bottom_nav_my_place">My Places</string>
+    <string name="bottom_nav_recommend">Recommend</string>
+    <string name="bottom_nav_more">More</string>
+
+    <!--  ApplicationPermissionManager  -->
+    <string name="permission_deny">Deny</string>
+    <string name="permission_allow">Allow</string>
+    <string name="permission_location">Location</string>
+    <string name="permission_location_explain">&lt;app_name&gt; requests location permission to help you find exact location.</string>
+
+    <!--  MoreFragment  -->
+    <string name="more_user_default_name">User</string>
+    <string name="more_section_application">Application</string>
+    <string name="more_licenses">Licenses</string>
+    <string name="more_section_data">Data Management</string>
+    <string name="more_privacy_policy">Privacy Policies</string>
+    <string name="more_delete_favorite">Delete favorites</string>
+    <string name="more_delete_all">Delete all data</string>
+    <string name="more_section_report">Report</string>
+    <string name="more_report_issue">Report bugs</string>
+    <string name="more_report_place">Report place</string>
+
+    <!--  Content descriptions  -->
+    <string name="des_main_fab">Find button</string>
+    <string name="des_map_kakao">Kakao Map</string>
+    <string name="des_row_more_user_img">User Image</string>
+    <string name="des_row_section_button">Section Button</string>
+</resources>

@@ -1,0 +1,51 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.HallymMap" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_200</item>
+        <item name="colorPrimaryVariant">@color/blue_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="Theme.HallymMap.Toolbar" parent="Theme.HallymMap">
+        <!--  Toolbar color  -->
+        <item name="android:background">@color/cardview_dark_background</item>
+    </style>
+    <style name="Theme.HallymMap.Divider" parent="Theme.HallymMap">
+        <!--  Divider color  -->
+        <item name="android:background">@color/gray_500</item>
+    </style>
+
+    <!--  Widgets  -->
+    <style name="Theme.HallymMap.PrimaryTextView" parent="Theme.HallymMap">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:alpha">0.8</item>
+    </style>
+    <style name="Theme.HallymMap.ImageButton" parent="Theme.HallymMap">
+        <item name="android:background">@drawable/background_image_button_dark</item>
+    </style>
+
+    <!--  RecyclerView Rows  -->
+    <style name="Theme.HallymMap.RecyclerView" parent="Theme.HallymMap">
+        <item name="android:background">@color/gray_900</item>
+    </style>
+    <style name="Theme.HallymMap.RecyclerViewTop" parent="Theme.HallymMap">
+        <item name="android:background">@drawable/background_table_item_top_dark</item>
+    </style>
+    <style name="Theme.HallymMap.RecyclerViewSingle" parent="Theme.HallymMap">
+        <item name="android:background">@drawable/background_table_item_single_dark</item>
+    </style>
+    <style name="Theme.HallymMap.RecyclerViewMiddle" parent="Theme.HallymMap">
+        <item name="android:background">@drawable/background_table_item_middle_dark</item>
+    </style>
+    <style name="Theme.HallymMap.RecyclerViewBottom" parent="Theme.HallymMap">
+        <item name="android:background">@drawable/background_table_item_bottom_dark</item>
+    </style>
+</resources>

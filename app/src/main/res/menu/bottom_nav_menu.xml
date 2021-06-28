@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/navCurrent"
+        android:icon="@drawable/baseline_location_on_24"
+        android:title="@string/bottom_nav_current" />
+    <item
+        android:id="@+id/navMy"
+        android:icon="@drawable/baseline_favorite_24"
+        android:title="@string/bottom_nav_my_place" />
+    <item
+        android:id="@+id/navPlaceholder"
+        android:enabled="false"
+        android:title="" />
+    <item
+        android:id="@+id/navFacilities"
+        android:icon="@drawable/baseline_local_cafe_24"
+        android:title="@string/bottom_nav_recommend" />
+    <item
+        android:id="@+id/navMore"
+        android:icon="@drawable/baseline_more_horiz_24"
+        android:title="@string/bottom_nav_more" />
+</menu>

@@ -1,0 +1,2 @@
+rootProject.name = "HallymMap"
+include ':app'
