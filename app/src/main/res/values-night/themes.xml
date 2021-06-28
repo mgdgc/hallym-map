@@ -34,18 +34,6 @@
 
     <!--  RecyclerView Rows  -->
     <style name="Theme.HallymMap.RecyclerView" parent="Theme.HallymMap">
-        <item name="android:background">@color/gray_900</item>
-    </style>
-    <style name="Theme.HallymMap.RecyclerViewTop" parent="Theme.HallymMap">
-        <item name="android:background">@drawable/background_table_item_top_dark</item>
-    </style>
-    <style name="Theme.HallymMap.RecyclerViewSingle" parent="Theme.HallymMap">
-        <item name="android:background">@drawable/background_table_item_single_dark</item>
-    </style>
-    <style name="Theme.HallymMap.RecyclerViewMiddle" parent="Theme.HallymMap">
-        <item name="android:background">@drawable/background_table_item_middle_dark</item>
-    </style>
-    <style name="Theme.HallymMap.RecyclerViewBottom" parent="Theme.HallymMap">
-        <item name="android:background">@drawable/background_table_item_bottom_dark</item>
+        <item name="android:background">@color/bg_primary</item>
     </style>
 </resources>

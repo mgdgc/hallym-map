@@ -22,7 +22,7 @@
 
     <style name="Theme.HallymMap.Divider" parent="Theme.HallymMap">
         <!--  Divider color  -->
-        <item name="android:background">@color/gray_200</item>
+        <item name="android:background">@color/gray_300</item>
     </style>
 
     <!--  Widgets  -->
@@ -36,18 +36,6 @@
 
     <!--  RecyclerView Rows  -->
     <style name="Theme.HallymMap.RecyclerView" parent="Theme.HallymMap">
-        <item name="android:background">@color/gray_200</item>
-    </style>
-    <style name="Theme.HallymMap.RecyclerViewTop" parent="Theme.HallymMap">
-        <item name="android:background">@drawable/background_table_item_top_light</item>
-    </style>
-    <style name="Theme.HallymMap.RecyclerViewSingle" parent="Theme.HallymMap">
-        <item name="android:background">@drawable/background_table_item_single_light</item>
-    </style>
-    <style name="Theme.HallymMap.RecyclerViewMiddle" parent="Theme.HallymMap">
-        <item name="android:background">@drawable/background_table_item_middle_light</item>
-    </style>
-    <style name="Theme.HallymMap.RecyclerViewBottom" parent="Theme.HallymMap">
-        <item name="android:background">@drawable/background_table_item_bottom_light</item>
+        <item name="android:background">@color/bg_primary</item>
     </style>
 </resources>

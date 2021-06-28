@@ -28,6 +28,8 @@ class MoreMenuDefaultData(val context: Context) {
                 iconBackgroundColor = R.drawable.icon_app_icon_bg
             )
         appInfo.selectable = true
+        appInfo.accessory = true
+        appInfo.itemPosition = TableData.Companion.ItemPosition.TOP
         data.add(appInfo)
 
         val licenses = TableData(
@@ -39,6 +41,7 @@ class MoreMenuDefaultData(val context: Context) {
         )
         licenses.accessory = true
         licenses.selectable = true
+        licenses.itemPosition = TableData.Companion.ItemPosition.BOTTOM
         data.add(licenses)
 
         // Data Management
@@ -54,6 +57,7 @@ class MoreMenuDefaultData(val context: Context) {
             icon = R.drawable.baseline_policy_24,
             iconBackgroundColor = R.drawable.icon_yellow_bg
         )
+        privacyPolicy.itemPosition = TableData.Companion.ItemPosition.TOP
         privacyPolicy.accessory = true
         privacyPolicy.selectable = true
         data.add(privacyPolicy)
@@ -66,6 +70,7 @@ class MoreMenuDefaultData(val context: Context) {
             iconBackgroundColor = R.drawable.icon_orange_bg
         )
         deleteFav.selectable = true
+        deleteFav.itemPosition = TableData.Companion.ItemPosition.MIDDLE
         data.add(deleteFav)
 
         val deleteAll = TableData(
@@ -76,6 +81,7 @@ class MoreMenuDefaultData(val context: Context) {
             iconBackgroundColor = R.drawable.icon_red_bg
         )
         deleteAll.selectable = true
+        deleteAll.itemPosition = TableData.Companion.ItemPosition.BOTTOM
         data.add(deleteAll)
 
         // Report
@@ -92,6 +98,7 @@ class MoreMenuDefaultData(val context: Context) {
             iconBackgroundColor = R.drawable.icon_gray_bg
         )
         reportIssue.selectable = true
+        reportIssue.itemPosition = TableData.Companion.ItemPosition.TOP
         data.add(reportIssue)
 
         val reportPlace = TableData(
@@ -102,6 +109,7 @@ class MoreMenuDefaultData(val context: Context) {
             iconBackgroundColor = R.drawable.icon_gray_bg
         )
         reportPlace.selectable = true
+        reportPlace.itemPosition = TableData.Companion.ItemPosition.BOTTOM
         data.add(reportPlace)
 
         return data.toTypedArray()

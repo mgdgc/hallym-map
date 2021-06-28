@@ -5,15 +5,15 @@
     android:id="@+id/layoutRowMoreUser"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/Theme.HallymMap.RecyclerViewSingle">
+    android:background="@drawable/background_table_item_single">
 
     <ImageView
         android:id="@+id/imgRowMoreUserEdit"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="24dp"
-        android:padding="8dp"
         android:elevation="2dp"
+        android:padding="8dp"
         android:src="@drawable/baseline_edit_24"
         android:theme="@style/Theme.HallymMap.ImageButton"
         app:layout_constraintBottom_toBottomOf="parent"

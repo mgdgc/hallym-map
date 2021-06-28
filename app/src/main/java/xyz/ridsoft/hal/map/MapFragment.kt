@@ -52,4 +52,8 @@ class MapFragment : Fragment() {
             GeoPoint(GeoCoordinate.UNIVERSITY.latitude, GeoCoordinate.UNIVERSITY.longitude)
         binding.mapView.controller.setCenter(startPoint)
     }
+
+    private fun initMapPoint() {
+
+    }
 }

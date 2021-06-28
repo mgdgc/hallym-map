@@ -12,7 +12,8 @@ class Place(val id: Int, val name: String, val latitude: Double, val longitude: 
         }
 
         class Facility(val id: Int, val type: FacilityType, val floor: Int) {
-
+            var name: String? = null
+            var searchTag: String? = null
         }
     }
 
@@ -21,6 +22,7 @@ class Place(val id: Int, val name: String, val latitude: Double, val longitude: 
     var legacyName: String? = null
     var buildingNum: Int = DEFAULT_BUILDING_NUMBER
     var facility: Array<Facility> = arrayOf()
+    var searchTag: String? = null
 
 
 }

@@ -1,14 +1,14 @@
 package xyz.ridsoft.hal.more
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import xyz.ridsoft.hal.R
+import xyz.ridsoft.hal.common.EmptyFooter
 import xyz.ridsoft.hal.common.SectionHeader
+import xyz.ridsoft.hal.databinding.RowEmptyFooterBinding
 import xyz.ridsoft.hal.databinding.RowMoreMenuBinding
 import xyz.ridsoft.hal.databinding.RowMoreUserBinding
 import xyz.ridsoft.hal.databinding.RowSectionHeaderBinding
@@ -21,6 +21,7 @@ class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
         private const val VIEW_TYPE_ROW = R.layout.row_more_menu
         private const val VIEW_TYPE_USER = R.layout.row_more_user
         private const val VIEW_TYPE_SECTION = R.layout.row_section_header
+        private const val VIEW_TYPE_FOOTER = R.layout.row_empty_footer
     }
 
     private var data: ArrayList<TableData> = ArrayList()
@@ -39,6 +40,10 @@ class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
 
             VIEW_TYPE_SECTION -> SectionHeader(
                 RowSectionHeaderBinding.inflate(LayoutInflater.from(context), parent, false)
+            )
+
+            VIEW_TYPE_FOOTER -> EmptyFooter(
+                RowEmptyFooterBinding.inflate(LayoutInflater.from(context), parent, false)
             )
 
             else -> MoreMenuViewHolder(
@@ -83,6 +88,17 @@ class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
                 }
             }
 
+            // Background
+            when (data[position].itemPosition) {
+                TableData.Companion.ItemPosition.TOP -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(R.drawable.background_table_item_top)
+                TableData.Companion.ItemPosition.MIDDLE -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(R.drawable.background_table_item_middle)
+                TableData.Companion.ItemPosition.BOTTOM -> {
+                    viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(R.drawable.background_table_item_bottom)
+                    viewHolder.binding.layoutRowMoreMenuDivider.visibility = View.INVISIBLE
+                }
+                TableData.Companion.ItemPosition.SINGLE -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(R.drawable.background_table_item_single)
+            }
+
         } else if (holder.itemViewType == VIEW_TYPE_SECTION) {
             val viewHolder = holder as SectionHeader
 
@@ -115,12 +131,12 @@ class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return data.size + 1
     }
 
     override fun getItemViewType(position: Int): Int {
         super.getItemViewType(position)
-        return if (position == 0) VIEW_TYPE_USER else {
+        return if (position == 0) VIEW_TYPE_USER else if (position == data.size) VIEW_TYPE_FOOTER else {
             when (data[position].itemType) {
                 TableData.Companion.ItemType.DIVIDER -> VIEW_TYPE_SECTION
                 TableData.Companion.ItemType.NORMAL -> VIEW_TYPE_ROW

@@ -3,7 +3,7 @@ package xyz.ridsoft.hal.model
 class TableData(var id: String, var title: String) {
     companion object {
         enum class ItemType {
-            NORMAL, DIVIDER
+            NORMAL, DIVIDER, HEADER, FOOTER
         }
 
         enum class ItemPosition {

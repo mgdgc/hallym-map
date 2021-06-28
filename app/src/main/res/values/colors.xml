@@ -12,6 +12,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray_200">#ededed</color>
+    <color name="gray_300">#e0e0e0</color>
     <color name="gray_500">#2C2C2C</color>
     <color name="gray_800">#1C1C1C</color>
     <color name="gray_900">#121212</color>
@@ -30,5 +31,10 @@
     <color name="icon_teal">#30B0C7</color>
     <color name="icon_yellow">#FFCC00</color>
     <color name="icon_blue_gray">#607d8b</color>
+
+    <!--  ViewGroup background color  -->
+    <color name="bg_primary">#ededed</color>
+    <color name="bg_secondary">#ffffff</color>
+    <color name="bg_selected">#BDBDBD</color>
 
 </resources>
