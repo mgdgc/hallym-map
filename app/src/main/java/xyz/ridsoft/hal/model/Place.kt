@@ -21,7 +21,7 @@ class Place(val id: Int, val name: String, val latitude: Double, val longitude: 
     var nameEn: String? = null
     var legacyName: String? = null
     var buildingNum: Int = DEFAULT_BUILDING_NUMBER
-    var facility: Array<Facility> = arrayOf()
+    var facilityId: Array<Int> = arrayOf()
     var searchTag: String? = null
 
 

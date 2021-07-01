@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xyz.ridsoft.hal">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,15 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HallymMap"
         android:usesCleartextTraffic="true">
-
-        <activity android:name="xyz.ridsoft.hal.MainActivity">
+        <activity android:name=".developer.FacilityJsonBuilderActivity"></activity>
+        <activity android:name=".developer.JsonBuilderActivity" />
+        <activity android:name=".more.AppInfoActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

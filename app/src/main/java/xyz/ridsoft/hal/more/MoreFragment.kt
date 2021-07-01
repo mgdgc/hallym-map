@@ -1,5 +1,6 @@
 package xyz.ridsoft.hal.more
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -44,7 +45,7 @@ class MoreFragment : Fragment() {
     private fun handleOnItemClickListener(id: String) {
         when (id) {
             "app_info" -> {
-
+                startActivity(Intent(context, AppInfoActivity::class.java))
             }
 
 

@@ -18,6 +18,7 @@ import org.osmdroid.views.CustomZoomButtonsController
 import xyz.ridsoft.hal.MainActivity
 import xyz.ridsoft.hal.R
 import xyz.ridsoft.hal.data.GeoCoordinate
+import xyz.ridsoft.hal.data.MapPoint
 import xyz.ridsoft.hal.databinding.FragmentMapBinding
 import java.util.*
 
@@ -53,7 +54,9 @@ class MapFragment : Fragment() {
         binding.mapView.controller.setCenter(startPoint)
     }
 
-    private fun initMapPoint() {
+    private fun initPlaces() {
+        val places = MapPoint().getPlaces()
+
 
     }
 }
