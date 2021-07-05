@@ -7,6 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import xyz.ridsoft.hal.databinding.ActivityAppInfoBinding
 import xyz.ridsoft.hal.developer.FacilityJsonBuilderActivity
 import xyz.ridsoft.hal.developer.JsonBuilderActivity
+import xyz.ridsoft.hal.value.SharedPreferencesKeys
 
 class AppInfoActivity : AppCompatActivity() {
 
@@ -21,22 +22,20 @@ class AppInfoActivity : AppCompatActivity() {
 
         binding.txtAppName.setOnClickListener {
             if (clicked >= 7) {
+                val pref = getSharedPreferences(SharedPreferencesKeys.DEVELOPER_PREF, 0)
+                val edit = pref.edit()
                 val alert = AlertDialog.Builder(this)
-                alert.setTitle("Developer Tools")
-                    .setNeutralButton("Close") { dialog, _ -> dialog.dismiss() }
-                    .setPositiveButton("Place Json Builder") { dialog, _ ->
-                        this.startActivity(
-                            Intent(this@AppInfoActivity, JsonBuilderActivity::class.java)
-                        )
+                alert.setTitle("개발자 메뉴")
+                    .setMessage("개발자 모드를 활성화하시겠습니까?")
+                    .setNeutralButton("닫기") { dialog, _ -> dialog.dismiss() }
+                    .setPositiveButton("활성화") { dialog, _ ->
+                        edit.putBoolean(SharedPreferencesKeys.BOOL_DEV_MENU_ENABLE, true)
+                        edit.apply()
                         dialog.dismiss()
                     }
-                    .setNegativeButton("Facility Json Builder") { dialog, _ ->
-                        this.startActivity(
-                            Intent(
-                                this@AppInfoActivity,
-                                FacilityJsonBuilderActivity::class.java
-                            )
-                        )
+                    .setNegativeButton("비활성화") { dialog, _ ->
+                        edit.putBoolean(SharedPreferencesKeys.BOOL_DEV_MENU_ENABLE, false)
+                        edit.apply()
                         dialog.dismiss()
                     }
                     .show()

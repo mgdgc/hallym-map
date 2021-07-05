@@ -1,9 +1,12 @@
 package xyz.ridsoft.hal.more
 
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import xyz.ridsoft.hal.R
 import xyz.ridsoft.hal.common.EmptyFooter
@@ -14,6 +17,7 @@ import xyz.ridsoft.hal.databinding.RowMoreUserBinding
 import xyz.ridsoft.hal.databinding.RowSectionHeaderBinding
 import xyz.ridsoft.hal.model.TableData
 import xyz.ridsoft.hal.value.SharedPreferencesKeys
+import kotlin.math.sin
 
 class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -79,6 +83,23 @@ class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
                 viewHolder.binding.imgRowMoreMenuAccessory.visibility = View.VISIBLE
             }
 
+            // Background
+            when (data[position].itemPosition) {
+                TableData.Companion.ItemPosition.TOP -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(
+                    R.drawable.background_table_item_top
+                )
+                TableData.Companion.ItemPosition.MIDDLE -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(
+                    R.drawable.background_table_item_middle
+                )
+                TableData.Companion.ItemPosition.BOTTOM -> {
+                    viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(R.drawable.background_table_item_bottom)
+                    viewHolder.binding.layoutRowMoreMenuDivider.visibility = View.INVISIBLE
+                }
+                TableData.Companion.ItemPosition.SINGLE -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(
+                    R.drawable.background_table_item_single
+                )
+            }
+
             // Click
             if (data[position].selectable) {
                 viewHolder.binding.layoutRowMoreMenu.setOnClickListener {
@@ -86,17 +107,6 @@ class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
                         onItemClickListener!!(data[position].id)
                     }
                 }
-            }
-
-            // Background
-            when (data[position].itemPosition) {
-                TableData.Companion.ItemPosition.TOP -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(R.drawable.background_table_item_top)
-                TableData.Companion.ItemPosition.MIDDLE -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(R.drawable.background_table_item_middle)
-                TableData.Companion.ItemPosition.BOTTOM -> {
-                    viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(R.drawable.background_table_item_bottom)
-                    viewHolder.binding.layoutRowMoreMenuDivider.visibility = View.INVISIBLE
-                }
-                TableData.Companion.ItemPosition.SINGLE -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(R.drawable.background_table_item_single)
             }
 
         } else if (holder.itemViewType == VIEW_TYPE_SECTION) {

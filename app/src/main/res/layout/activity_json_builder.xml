@@ -180,7 +180,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <Button
                 android:id="@+id/buttonJsonBuilderGenerate"
@@ -200,6 +200,17 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:text="Save"
+                tools:ignore="HardcodedText">
+
+            </Button>
+
+            <Button
+                android:id="@+id/buttonJsonBuilderFacility"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:text="Facilities"
                 tools:ignore="HardcodedText">
 
             </Button>
@@ -237,6 +248,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/txtJsonBuilder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"

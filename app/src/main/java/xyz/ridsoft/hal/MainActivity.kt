@@ -4,7 +4,12 @@ import android.Manifest
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import android.view.animation.Interpolator
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import xyz.ridsoft.hal.api.ApplicationPermissionManager
 import xyz.ridsoft.hal.databinding.ActivityMainBinding
@@ -78,12 +83,25 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    public fun changeBottomAppBarState(hide: Boolean) {
+    public fun hideFloatingActionButton(hide: Boolean) {
+        if (hide) {
+            binding.mainFAB.hide()
+        } else {
+            binding.mainFAB.show()
+        }
+    }
+
+    public fun hideBottomNavigationView(hide: Boolean) {
         if (hide) {
             binding.mainBAB.performHide()
         } else {
             binding.mainBAB.performShow()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mainBottomNav.selectedItemId = 0
     }
 
     private fun requestPermission() {

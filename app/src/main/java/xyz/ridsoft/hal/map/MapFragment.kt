@@ -59,4 +59,8 @@ class MapFragment : Fragment() {
 
 
     }
+
+    override fun onDetach() {
+        super.onDetach()
+    }
 }

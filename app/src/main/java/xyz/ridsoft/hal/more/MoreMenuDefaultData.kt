@@ -3,6 +3,7 @@ package xyz.ridsoft.hal.more
 import android.content.Context
 import xyz.ridsoft.hal.R
 import xyz.ridsoft.hal.model.TableData
+import xyz.ridsoft.hal.value.SharedPreferencesKeys
 
 class MoreMenuDefaultData(val context: Context) {
 
@@ -31,6 +32,32 @@ class MoreMenuDefaultData(val context: Context) {
         appInfo.accessory = true
         appInfo.itemPosition = TableData.Companion.ItemPosition.TOP
         data.add(appInfo)
+
+        // If developer menu is enabled
+        if (context.getSharedPreferences(SharedPreferencesKeys.DEVELOPER_PREF, 0)
+                .getBoolean(SharedPreferencesKeys.BOOL_DEV_MENU_ENABLE, false)
+        ) {
+            val devMenu = TableData(
+                "dev_menu", context.getString(R.string.more_dev_menu), content = null,
+                icon = R.drawable.baseline_bug_report_24,
+                iconBackgroundColor = R.drawable.icon_green_bg
+            )
+            devMenu.selectable = true
+            devMenu.accessory = true
+            devMenu.itemPosition = TableData.Companion.ItemPosition.MIDDLE
+            data.add(devMenu)
+        }
+
+        val changeLog = TableData(
+            "change_log",
+            context.getString(R.string.more_change_log),
+            content = null,
+            icon = R.drawable.baseline_new_releases_24,
+            iconBackgroundColor = R.drawable.icon_blue_bg
+        )
+        changeLog.selectable = true
+        changeLog.itemPosition = TableData.Companion.ItemPosition.MIDDLE
+        data.add(changeLog)
 
         val licenses = TableData(
             "licenses",

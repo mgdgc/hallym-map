@@ -24,6 +24,16 @@
     <string name="more_section_report">Report</string>
     <string name="more_report_issue">Report bugs</string>
     <string name="more_report_place">Report place</string>
+    <string name="more_change_log">Change log</string>
+    <string name="more_dev_menu">Developer Menu</string>
+
+    <!--  Place  -->
+    <!--  Facility  -->
+    <string name="facility_cafe">Cafe</string>
+    <string name="facility_study_room">Study room</string>
+    <string name="facility_convenience_store">Convenience Store</string>
+    <string name="facility_book_store">Book Store</string>
+    <string name="facility_stationery_store">Stationery</string>
 
     <!--  Content descriptions  -->
     <string name="des_main_fab">Find button</string>

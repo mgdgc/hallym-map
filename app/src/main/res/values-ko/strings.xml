@@ -25,6 +25,16 @@
     <string name="more_section_report">문의</string>
     <string name="more_report_issue">버그 신고</string>
     <string name="more_report_place">장소 수정/ 추가 요청</string>
+    <string name="more_change_log">변경사항 기록</string>
+    <string name="more_dev_menu">개발자 메뉴</string>
+
+    <!--  Place  -->
+    <!--  Facility  -->
+    <string name="facility_cafe">카페</string>
+    <string name="facility_study_room">스터디룸</string>
+    <string name="facility_convenience_store">편의점</string>
+    <string name="facility_book_store">서점</string>
+    <string name="facility_stationery_store">문구점</string>
 
     <!--  Content descriptions  -->
     <string name="des_main_fab">찾기 버튼</string>
