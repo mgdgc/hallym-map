@@ -6,6 +6,7 @@
 > "방학? 놀면 뭐하니?" 오픈소스SW 개발 공모전
 
 <br>
+
 ## 설치
 <img alt="Project Icon" src="/app/src/main/ic_launcher-playstore.png" width="120" height="120"/>
 
