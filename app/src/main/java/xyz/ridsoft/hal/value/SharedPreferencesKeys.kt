@@ -7,5 +7,6 @@ class SharedPreferencesKeys {
 
         public const val DEVELOPER_PREF = "developer"
         public const val BOOL_DEV_MENU_ENABLE = "dev_menu"
+        public const val STRING_FACILITY_JSON = "facilities"
     }
 }

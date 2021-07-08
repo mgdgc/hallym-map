@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutFacilityJsonBuilder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".developer.FacilityJsonBuilderActivity">
@@ -9,22 +10,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="?android:attr/actionBarSize">
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="3"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <EditText
                 android:id="@+id/editFacilityId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="numberDecimal"
                 android:hint="Id"
+                android:inputType="numberDecimal"
                 android:nextFocusDown="@id/editFacilityFloor"
                 tools:ignore="HardcodedText">
 
@@ -34,11 +35,11 @@
                 android:id="@+id/editFacilityFloor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
+                android:layout_weight="1"
                 android:hint="Floor"
+                android:inputType="numberDecimal"
                 android:nextFocusDown="@id/spinnerFacilityCategory"
-                tools:ignore="HardcodedText"
-                android:layout_weight="1">
+                tools:ignore="HardcodedText">
 
             </EditText>
 
@@ -46,8 +47,8 @@
                 android:id="@+id/spinnerFacilityCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nextFocusDown="@id/editFacilityName"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:nextFocusDown="@id/editFacilityName">
 
             </Spinner>
 
@@ -62,11 +63,11 @@
                 android:id="@+id/editFacilityName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:nextFocusDown="@id/editFacilityKr"
+                android:layout_weight="1"
                 android:hint="(Name)"
-                tools:ignore="HardcodedText"
-                android:layout_weight="1">
+                android:inputType="text"
+                android:nextFocusDown="@id/editFacilityKr"
+                tools:ignore="HardcodedText">
 
             </EditText>
 
@@ -74,11 +75,11 @@
                 android:id="@+id/editFacilityKr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:nextFocusDown="@id/editFacilityEn"
+                android:layout_weight="1"
                 android:hint="(Kr)"
-                tools:ignore="HardcodedText"
-                android:layout_weight="1">
+                android:inputType="text"
+                android:nextFocusDown="@id/editFacilityEn"
+                tools:ignore="HardcodedText">
 
             </EditText>
 
@@ -86,10 +87,10 @@
                 android:id="@+id/editFacilityEn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
+                android:layout_weight="1"
                 android:hint="(En)"
-                tools:ignore="HardcodedText"
-                android:layout_weight="1">
+                android:inputType="text"
+                tools:ignore="HardcodedText">
 
             </EditText>
 
@@ -99,8 +100,9 @@
             android:id="@+id/editFacilityTag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
             android:hint="(Tags)"
+            android:inputType="text"
+            android:imeOptions="actionDone"
             tools:ignore="HardcodedText">
 
         </EditText>
@@ -109,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="2">
 
             <Button
                 android:id="@+id/buttonFacilityGenerate"
@@ -118,17 +120,6 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:text="Generate"
-                tools:ignore="HardcodedText">
-
-            </Button>
-
-            <Button
-                android:id="@+id/buttonFacilitySave"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:text="Save"
                 tools:ignore="HardcodedText">
 
             </Button>
@@ -181,8 +172,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
+            android:lineSpacingExtra="8dp"
             android:text="Object Info"
+            android:textColor="@color/text_primary"
             android:textIsSelectable="true"
+            android:textSize="16sp"
             tools:ignore="HardcodedText">
 
         </TextView>

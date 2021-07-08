@@ -1,5 +1,7 @@
 package xyz.ridsoft.hal.model
 
+import com.google.gson.Gson
+
 class Place(val id: Int, val name: String, val latitude: Double, val longitude: Double) {
 
     companion object {
@@ -29,15 +31,22 @@ class Place(val id: Int, val name: String, val latitude: Double, val longitude: 
             var kr: String? = null
             var en: String? = null
             var searchTag: String? = null
+
+            fun toJson(): String {
+                return Gson().toJson(this)
+            }
         }
     }
 
     var kr: String? = null
     var en: String? = null
     var legacyName: String? = null
-    var buildingNum: Int = DEFAULT_BUILDING_NUMBER
+    var buildingNo: Int = DEFAULT_BUILDING_NUMBER
     var facilityId: Array<Int> = arrayOf()
     var searchTag: String? = null
 
+    fun toJson(): String {
+        return Gson().toJson(this)
+    }
 
 }

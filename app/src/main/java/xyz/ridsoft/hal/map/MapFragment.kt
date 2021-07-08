@@ -1,10 +1,12 @@
 package xyz.ridsoft.hal.map
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import org.osmdroid.config.Configuration
@@ -41,6 +43,9 @@ class MapFragment : Fragment() {
         initMapView()
     }
 
+    private var onTouch = false
+
+    @SuppressLint("ClickableViewAccessibility")
     private fun initMapView() {
         Configuration.getInstance().userAgentValue = BuildConfig.APPLICATION_ID
         binding.mapView.setTileSource(TileSourceFactory.MAPNIK)

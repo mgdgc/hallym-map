@@ -17,6 +17,9 @@
     <color name="gray_800">#1C1C1C</color>
     <color name="gray_900">#121212</color>
 
+    <!--  text color  -->
+    <color name="text_primary">#000000</color>
+
     <!--  Item Color  -->
     <color name="hallym_blue">#005CAC</color>
     <color name="hallym_teal">#00ACA9</color>
