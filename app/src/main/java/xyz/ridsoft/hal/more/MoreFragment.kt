@@ -1,6 +1,7 @@
 package xyz.ridsoft.hal.more
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,8 +15,15 @@ import xyz.ridsoft.hal.R
 import xyz.ridsoft.hal.databinding.FragmentMoreBinding
 import xyz.ridsoft.hal.developer.FacilityJsonBuilderActivity
 import xyz.ridsoft.hal.developer.JsonBuilderActivity
+import xyz.ridsoft.hal.value.SharedPreferencesManager
+import xyz.ridsoft.hal.value.URL
 
 class MoreFragment : Fragment() {
+
+    companion object {
+        public const val TAG = "more"
+    }
+
 
     private lateinit var binding: FragmentMoreBinding
     private lateinit var adapter: MoreAdapter
@@ -33,6 +41,10 @@ class MoreFragment : Fragment() {
         binding = FragmentMoreBinding.bind(view)
 
         initRecyclerView()
+
+        (activity as MainActivity).registerFavClickListener {
+            // TODO: on fab click
+        }
     }
 
     private fun initRecyclerView() {
@@ -81,6 +93,52 @@ class MoreFragment : Fragment() {
                         )
                         dialog.dismiss()
                     }
+                    .show()
+            }
+
+            "privacy" -> {
+                val alert = AlertDialog.Builder(requireContext())
+                alert.setTitle(R.string.more_privacy_policy)
+                    .setMessage(R.string.more_privacy_policy_message)
+                    .setPositiveButton(R.string.open) { dialog, _ ->
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(URL.PRIVACY_POLICY)))
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton(R.string.cancel) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setCancelable(true)
+                    .show()
+            }
+
+            "delete_fav" -> {
+                val alert = AlertDialog.Builder(requireContext())
+                alert.setTitle(R.string.more_delete_favorite)
+                    .setMessage(R.string.more_delete_favorite_message)
+                    .setPositiveButton(R.string.cancel) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setNeutralButton(R.string.proceed) { dialog, _ ->
+                        SharedPreferencesManager(requireContext()).removeAll()
+                        dialog.dismiss()
+                    }
+                    .setCancelable(true)
+                    .show()
+                SharedPreferencesManager(requireContext()).removeFavorites()
+            }
+
+            "delete_all" -> {
+                val alert = AlertDialog.Builder(requireContext())
+                alert.setTitle(R.string.more_delete_all)
+                    .setMessage(R.string.more_delete_all_message)
+                    .setPositiveButton(R.string.cancel) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setNeutralButton(R.string.proceed) { dialog, _ ->
+                        SharedPreferencesManager(requireContext()).removeAll()
+                        dialog.dismiss()
+                    }
+                    .setCancelable(true)
                     .show()
             }
 

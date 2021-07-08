@@ -2,14 +2,14 @@ package xyz.ridsoft.hal
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Icon
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
-import android.view.animation.Interpolator
 import android.widget.Toast
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import xyz.ridsoft.hal.api.ApplicationPermissionManager
 import xyz.ridsoft.hal.databinding.ActivityMainBinding
@@ -27,6 +27,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recommendFragment: RecommendFragment
     private lateinit var moreFragment: MoreFragment
 
+    private var onFavClickListeners = ArrayList<((View) -> Unit)>()
+
+    private lateinit var searchIcon: Icon
+    private lateinit var addIcon: Icon
+    private lateinit var likeIcon: Icon
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -43,25 +49,37 @@ class MainActivity : AppCompatActivity() {
         binding.mainBottomNav.isSelected = false
         binding.mainBottomNav.itemTextAppearanceActive
 
+        searchIcon = Icon.createWithResource(this, R.drawable.baseline_search_24)
+        addIcon = Icon.createWithResource(this, R.drawable.baseline_add_24)
+        likeIcon = Icon.createWithResource(this, R.drawable.baseline_thumb_up_24)
+
         binding.mainBottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navCurrent -> {
                     fragmentTransaction(mapFragment)
+                    binding.mainFAB.setImageIcon(searchIcon)
                 }
 
                 R.id.navMy -> {
                     fragmentTransaction(myPlaceFragment)
+                    binding.mainFAB.setImageIcon(addIcon)
                 }
 
                 R.id.navFacilities -> {
                     fragmentTransaction(recommendFragment)
+                    binding.mainFAB.setImageIcon(searchIcon)
                 }
 
                 R.id.navMore -> {
                     fragmentTransaction(moreFragment)
+                    binding.mainFAB.setImageIcon(likeIcon)
                 }
             }
             true
+        }
+
+        binding.mainFAB.setOnClickListener {
+            onFavClickListeners[binding.mainBottomNav.selectedItemId](it)
         }
     }
 
@@ -99,6 +117,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    public fun registerFavClickListener(listener: ((View) -> Unit)) {
+        onFavClickListeners.add(listener)
+    }
+
     override fun onResume() {
         super.onResume()
         binding.mainBottomNav.selectedItemId = 0
@@ -124,10 +146,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Denied", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
 }

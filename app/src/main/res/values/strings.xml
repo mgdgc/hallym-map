@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">HallymMap</string>
 
+    <!--  Common  -->
+    <string name="yes">Yes</string>
+    <string name="no">no</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="allow">Allow</string>
+    <string name="deny">Deny</string>
+    <string name="open">Open</string>
+    <string name="proceed">Proceed</string>
+
     <!--  MainActivity  -->
     <string name="bottom_nav_current">Map</string>
     <string name="bottom_nav_my_place">My Places</string>
@@ -18,9 +28,12 @@
     <string name="more_section_application">Application</string>
     <string name="more_licenses">Licenses</string>
     <string name="more_section_data">Data Management</string>
-    <string name="more_privacy_policy">Privacy Policies</string>
+    <string name="more_privacy_policy">Privacy Policy</string>
+    <string name="more_privacy_policy_message">Privacy policy is provided via our Github. Would you like to open the link?</string>
     <string name="more_delete_favorite">Delete favorites</string>
+    <string name="more_delete_favorite_message">Would you like to delete all your preferences?\n\nThis work is irreversible.</string>
     <string name="more_delete_all">Delete all data</string>
+    <string name="more_delete_all_message">Would you like to delete all data?\n\nThis work includes removing your preferences, as well as application data, and it is irreversible.</string>
     <string name="more_section_report">Report</string>
     <string name="more_report_issue">Report bugs</string>
     <string name="more_report_place">Report place</string>

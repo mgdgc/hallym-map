@@ -41,6 +41,10 @@ class MapFragment : Fragment() {
         binding = FragmentMapBinding.bind(view)
 
         initMapView()
+
+        (activity as MainActivity).registerFavClickListener {
+            // TODO: on fab click
+        }
     }
 
     private var onTouch = false

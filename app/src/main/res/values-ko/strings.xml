@@ -2,6 +2,16 @@
 <resources>
     <string name="app_name">나의 한림 찾기</string>
 
+    <!--  Common  -->
+    <string name="yes">예</string>
+    <string name="no">아니오</string>
+    <string name="confirm">확인</string>
+    <string name="cancel">취소</string>
+    <string name="allow">허용</string>
+    <string name="deny">거부</string>
+    <string name="open">열기</string>
+    <string name="proceed">진행</string>
+
     <!--  MainActivity  -->
     <string name="bottom_nav_current">지도</string>
     <string name="bottom_nav_my_place">내 장소</string>
@@ -20,8 +30,11 @@
     <string name="more_licenses">오픈소스 라이선스</string>
     <string name="more_section_data">데이터 관리</string>
     <string name="more_privacy_policy">개인정보처리정책</string>
+    <string name="more_privacy_policy_message">개인정보처리정책은 웹브라우저를 통해 제공됩니다. 링크를 여시겠습니까?</string>
     <string name="more_delete_favorite">내 장소 삭제</string>
+    <string name="more_delete_favorite_message">\'내 장소\'를 모두 지우시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.</string>
     <string name="more_delete_all">모든 데이터 삭제</string>
+    <string name="more_delete_all_message">모든 데이터를 지우시겠습니까?\n\n이 작업은 사용자의 데이터를 포함하여 애플리케이션의 모든 데이터를 제거하는 작업입니다. \n\n실행 이후에는 되돌릴 수 없습니다.</string>
     <string name="more_section_report">문의</string>
     <string name="more_report_issue">버그 신고</string>
     <string name="more_report_place">장소 수정/ 추가 요청</string>

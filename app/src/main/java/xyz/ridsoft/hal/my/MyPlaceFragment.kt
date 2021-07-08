@@ -5,9 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import xyz.ridsoft.hal.MainActivity
 import xyz.ridsoft.hal.R
+import xyz.ridsoft.hal.databinding.FragmentMyPlaceBinding
 
 class MyPlaceFragment : Fragment() {
+
+    companion object {
+        public const val TAG = "my_place"
+    }
+
+    private lateinit var binding: FragmentMyPlaceBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,5 +27,10 @@ class MyPlaceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentMyPlaceBinding.bind(view)
+
+        (activity as MainActivity).registerFavClickListener {
+            // TODO: on fab click
+        }
     }
 }

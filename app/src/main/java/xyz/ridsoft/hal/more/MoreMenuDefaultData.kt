@@ -90,7 +90,7 @@ class MoreMenuDefaultData(val context: Context) {
         data.add(privacyPolicy)
 
         val deleteFav = TableData(
-            "privacy",
+            "delete_fav",
             context.getString(R.string.more_delete_favorite),
             content = null,
             icon = R.drawable.baseline_delete_outline_24,
@@ -101,7 +101,7 @@ class MoreMenuDefaultData(val context: Context) {
         data.add(deleteFav)
 
         val deleteAll = TableData(
-            "privacy",
+            "delete_all",
             context.getString(R.string.more_delete_all),
             content = null,
             icon = R.drawable.baseline_delete_24,
