@@ -47,6 +47,12 @@
     <string name="facility_convenience_store">Convenience Store</string>
     <string name="facility_book_store">Book Store</string>
     <string name="facility_stationery_store">Stationery</string>
+    <string name="facility_atm">ATM</string>
+    <string name="facility_cafeteria">Cafeteria</string>
+    <string name="facility_printer">Printer</string>
+    <string name="facility_post">Post Office</string>
+    <string name="facility_vending_machine">Vending Machine</string>
+    <string name="facility_etc">Etc</string>
 
     <!--  Content descriptions  -->
     <string name="des_main_fab">Find button</string>

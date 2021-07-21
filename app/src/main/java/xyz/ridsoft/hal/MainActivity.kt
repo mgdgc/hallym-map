@@ -4,8 +4,10 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Icon
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var searchIcon: Icon
     private lateinit var addIcon: Icon
+    private lateinit var editIcon: Icon
     private lateinit var likeIcon: Icon
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         searchIcon = Icon.createWithResource(this, R.drawable.baseline_search_24)
         addIcon = Icon.createWithResource(this, R.drawable.baseline_add_24)
+        editIcon = Icon.createWithResource(this, R.drawable.baseline_edit_24)
         likeIcon = Icon.createWithResource(this, R.drawable.baseline_thumb_up_24)
 
         binding.mainBottomNav.setOnNavigationItemSelectedListener {
@@ -62,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.navMy -> {
                     fragmentTransaction(myPlaceFragment)
-                    binding.mainFAB.setImageIcon(addIcon)
+                    binding.mainFAB.setImageIcon(editIcon)
                 }
 
                 R.id.navFacilities -> {
@@ -79,13 +83,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.mainFAB.setOnClickListener {
-            onFavClickListeners[binding.mainBottomNav.selectedItemId](it)
+            onFavClickListeners[
+                    when (binding.mainBottomNav.selectedItemId) {
+                        R.id.navCurrent -> 0
+                        R.id.navMy -> 1
+                        R.id.navFacilities -> 2
+                        R.id.navMore -> 3
+                        else -> return@setOnClickListener
+                    }
+            ](it)
         }
     }
 
     private fun initFragments() {
         mapFragment = MapFragment()
-
         moreFragment = MoreFragment()
         myPlaceFragment = MyPlaceFragment()
         recommendFragment = RecommendFragment()

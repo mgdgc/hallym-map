@@ -15,6 +15,12 @@ class RecommendFragment : Fragment() {
         public const val TAG = "recommend"
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity as MainActivity).registerFavClickListener {
+            // TODO: on fab click
+        }
+    }
 
     private lateinit var binding: FragmentRecommendBinding
 
@@ -29,9 +35,5 @@ class RecommendFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRecommendBinding.bind(view)
-
-        (activity as MainActivity).registerFavClickListener {
-            // TODO: on fab click
-        }
     }
 }

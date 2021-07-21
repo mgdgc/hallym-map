@@ -1,14 +1,20 @@
 package xyz.ridsoft.hal.map
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Size
+import android.util.SizeF
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
+import com.google.android.material.chip.Chip
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapListener
 import org.osmdroid.events.ScrollEvent
@@ -22,11 +28,19 @@ import xyz.ridsoft.hal.R
 import xyz.ridsoft.hal.data.GeoCoordinate
 import xyz.ridsoft.hal.data.MapPoint
 import xyz.ridsoft.hal.databinding.FragmentMapBinding
+import xyz.ridsoft.hal.model.Place
 import java.util.*
 
 class MapFragment : Fragment() {
 
     private lateinit var binding: FragmentMapBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity as MainActivity).registerFavClickListener {
+            // TODO: on fab click
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,13 +55,12 @@ class MapFragment : Fragment() {
         binding = FragmentMapBinding.bind(view)
 
         initMapView()
+        initChipView()
 
-        (activity as MainActivity).registerFavClickListener {
-            // TODO: on fab click
+        binding.buttonMapCurrent.setOnClickListener {
+            // TODO
         }
     }
-
-    private var onTouch = false
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initMapView() {
@@ -67,6 +80,36 @@ class MapFragment : Fragment() {
         val places = MapPoint().getPlaces()
 
 
+    }
+
+    @SuppressLint("ResourceType")
+    private fun initChipView() {
+        val facilities = Place.Companion.FacilityType.getArray()
+
+        for (f in facilities) {
+            val chip = Chip(requireContext())
+
+            chip.text = Place.Companion.FacilityType.getString(requireContext(), f)
+            chip.isCheckable = true
+            chip.isCloseIconVisible = false
+            chip.chipBackgroundColor =
+                requireContext().resources.getColorStateList(R.drawable.background_tag, null)
+
+            val drawable = AppCompatResources.getDrawable(
+                requireContext(),
+                Place.Companion.FacilityType.getIconId(f)
+            )
+            val layerDrawable = LayerDrawable(arrayOf(drawable))
+            layerDrawable.setLayerInset(0, 4, 4, 4, 4)
+            chip.chipIcon = layerDrawable
+            chip.iconStartPadding = 16f
+
+            chip.setOnClickListener { view ->
+
+            }
+
+            binding.chipMapTag.addView(chip)
+        }
     }
 
     override fun onDetach() {

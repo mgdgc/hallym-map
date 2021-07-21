@@ -1,10 +1,10 @@
 package xyz.ridsoft.hal.developer
 
-import android.R
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
@@ -19,7 +19,7 @@ class JsonBuilderActivity : AppCompatActivity() {
     private lateinit var binding: ActivityJsonBuilderBinding
 
     private var place: Place? = null
-    private var placeArr = ArrayList<String>()
+    private var placeArr = ArrayList<Place>()
 
     private lateinit var pref: SharedPreferences
 
@@ -30,7 +30,21 @@ class JsonBuilderActivity : AppCompatActivity() {
 
         pref = getSharedPreferences(SharedPreferencesKeys.DEVELOPER_PREF, 0)
 
+        binding.editJsonBuilderId.setText((System.currentTimeMillis() % 100000).toString())
         binding.editJsonBuilderId.requestFocus()
+
+        binding.buttonJsonBuilderClear.setOnClickListener {
+            binding.editJsonBuilderId.text.clear()
+            binding.editJsonBuilderId.setText((System.currentTimeMillis() % 100000).toString())
+            binding.editJsonBuilderName.text.clear()
+            binding.editJsonBuilderBuildingNo.text.clear()
+            binding.editJsonBuilderLegacyName.text.clear()
+            binding.editJsonBuilderNameKr.text.clear()
+            binding.editJsonBuilderNameEn.text.clear()
+            binding.editJsonBuilderLat.text.clear()
+            binding.editJsonBuilderLon.text.clear()
+            binding.editJsonBuilderTags.text.clear()
+        }
 
         binding.buttonJsonBuilderGenerate.setOnClickListener {
             generate()
@@ -52,37 +66,52 @@ class JsonBuilderActivity : AppCompatActivity() {
                     .setAction("Confirm") { }
                     .show()
             } else {
-                placeArr.add(Gson().toJson(place))
+                placeArr.add(place!!)
+                saveArr()
             }
+        }
+
+        binding.buttonJsonBuilderFromJson.setOnClickListener {
+            val edittext = EditText(this)
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Recover from JSON")
+                .setView(edittext)
+                .setPositiveButton("복구") { dialog, _ ->
+                    val arr = Gson().fromJson(edittext.text.toString(), Array<Place>::class.java)
+                    this.placeArr.addAll(arr)
+                    dialog.dismiss()
+                }
+                .setNegativeButton("취소") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
 
         binding.buttonJsonBuilderSeeArr.setOnClickListener {
             val arr = Array(placeArr.size) { i ->
-                val item = Gson().fromJson(placeArr[i], Place::class.java)
                 var string = ""
-                string += "[" + item.id + "]  " + item.name + "  ( #" + item.buildingNo + " )"
+                string += "[" + placeArr[i].id + "]  " + placeArr[i].name + "  ( #" + placeArr[i].buildingNo + " )"
 
                 string
             }
 
-            val dialog = AlertDialog.Builder(this)
+            val builder = AlertDialog.Builder(this)
             val adapter = ArrayAdapter<String>(
                 this,
-                R.layout.simple_list_item_1,
+                android.R.layout.simple_list_item_1,
                 arr
             )
-            dialog.setAdapter(adapter) { dialog, which ->
+            builder.setAdapter(adapter) { dialog, i ->
                 dialog.dismiss()
-                val item = Gson().fromJson(placeArr[which], Place::class.java)
                 val itemMenu = AlertDialog.Builder(this)
-                itemMenu.setTitle("[" + item.id + "] " + item.name)
-                    .setMessage(placeArr[which])
+                itemMenu.setTitle("[" + placeArr[i].id + "] " + placeArr[i].name)
+                    .setMessage(Gson().toJson(placeArr[i]))
                     .setNeutralButton("제거") { d, _ ->
-                        placeArr.removeAt(which)
+                        placeArr.removeAt(i)
                         d.dismiss()
                     }
                     .setPositiveButton("수정") { d, _ ->
-                        setContent(item)
+                        setContent(placeArr[i])
                         d.dismiss()
                     }
                     .setNegativeButton("닫기") { d, _ ->
@@ -90,15 +119,19 @@ class JsonBuilderActivity : AppCompatActivity() {
                     }
                     .show()
             }
-            dialog.setPositiveButton("저장") { dialog, _ ->
+            builder.setPositiveButton("저장") { d, _ ->
                 saveArr()
-                dialog.dismiss()
+                d.dismiss()
             }
-            dialog.setNeutralButton("닫기") { dialog, _ ->
-                dialog?.dismiss()
+            builder.setNeutralButton("닫기") { d, _ ->
+                d.dismiss()
             }
-            dialog.setCancelable(true)
-            dialog.show()
+            builder.setNegativeButton("to Json") { d, _ ->
+                binding.txtJsonBuilder.text = Gson().toJson(placeArr.toTypedArray())
+                d.dismiss()
+            }
+            builder.setCancelable(true)
+            builder.show()
         }
 
         initArr()
@@ -176,8 +209,8 @@ class JsonBuilderActivity : AppCompatActivity() {
 
     private fun initArr() {
         placeArr.clear()
-        pref.getString(SharedPreferencesKeys.STRING_FACILITY_JSON, null)?.let {
-            val arr = Gson().fromJson(it, Array<String>::class.java)
+        pref.getString(SharedPreferencesKeys.STRING_PLACE_JSON, null)?.let {
+            val arr = Gson().fromJson(it, Array<Place>::class.java)
             placeArr.addAll(arr)
         }
     }

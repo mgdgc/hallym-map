@@ -181,7 +181,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <Button
                 android:id="@+id/buttonJsonBuilderGenerate"
@@ -189,7 +189,19 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
+                android:textSize="12sp"
                 android:text="Generate"
+                tools:ignore="HardcodedText">
+
+            </Button>
+
+            <Button
+                android:id="@+id/buttonJsonBuilderClear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:text="Clear"
                 tools:ignore="HardcodedText">
 
             </Button>
@@ -199,6 +211,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
+                android:textSize="12sp"
                 android:layout_weight="1"
                 android:text="Facilities"
                 tools:ignore="HardcodedText">
@@ -211,7 +224,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <Button
                 android:id="@+id/buttonJsonBuilderAddArr"
@@ -219,7 +232,18 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:text="Add to arr"
+                android:text="Add"
+                tools:ignore="HardcodedText">
+
+            </Button>
+
+            <Button
+                android:id="@+id/buttonJsonBuilderFromJson"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:text="Json"
                 tools:ignore="HardcodedText">
 
             </Button>

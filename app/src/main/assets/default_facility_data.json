@@ -1,0 +1,110 @@
+[
+  {
+    "en": "BLUEPOT Cafe",
+    "floor": 1,
+    "id": 82300,
+    "kr": "블루포트",
+    "name": "블루포트",
+    "searchTag": "카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,노맛,아이스,hot,cold,iced,drink",
+    "type": "CAFE"
+  },
+  {
+    "en": "BLUEPOT Cafe",
+    "floor": 1,
+    "id": 82301,
+    "kr": "블루포트",
+    "name": "블루포트",
+    "searchTag": "카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,노맛,아이스,hot,cold,iced,drink",
+    "type": "CAFE"
+  },
+  {
+    "en": "THUMB Coffee",
+    "floor": 1,
+    "id": 89578,
+    "kr": "텀브커피",
+    "name": "텀브커피",
+    "searchTag": "카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,불친절,아이스,hot,cold,iced,drink",
+    "type": "CAFE"
+  },
+  {
+    "en": "Bread\u0026Co.",
+    "floor": 2,
+    "id": 30412,
+    "kr": "브레댄코",
+    "name": "브레댄코",
+    "searchTag": "카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,아이스,hot,cold,iced,drink",
+    "type": "CAFE"
+  },
+  {
+    "en": "Post Office",
+    "floor": 1,
+    "id": 2642,
+    "kr": "우체국",
+    "name": "우체국",
+    "searchTag": "우체국,우편취급국,캠라센,clc,택배,우편",
+    "type": "POST"
+  },
+  {
+    "en": "GS25",
+    "floor": 2,
+    "id": 21441,
+    "kr": "GS25",
+    "name": "GS25",
+    "searchTag": "편의점,메갈,식당,캠라센,clc,택배,문구",
+    "type": "STORE_CONVENIENCE"
+  },
+  {
+    "en": "GS25",
+    "floor": 4,
+    "id": 21442,
+    "kr": "GS25",
+    "name": "GS25",
+    "searchTag": "편의점,메갈,식당,캠라센,clc,택배,문구",
+    "type": "STORE_CONVENIENCE"
+  },
+  {
+    "en": "Book Store",
+    "floor": 2,
+    "id": 67963,
+    "kr": "구내서점",
+    "name": "구내서점",
+    "searchTag": "서점,서적,전공,책,문구,문구점,문방구,캠라센,학생복지관,clc",
+    "type": "STORE_BOOK"
+  },
+  {
+    "en": "Cafeteria (Student)",
+    "floor": 2,
+    "id": 82189,
+    "kr": "학생식당",
+    "name": "학생식당",
+    "searchTag": "중식,밥,아침,석식,급식,아워홈,식사,학생복지관,캠라센,clc",
+    "type": "CAFETERIA"
+  },
+  {
+    "en": "Cafeteria (Faculty)",
+    "floor": 2,
+    "id": 82190,
+    "kr": "교직원식당",
+    "name": "교직원식당",
+    "searchTag": "중식,밥,아침,석식,급식,아워홈,식사,별관,인문",
+    "type": "CAFETERIA"
+  },
+  {
+    "en": "Printer",
+    "floor": 4,
+    "id": 48252,
+    "kr": "인쇄점",
+    "name": "인쇄점",
+    "searchTag": "인쇄,복사,출력,애드투페이퍼,copy,print,도서관,일송",
+    "type": "PRINTER"
+  },
+  {
+    "en": "Printer",
+    "floor": 4,
+    "id": 48253,
+    "kr": "인쇄점",
+    "name": "인쇄점",
+    "searchTag": "인쇄,복사,출력,애드투페이퍼,copy,print,인문,자연",
+    "type": "PRINTER"
+  }
+]

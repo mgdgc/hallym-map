@@ -48,6 +48,12 @@
     <string name="facility_convenience_store">편의점</string>
     <string name="facility_book_store">서점</string>
     <string name="facility_stationery_store">문구점</string>
+    <string name="facility_atm">ATM</string>
+    <string name="facility_cafeteria">식당</string>
+    <string name="facility_printer">인쇄점</string>
+    <string name="facility_post">우체국</string>
+    <string name="facility_vending_machine">자판기</string>
+    <string name="facility_etc">기타</string>
 
     <!--  Content descriptions  -->
     <string name="des_main_fab">찾기 버튼</string>

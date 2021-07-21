@@ -9,4 +9,8 @@
     <!--  text color  -->
     <color name="text_primary">#ffffff</color>
 
+    <!--  ChipView color  -->
+    <color name="chip_normal">#525252</color>
+    <color name="chip_selected">#676767</color>
+
 </resources>

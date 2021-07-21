@@ -3,6 +3,7 @@ package xyz.ridsoft.hal.more
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.DisplayMetrics
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,13 @@ class MoreFragment : Fragment() {
     }
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity as MainActivity).registerFavClickListener {
+            // TODO: on fab click
+        }
+    }
+
     private lateinit var binding: FragmentMoreBinding
     private lateinit var adapter: MoreAdapter
 
@@ -41,10 +49,6 @@ class MoreFragment : Fragment() {
         binding = FragmentMoreBinding.bind(view)
 
         initRecyclerView()
-
-        (activity as MainActivity).registerFavClickListener {
-            // TODO: on fab click
-        }
     }
 
     private fun initRecyclerView() {

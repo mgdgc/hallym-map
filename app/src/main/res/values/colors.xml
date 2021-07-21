@@ -40,4 +40,8 @@
     <color name="bg_secondary">#ffffff</color>
     <color name="bg_selected">#BDBDBD</color>
 
+    <!--  ChipView color  -->
+    <color name="chip_normal">#E5E5E5</color>
+    <color name="chip_selected">#D1D1D1</color>
+
 </resources>

@@ -1,11 +1,11 @@
 package xyz.ridsoft.hal.developer
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -21,7 +21,7 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
 
     private var facility: Place.Companion.Facility? = null
 
-    private var facArr = ArrayList<String>()
+    private var facArr = ArrayList<Place.Companion.Facility>()
 
     private lateinit var pref: SharedPreferences
 
@@ -37,12 +37,29 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
             getString(R.string.facility_study_room),
             getString(R.string.facility_convenience_store),
             getString(R.string.facility_book_store),
-            getString(R.string.facility_stationery_store)
+            getString(R.string.facility_stationery_store),
+            getString(R.string.facility_atm),
+            getString(R.string.facility_cafeteria),
+            getString(R.string.facility_printer),
+            getString(R.string.facility_post),
+            getString(R.string.facility_vending_machine),
+            getString(R.string.facility_etc)
         )
         binding.spinnerFacilityCategory.adapter =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items)
 
+        binding.editFacilityId.setText((System.currentTimeMillis() % 100000).toString())
         binding.editFacilityId.requestFocus()
+
+        binding.buttonFacilityClear.setOnClickListener {
+            binding.editFacilityId.text.clear()
+            binding.editFacilityId.setText((System.currentTimeMillis() % 100000).toString())
+            binding.editFacilityName.text.clear()
+            binding.editFacilityFloor.text.clear()
+            binding.editFacilityKr.text.clear()
+            binding.editFacilityEn.text.clear()
+            binding.editFacilityTag.text.clear()
+        }
 
         binding.buttonFacilityPlace.setOnClickListener {
             startActivity(
@@ -70,37 +87,52 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
                     .show()
                 return@setOnClickListener
             } else {
-                facility?.let { facArr.add(it.toJson()) }
+                facility?.let { facArr.add(it) }
+                saveArr()
             }
+        }
+
+        binding.buttonFacilityFromJson.setOnClickListener {
+            val edittext = EditText(this)
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Recover from JSON")
+                .setView(edittext)
+                .setPositiveButton("복구") { dialog, _ ->
+                    val arr = Gson().fromJson(edittext.text.toString(), Array<Place.Companion.Facility>::class.java)
+                    this.facArr.addAll(arr)
+                    dialog.dismiss()
+                }
+                .setNegativeButton("취소") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
 
         binding.buttonFacilityShow.setOnClickListener {
             val arr = Array(facArr.size) { i ->
-                val item = Gson().fromJson(facArr[i], Place.Companion.Facility::class.java)
                 var string = ""
-                string += "[" + item.id + "]  " + item.name + "  ( " + item.type + ", " + item.floor + "f )"
+                string += "[" + facArr[i].id + "]  " + facArr[i].name + "  ( " + facArr[i].type + ", " + facArr[i].floor + "f )"
 
                 string
             }
 
-            val dialog = AlertDialog.Builder(this)
+            val builder = AlertDialog.Builder(this)
             val adapter = ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
                 arr
             )
-            dialog.setAdapter(adapter) { dialog, which ->
+            builder.setAdapter(adapter) { dialog, i ->
                 dialog.dismiss()
-                val item = Gson().fromJson(facArr[which], Place.Companion.Facility::class.java)
                 val itemMenu = AlertDialog.Builder(this)
-                itemMenu.setTitle("[" + item.id + "] " + item.name)
-                    .setMessage(facArr[which])
+                itemMenu.setTitle("[" + facArr[i].id + "] " + facArr[i].name)
+                    .setMessage(Gson().toJson(facArr[i]))
                     .setNeutralButton("제거") { d, _ ->
-                        facArr.removeAt(which)
+                        facArr.removeAt(i)
                         d.dismiss()
                     }
                     .setPositiveButton("수정") { d, _ ->
-                        setContent(item)
+                        setContent(facArr[i])
                         d.dismiss()
                     }
                     .setNegativeButton("닫기") { d, _ ->
@@ -108,15 +140,19 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
                     }
                     .show()
             }
-            dialog.setPositiveButton("저장") { dialog, _ ->
+            builder.setPositiveButton("저장") { d, _ ->
                 saveArr()
-                dialog.dismiss()
+                d.dismiss()
             }
-            dialog.setNeutralButton("닫기") { dialog, _ ->
-                dialog?.dismiss()
+            builder.setNeutralButton("닫기") { d, _ ->
+                d.dismiss()
             }
-            dialog.setCancelable(true)
-            dialog.show()
+            builder.setNegativeButton("to Json") { d, _ ->
+                binding.txtFacility.text = Gson().toJson(facArr.toTypedArray())
+                d.dismiss()
+            }
+            builder.setCancelable(true)
+            builder.show()
         }
 
         initArr()
@@ -136,9 +172,9 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
             facility = Place.Companion.Facility(id, type, floor)
 
             facility!!.name = if (name.isNotEmpty()) name else null
-            facility!!.kr = if (kr.isNotEmpty()) name else null
-            facility!!.en = if (en.isNotEmpty()) name else null
-            facility!!.searchTag = if (tag.isNotEmpty()) name else null
+            facility!!.kr = if (kr.isNotEmpty()) kr else null
+            facility!!.en = if (en.isNotEmpty()) en else null
+            facility!!.searchTag = if (tag.isNotEmpty()) tag else null
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -182,8 +218,7 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
     private fun initArr() {
         facArr.clear()
         pref.getString(SharedPreferencesKeys.STRING_FACILITY_JSON, null)?.let {
-            val arr = Gson().fromJson(it, Array<String>::class.java)
-            facArr.addAll(arr)
+            facArr.addAll(Gson().fromJson(it, Array<Place.Companion.Facility>::class.java))
         }
     }
 
