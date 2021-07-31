@@ -15,11 +15,8 @@ class MyPlaceFragment : Fragment() {
         public const val TAG = "my_place"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        (activity as MainActivity).registerFavClickListener {
-            // TODO: on fab click
-        }
+    public var onClickListener: ((View) -> Unit) = {
+
     }
 
     private lateinit var binding: FragmentMyPlaceBinding

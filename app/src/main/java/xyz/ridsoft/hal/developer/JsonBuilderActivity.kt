@@ -30,7 +30,6 @@ class JsonBuilderActivity : AppCompatActivity() {
 
         pref = getSharedPreferences(SharedPreferencesKeys.DEVELOPER_PREF, 0)
 
-        binding.editJsonBuilderId.setText((System.currentTimeMillis() % 100000).toString())
         binding.editJsonBuilderId.requestFocus()
 
         binding.buttonJsonBuilderClear.setOnClickListener {
@@ -152,9 +151,11 @@ class JsonBuilderActivity : AppCompatActivity() {
 
             place = Place(id, name, lat, long)
 
-            val facilities = binding.editJsonBuilderFacilities.text.toString().split(",")
-            for (i in facilities.indices) {
-                place!!.facilityId[i] = facilities[i].toInt()
+            if (binding.editJsonBuilderFacilities.text.isNotEmpty()) {
+                val facilities = binding.editJsonBuilderFacilities.text.toString().split(",")
+                place!!.facilityId = Array<Int>(facilities.size) {
+                    facilities[it].toInt()
+                }
             }
 
             place!!.buildingNo = buildingNo
@@ -165,7 +166,13 @@ class JsonBuilderActivity : AppCompatActivity() {
 
         } catch (e: Exception) {
             e.printStackTrace()
-            binding.txtJsonBuilder.text = e.localizedMessage
+            Snackbar.make(
+                binding.layoutJsonBuilder,
+                e.localizedMessage,
+                Snackbar.LENGTH_LONG
+            )
+                .setAction("닫기") { }
+                .show()
         }
     }
 
@@ -199,12 +206,16 @@ class JsonBuilderActivity : AppCompatActivity() {
         binding.editJsonBuilderLat.setText(obj.latitude.toString())
         binding.editJsonBuilderLon.setText(obj.longitude.toString())
         binding.editJsonBuilderTags.setText(obj.searchTag)
-        val builder = StringBuilder()
-        for (i in obj.facilityId.indices) {
-            builder.append(obj.facilityId[i])
-            if (i < obj.facilityId.size - 1) builder.append(", ")
+
+        obj.facilityId?.let {
+            val builder = StringBuilder()
+            for (i in it.indices) {
+                builder.append(it[i])
+                if (i < it.size - 1) builder.append(", ")
+            }
+            binding.editJsonBuilderFacilities.setText(builder.toString())
         }
-        binding.editJsonBuilderFacilities.setText(builder.toString())
+
     }
 
     private fun initArr() {
@@ -218,7 +229,7 @@ class JsonBuilderActivity : AppCompatActivity() {
     private fun saveArr() {
         val edit = pref.edit()
         edit.putString(
-            SharedPreferencesKeys.STRING_FACILITY_JSON,
+            SharedPreferencesKeys.STRING_PLACE_JSON,
             Gson().toJson(placeArr.toTypedArray())
         )
         edit.apply()

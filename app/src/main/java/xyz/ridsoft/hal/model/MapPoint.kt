@@ -4,20 +4,51 @@ import android.content.Context
 import com.google.gson.Gson
 import xyz.ridsoft.hal.R
 
-data class Place(val id: Int, val name: String, val latitude: Double, val longitude: Double) {
+abstract class MapPoint(
+    open var id: Int,
+    open var name: String,
+    open var latitude: Double,
+    open var longitude: Double
+) {
+    var searchTag: String? = null
+    var kr: String? = null
+    var en: String? = null
+}
+
+class Place(
+    id: Int,
+    name: String,
+    latitude: Double,
+    longitude: Double
+) : MapPoint(id, name, latitude, longitude) {
 
     companion object {
-        public const val DEFAULT_LANG = "default"
+        const val DEFAULT_BUILDING_NUMBER = 0
+    }
 
-        public const val DEFAULT_BUILDING_NUMBER = 0
+    var legacyName: String? = null
+    var buildingNo: Int = DEFAULT_BUILDING_NUMBER
+    var facilityId: Array<Int>? = null
 
+}
+
+class Facility(
+    id: Int,
+    name: String,
+    latitude: Double,
+    longitude: Double,
+    var type: FacilityType,
+    var floor: Int
+) : MapPoint(id, name, latitude, longitude) {
+
+    companion object {
         enum class FacilityType {
             CAFE, STUDY_ROOM, STORE_CONVENIENCE, STORE_BOOK, STORE_STATIONERY,
             ATM, CAFETERIA, PRINTER, POST, VENDING_MACHINE, ETC;
 
             companion object {
-                fun getArray(): Array<FacilityType> {
 
+                fun getArray(): Array<FacilityType> {
                     return arrayOf(
                         CAFE, STUDY_ROOM, STORE_CONVENIENCE, STORE_BOOK, STORE_STATIONERY,
                         ATM, CAFETERIA, PRINTER, POST, VENDING_MACHINE, ETC
@@ -57,28 +88,6 @@ data class Place(val id: Int, val name: String, val latitude: Double, val longit
                 }
             }
         }
-
-        data class Facility(val id: Int, val type: FacilityType, val floor: Int) {
-            var name: String? = null
-            var kr: String? = null
-            var en: String? = null
-            var searchTag: String? = null
-
-            fun toJson(): String {
-                return Gson().toJson(this)
-            }
-        }
-    }
-
-    var kr: String? = null
-    var en: String? = null
-    var legacyName: String? = null
-    var buildingNo: Int = DEFAULT_BUILDING_NUMBER
-    var facilityId: Array<Int> = arrayOf()
-    var searchTag: String? = null
-
-    fun toJson(): String {
-        return Gson().toJson(this)
     }
 
 }

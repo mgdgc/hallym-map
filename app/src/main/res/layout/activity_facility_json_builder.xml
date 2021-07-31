@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="(Name)"
+                android:hint="Name"
                 android:inputType="text"
                 android:nextFocusDown="@id/editFacilityKr"
                 tools:ignore="HardcodedText">
@@ -89,7 +89,39 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="(En)"
+                android:nextFocusDown="@+id/editFacilityLat"
                 android:inputType="text"
+                tools:ignore="HardcodedText">
+
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editFacilityLat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nextFocusDown="@+id/editFacilityLon"
+                android:layout_weight="1"
+                android:hint="Latitude"
+                android:inputType="numberDecimal"
+                tools:ignore="HardcodedText">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/editFacilityLon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Longitude"
+                android:inputType="numberDecimal"
+                android:nextFocusDown="@+id/editFacilityTag"
                 tools:ignore="HardcodedText">
 
             </EditText>

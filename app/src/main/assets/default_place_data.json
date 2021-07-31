@@ -1,3 +1,13 @@
-{
-  
-}
+[
+  {
+    "buildingNo": 1,
+    "legacyName": "37.88633",
+    "en": "College of Engineering",
+    "id": 1,
+    "kr": "공학관",
+    "latitude": 37.88633,
+    "longitude": 127.73577,
+    "name": "공학관",
+    "searchTag": ""
+  }
+]

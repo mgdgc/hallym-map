@@ -40,6 +40,12 @@
     <string name="more_change_log">Change log</string>
     <string name="more_dev_menu">Developer Menu</string>
 
+    <!--  SearchActivity  -->
+    <string name="search_place_holder">Lecture room, building name, …</string>
+    <string name="search_building">Searching building</string>
+    <string name="search_facility">Searching facility</string>
+    <string name="search_lecture_room">Searching lecture room</string>
+
     <!--  Place  -->
     <!--  Facility  -->
     <string name="facility_cafe">Cafe</string>

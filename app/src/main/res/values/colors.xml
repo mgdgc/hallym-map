@@ -38,6 +38,7 @@
     <!--  ViewGroup background color  -->
     <color name="bg_primary">#ededed</color>
     <color name="bg_secondary">#ffffff</color>
+    <color name="bg_tertiary">#e0e0e0</color>
     <color name="bg_selected">#BDBDBD</color>
 
     <!--  ChipView color  -->

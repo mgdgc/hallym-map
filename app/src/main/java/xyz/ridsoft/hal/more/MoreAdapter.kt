@@ -60,53 +60,10 @@ class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
         if (holder.itemViewType == VIEW_TYPE_ROW) {
             val viewHolder = holder as MoreMenuViewHolder
 
-            // Title
-            viewHolder.binding.txtRowMoreMenuTitle.text = data[position].title
+            viewHolder.bind(data[position])
 
-            // Content
-            data[position].content?.let {
-                viewHolder.binding.txtRowMoreMenuContent.text = it
-            }
-
-            // Icon
-            data[position].icon?.let {
-                viewHolder.binding.imgRowMoreMenu.setImageResource(it)
-            }
-
-            // Icon background
-            data[position].iconBackgroundColor?.let {
-                viewHolder.binding.layoutRowMoreMenuIcon.setBackgroundResource(it)
-            }
-
-            // Accessory
-            if (data[position].accessory) {
-                viewHolder.binding.imgRowMoreMenuAccessory.visibility = View.VISIBLE
-            }
-
-            // Background
-            when (data[position].itemPosition) {
-                TableData.Companion.ItemPosition.TOP -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(
-                    R.drawable.background_table_item_top
-                )
-                TableData.Companion.ItemPosition.MIDDLE -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(
-                    R.drawable.background_table_item_middle
-                )
-                TableData.Companion.ItemPosition.BOTTOM -> {
-                    viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(R.drawable.background_table_item_bottom)
-                    viewHolder.binding.layoutRowMoreMenuDivider.visibility = View.INVISIBLE
-                }
-                TableData.Companion.ItemPosition.SINGLE -> viewHolder.binding.layoutRowMoreMenu.setBackgroundResource(
-                    R.drawable.background_table_item_single
-                )
-            }
-
-            // Click
-            if (data[position].selectable) {
-                viewHolder.binding.layoutRowMoreMenu.setOnClickListener {
-                    if (onItemClickListener != null) {
-                        onItemClickListener!!(data[position].id)
-                    }
-                }
+            if (onItemClickListener != null) {
+                viewHolder.onItemClickListener = this.onItemClickListener
             }
 
         } else if (holder.itemViewType == VIEW_TYPE_SECTION) {

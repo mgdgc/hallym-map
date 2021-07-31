@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import xyz.ridsoft.hal.MainActivity
@@ -25,12 +26,8 @@ class MoreFragment : Fragment() {
         public const val TAG = "more"
     }
 
+    public var onClickListener: ((View) -> Unit) = {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        (activity as MainActivity).registerFavClickListener {
-            // TODO: on fab click
-        }
     }
 
     private lateinit var binding: FragmentMoreBinding
@@ -68,6 +65,7 @@ class MoreFragment : Fragment() {
                 (activity as MainActivity).hideFloatingActionButton(dy > 0)
             }
         })
+
 
         adapter.initDefaultData()
     }

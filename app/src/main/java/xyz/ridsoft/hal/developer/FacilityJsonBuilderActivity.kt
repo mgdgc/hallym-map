@@ -11,7 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import xyz.ridsoft.hal.R
 import xyz.ridsoft.hal.databinding.ActivityFacilityJsonBuilderBinding
-import xyz.ridsoft.hal.model.Place
+import xyz.ridsoft.hal.model.Facility
 import xyz.ridsoft.hal.value.SharedPreferencesKeys
 import java.lang.StringBuilder
 
@@ -19,9 +19,9 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFacilityJsonBuilderBinding
 
-    private var facility: Place.Companion.Facility? = null
+    private var facility: Facility? = null
 
-    private var facArr = ArrayList<Place.Companion.Facility>()
+    private var facArr = ArrayList<Facility>()
 
     private lateinit var pref: SharedPreferences
 
@@ -98,7 +98,7 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
             builder.setTitle("Recover from JSON")
                 .setView(edittext)
                 .setPositiveButton("복구") { dialog, _ ->
-                    val arr = Gson().fromJson(edittext.text.toString(), Array<Place.Companion.Facility>::class.java)
+                    val arr = Gson().fromJson(edittext.text.toString(), Array<Facility>::class.java)
                     this.facArr.addAll(arr)
                     dialog.dismiss()
                 }
@@ -162,23 +162,26 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
         try {
             val id: Int = binding.editFacilityId.text.toString().toInt()
             val name: String = binding.editFacilityName.text.toString()
+            val latitude: Double = binding.editFacilityLat.text.toString().toDouble()
+            val longitude: Double = binding.editFacilityLon.text.toString().toDouble()
             val floor: Int = binding.editFacilityFloor.text.toString().toInt()
             val kr: String = binding.editFacilityKr.text.toString()
             val en: String = binding.editFacilityEn.text.toString()
             val tag: String = binding.editFacilityTag.text.toString()
-            val type: Place.Companion.FacilityType =
-                Place.Companion.FacilityType.getArray()[binding.spinnerFacilityCategory.selectedItemPosition]
+            val type: Facility.Companion.FacilityType =
+                Facility.Companion.FacilityType.getArray()[binding.spinnerFacilityCategory.selectedItemPosition]
 
-            facility = Place.Companion.Facility(id, type, floor)
+            facility = Facility(id, name, latitude, longitude, type, floor)
 
-            facility!!.name = if (name.isNotEmpty()) name else null
             facility!!.kr = if (kr.isNotEmpty()) kr else null
             facility!!.en = if (en.isNotEmpty()) en else null
             facility!!.searchTag = if (tag.isNotEmpty()) tag else null
 
         } catch (e: Exception) {
             e.printStackTrace()
-            binding.txtFacility.text = e.localizedMessage
+            Snackbar.make(binding.layoutFacilityJsonBuilder, e.localizedMessage, Snackbar.LENGTH_LONG)
+                .setAction("닫기") { }
+                .show()
         }
     }
 
@@ -187,28 +190,32 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
             val builder = StringBuilder()
             builder.append("--- Object info ---\n\n")
                 .append("id: " + facility!!.id + "\n")
-                .append("(name): " + facility!!.name + "\n")
+                .append("name: " + facility!!.name + "\n")
+                .append("latitude: " + facility!!.latitude + "\n")
+                .append("longitude: " + facility!!.longitude + "\n")
                 .append("(kr): " + facility!!.kr + "\n")
                 .append("(en): " + facility!!.en + "\n")
                 .append("floor: " + facility!!.floor + "\n")
                 .append("type: " + facility!!.type + "\n")
                 .append("searchTag: " + facility!!.searchTag + "\n\n\n")
                 .append("--- Json ---\n\n")
-                .append(facility!!.toJson())
+                .append(Gson().toJson(facility))
 
             binding.txtFacility.text = builder.toString()
         }
     }
 
-    private fun setContent(obj: Place.Companion.Facility) {
+    private fun setContent(obj: Facility) {
         binding.editFacilityId.setText(obj.id.toString())
         binding.editFacilityName.setText(obj.name)
         binding.editFacilityFloor.setText(obj.floor.toString())
         binding.editFacilityKr.setText(obj.kr)
         binding.editFacilityEn.setText(obj.en)
+        binding.editFacilityLat.setText(obj.latitude.toString())
+        binding.editFacilityLon.setText(obj.longitude.toString())
         binding.editFacilityTag.setText(obj.searchTag)
         var i = 0
-        for (f in Place.Companion.FacilityType.getArray()) {
+        for (f in Facility.Companion.FacilityType.getArray()) {
             if (obj.type == f) break
             i++
         }
@@ -218,7 +225,7 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
     private fun initArr() {
         facArr.clear()
         pref.getString(SharedPreferencesKeys.STRING_FACILITY_JSON, null)?.let {
-            facArr.addAll(Gson().fromJson(it, Array<Place.Companion.Facility>::class.java))
+            facArr.addAll(Gson().fromJson(it, Array<Facility>::class.java))
         }
     }
 

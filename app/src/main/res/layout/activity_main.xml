@@ -7,6 +7,20 @@
     android:fitsSystemWindows="false"
     tools:context=".MainActivity">
 
+    <FrameLayout
+        android:id="@+id/layoutMainCircularReveal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/bg_primary"
+        android:elevation="1dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/mainCoordinatorLayout"
         android:layout_width="0dp"

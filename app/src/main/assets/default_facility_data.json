@@ -1,110 +1,134 @@
 [
   {
-    "en": "BLUEPOT Cafe",
     "floor": 1,
+    "type": "CAFE",
+    "en": "BLUEPOT Cafe",
     "id": 82300,
     "kr": "블루포트",
+    "latitude": 37.8865527,
+    "longitude": 127.738236,
     "name": "블루포트",
-    "searchTag": "카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,노맛,아이스,hot,cold,iced,drink",
-    "type": "CAFE"
+    "searchTag": "인문,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,노맛,아이스,hot,cold,iced,drink"
   },
   {
-    "en": "BLUEPOT Cafe",
     "floor": 1,
+    "type": "CAFE",
+    "en": "BLUEPOT Cafe",
     "id": 82301,
     "kr": "블루포트",
+    "latitude": 37.8878977,
+    "longitude": 127.7384231,
     "name": "블루포트",
-    "searchTag": "카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,노맛,아이스,hot,cold,iced,drink",
-    "type": "CAFE"
+    "searchTag": "사회,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,노맛,아이스,hot,cold,iced,drink"
   },
   {
-    "en": "THUMB Coffee",
     "floor": 1,
+    "type": "CAFE",
+    "en": "THUMB Coffee",
     "id": 89578,
     "kr": "텀브커피",
+    "latitude": 37.8853754,
+    "longitude": 127.7358675,
     "name": "텀브커피",
-    "searchTag": "카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,불친절,아이스,hot,cold,iced,drink",
-    "type": "CAFE"
+    "searchTag": "생명,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,아이스,hot,cold,iced,drink"
   },
   {
-    "en": "Bread\u0026Co.",
     "floor": 2,
+    "type": "CAFE",
+    "en": "Bread\u0026Co.",
     "id": 30412,
     "kr": "브레댄코",
+    "latitude": 37.8865138,
+    "longitude": 127.7399687,
     "name": "브레댄코",
-    "searchTag": "카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,아이스,hot,cold,iced,drink",
-    "type": "CAFE"
+    "searchTag": "clc,식당,학생,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,아이스,hot,cold,iced,drink"
   },
   {
-    "en": "Post Office",
     "floor": 1,
+    "type": "POST",
+    "en": "Post Office",
     "id": 2642,
     "kr": "우체국",
+    "latitude": 37.8868557,
+    "longitude": 127.740162,
     "name": "우체국",
-    "searchTag": "우체국,우편취급국,캠라센,clc,택배,우편",
-    "type": "POST"
+    "searchTag": "우체국,우편취급국,캠라센,clc,택배,우편"
   },
   {
-    "en": "GS25",
     "floor": 2,
+    "type": "STORE_CONVENIENCE",
+    "en": "GS25",
     "id": 21441,
     "kr": "GS25",
+    "latitude": 37.8867769,
+    "longitude": 127.7400621,
     "name": "GS25",
-    "searchTag": "편의점,메갈,식당,캠라센,clc,택배,문구",
-    "type": "STORE_CONVENIENCE"
+    "searchTag": "편의점,식당,캠라센,clc,택배,문구,가지 않습니다,사지 않습니다"
   },
   {
-    "en": "GS25",
     "floor": 4,
+    "type": "STORE_CONVENIENCE",
+    "en": "GS25",
     "id": 21442,
     "kr": "GS25",
+    "latitude": 37.8860284,
+    "longitude": 127.7366001,
     "name": "GS25",
-    "searchTag": "편의점,메갈,식당,캠라센,clc,택배,문구",
-    "type": "STORE_CONVENIENCE"
+    "searchTag": "편의점,자연,과학,택배,문구,가지 않습니다,사지 않습니다"
   },
   {
-    "en": "Book Store",
     "floor": 2,
+    "type": "STORE_BOOK",
+    "en": "Book Store",
     "id": 67963,
     "kr": "구내서점",
+    "latitude": 37.8864618,
+    "longitude": 127.740073,
     "name": "구내서점",
-    "searchTag": "서점,서적,전공,책,문구,문구점,문방구,캠라센,학생복지관,clc",
-    "type": "STORE_BOOK"
+    "searchTag": "서점,서적,전공,책,문구,문구점,문방구,캠라센,학생복지관,clc"
   },
   {
-    "en": "Cafeteria (Student)",
     "floor": 2,
+    "type": "CAFETERIA",
+    "en": "Cafeteria (Student)",
     "id": 82189,
     "kr": "학생식당",
+    "latitude": 37.8868767,
+    "longitude": 127.7400138,
     "name": "학생식당",
-    "searchTag": "중식,밥,아침,석식,급식,아워홈,식사,학생복지관,캠라센,clc",
-    "type": "CAFETERIA"
+    "searchTag": "중식,밥,아침,석식,급식,아워홈,식사,학생복지관,캠라센,clc"
   },
   {
-    "en": "Cafeteria (Faculty)",
     "floor": 2,
+    "type": "CAFETERIA",
+    "en": "Cafeteria (Faculty)",
     "id": 82190,
     "kr": "교직원식당",
+    "latitude": 37.886616,
+    "longitude": 127.7385648,
     "name": "교직원식당",
-    "searchTag": "중식,밥,아침,석식,급식,아워홈,식사,별관,인문",
-    "type": "CAFETERIA"
+    "searchTag": "중식,밥,아침,석식,급식,아워홈,식사,별관,인문"
   },
   {
-    "en": "Printer",
     "floor": 4,
+    "type": "PRINTER",
+    "en": "Printer",
     "id": 48252,
     "kr": "인쇄점",
+    "latitude": 37.88496,
+    "longitude": 127.73692,
     "name": "인쇄점",
-    "searchTag": "인쇄,복사,출력,애드투페이퍼,copy,print,도서관,일송",
-    "type": "PRINTER"
+    "searchTag": "인쇄,복사,출력,애드투페이퍼,copy,print,도서관,일송"
   },
   {
-    "en": "Printer",
     "floor": 4,
+    "type": "PRINTER",
+    "en": "Printer",
     "id": 48253,
     "kr": "인쇄점",
+    "latitude": 37.88625,
+    "longitude": 127.73698,
     "name": "인쇄점",
-    "searchTag": "인쇄,복사,출력,애드투페이퍼,copy,print,인문,자연",
-    "type": "PRINTER"
+    "searchTag": "인쇄,복사,출력,애드투페이퍼,copy,print,인문,자연"
   }
 ]
