@@ -46,6 +46,18 @@
     <string name="search_building">건물을 검색중입니다.</string>
     <string name="search_facility">시설을 검색중입니다.</string>
     <string name="search_lecture_room">강의실을 검색중입니다.</string>
+    <string name="search_facility_related_description">&lt;name&gt; &lt;floor&gt;층</string>
+    <string name="search_facility_default_description">주변 정보가 없습니다.</string>
+    <string name="search_reason_name">이름이 일치합니다.</string>
+    <string name="search_reason_lecture_room_building">검색한 강의실이 이 건물에 있습니다.</string>
+    <string name="search_reason_tag">이 시설을 설명하는 것 같습니다.</string>
+    <string name="search_reason_lecture_room">강의실 번호입니다.</string>
+    <string name="search_reason_type">이 종류의 시설입니다.</string>
+    <string name="search_lecture_room_building">건물 번호</string>
+    <string name="search_lecture_room_floor">층</string>
+    <string name="search_lecture_room_number">호실</string>
+    <string name="search_lecture_room_unit">분반</string>
+    <string name="search_not_found">검색 결과가 없습니다.</string>
 
     <!--  Place  -->
     <!--  Facility  -->

@@ -1,46 +1,35 @@
 package xyz.ridsoft.hal.map
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.*
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewAnimationUtils
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
-import android.widget.ListAdapter
-import android.widget.SearchView
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginBottom
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import xyz.ridsoft.hal.R
-import xyz.ridsoft.hal.data.DefaultMapData
+import xyz.ridsoft.hal.data.DataManager
 import xyz.ridsoft.hal.databinding.ActivitySearchBinding
 import xyz.ridsoft.hal.model.Facility
-import xyz.ridsoft.hal.model.MapPoint
-import xyz.ridsoft.hal.model.Place
-import kotlin.math.hypot
 
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
-    private lateinit var places: Array<Place>
-    private lateinit var facilities: Array<Facility>
+    private lateinit var adapter: SearchRecyclerViewAdapter
 
     private var recentKeyword = ArrayList<String>()
 
-    private lateinit var onSearchResultListener: ((Array<MapPoint>) -> Unit)
+    private lateinit var onSearchResultListener: ((ArrayList<SearchResult>) -> Unit)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        DataManager(this)
 
         getIntentData()
         initDefaultData()
@@ -55,31 +44,18 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun initDefaultData() {
-        val mapData = DefaultMapData(this)
-        places = mapData.getDefaultPlaceData() ?: arrayOf()
-        facilities = mapData.getDefaultFacilityData() ?: arrayOf()
+        val mapData = DataManager(this)
+        DataManager.places = mapData.getDefaultPlaceData() ?: arrayOf()
+        DataManager.facilities = mapData.getDefaultFacilityData() ?: arrayOf()
 
-        onSearchResultListener = { r ->
-            val result = ArrayList<String>()
-            r.forEach {
-                result.add("[${it.id}] ${it.name} (${it.latitude}|${it.longitude})")
+        onSearchResultListener = { result ->
+            if (result.size > 0) {
+                adapter.data = result
+            } else {
+                Snackbar.make(binding.srlSearch, R.string.search_not_found, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.confirm) { }
+                    .show()
             }
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("검색 결과")
-                .setAdapter(
-                    ArrayAdapter<String>(
-                        this,
-                        android.R.layout.simple_list_item_1,
-                        result.toTypedArray()
-                    )
-                ) { d, _ ->
-                    d.dismiss()
-                }
-                .setNegativeButton("닫기") { d, _ ->
-                    d.dismiss()
-                }
-                .setCancelable(true)
-                .show()
         }
     }
 
@@ -88,7 +64,7 @@ class SearchActivity : AppCompatActivity() {
         binding.fabSearch.setOnClickListener {
             val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createOneShot(15, 70))
+                vibrator.vibrate(VibrationEffect.createOneShot(30, 70))
             }
 
             val intent = Intent()
@@ -108,6 +84,11 @@ class SearchActivity : AppCompatActivity() {
             )
         }
 
+        adapter = SearchRecyclerViewAdapter(this)
+
+        binding.rvSearch.adapter = adapter
+        binding.rvSearch.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvSearch.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -149,30 +130,133 @@ class SearchActivity : AppCompatActivity() {
 
     }
 
-    private fun search(query: List<String>) {
+    private fun search(queries: List<String>) {
         CoroutineScope(Dispatchers.Main).async {
-            val result = ArrayList<MapPoint>()
+            val result = ArrayList<SearchResult>()
 
-            query.forEach { q ->
-                places.forEach { p ->
-                    if (p.name.contains(q) || p.legacyName?.contains(q) == true || p.searchTag?.contains(q) == true) {
-                        result.add(p)
+            // Search the lecture room number
+            queries.forEach { q ->
+                // Check if the query is lecture room number.
+                val lectureRoomData = decodeLectureRoomNumber(q)
+
+                // If so, add it to the result list.
+                if (lectureRoomData != null) {
+                    result.add(lectureRoomData)
+
+                    // Also add related building info.
+                    lectureRoomData.data?.get("building")?.let {
+                        val relative = SearchResult(
+                            it.toInt(),
+                            SearchResult.Companion.Reason.LECTURE_ROOM_BUILDING
+                        )
+                        result.add(relative)
                     }
+                    return@forEach
                 }
             }
 
-            query.forEach { q ->
-                facilities.forEach { p ->
-                    if (p.name.contains(q) || p.searchTag?.contains(q) == true
-                        || Facility.Companion.FacilityType.getString(this@SearchActivity, p.type).contains(q)) {
-                        result.add(p)
+            // Search the places
+            DataManager.places!!.forEach { p ->
+                var name = true
+                var tag = false
+
+                queries.forEach { q ->
+                    if (!p.name.contains(q) && p.legacyName?.contains(q) == false) {
+                        name = false
                     }
+                    val tags = p.searchTag?.split(",")
+                    if (tags?.contains(q) == true) tag = true
                 }
+
+                if (name) result.add(SearchResult(p.id, SearchResult.Companion.Reason.NAME))
+                else if (tag) result.add(SearchResult(p.id, SearchResult.Companion.Reason.TAG))
             }
 
-            onSearchResultListener(result.distinct().toTypedArray())
+            // Search the facilities
+            DataManager.facilities!!.forEach { p ->
+                var name = true
+                var tag = false
+                var type = false
+
+                queries.forEach { q ->
+                    // Search name
+                    if (!p.name.contains(q)) name = false
+
+                    // Search type
+                    if (Facility.Companion.FacilityType.getString(this@SearchActivity, p.type) == q) type = true
+
+                    // Search tag
+                    val tags = p.searchTag?.split(",")
+                    if (tags?.contains(q) == true) tag = true
+                }
+
+                if (name) result.add(SearchResult(p.id, SearchResult.Companion.Reason.NAME))
+                else if (type) result.add(SearchResult(p.id, SearchResult.Companion.Reason.TYPE))
+                else if (tag) result.add(SearchResult(p.id, SearchResult.Companion.Reason.TAG))
+            }
+
+            onSearchResultListener(result)
 
         }
     }
 
+    private fun decodeLectureRoomNumber(q: String): SearchResult? {
+        val regex = Regex("^[A-Za-z]?[0-9]{4,5}(-[0-5]{1,2})?\$")
+        var lectureRoom = q
+
+        if (lectureRoom.matches(regex)) {
+            val data = mutableMapOf<String, String>()
+
+            if (lectureRoom.matches(Regex("^[A-Za-z][0-9]{4,5}(-[0-5]{1,2})?\$"))) {
+                data["pre"] = lectureRoom.slice(0 until 1)
+                lectureRoom = lectureRoom.removeRange(0 until 1)
+            }
+
+            if (lectureRoom.contains(Regex("-[0-5]{1,2}"))) {
+                val split = lectureRoom.split("-")
+                data["unit"] = "-${split[1]}"
+                lectureRoom = lectureRoom.replace(data["unit"]!!, "")
+            }
+
+            data["building"] = lectureRoom.slice(0 until lectureRoom.length - 3)
+            lectureRoom = lectureRoom.removeRange(0 until lectureRoom.length - 3)
+
+            data["floor"] = lectureRoom.slice(0 until 1)
+            lectureRoom = lectureRoom.removeRange(0 until 1)
+
+            data["room"] = lectureRoom
+
+            val result =
+                SearchResult(data["building"]!!.toInt(), SearchResult.Companion.Reason.LECTURE_ROOM)
+            result.data = data
+
+            return result
+
+        } else {
+            return null
+        }
+    }
+
+}
+
+data class SearchResult(var id: Int, var reason: Reason) {
+    companion object {
+        enum class Reason {
+            NAME, TAG, LECTURE_ROOM, LECTURE_ROOM_BUILDING, TYPE;
+
+            fun toString(context: Context): String {
+                return context.getString(
+                    when (this) {
+                        NAME -> R.string.search_reason_name
+                        TAG -> R.string.search_reason_tag
+                        LECTURE_ROOM -> R.string.search_reason_lecture_room
+                        TYPE -> R.string.search_reason_type
+                        LECTURE_ROOM_BUILDING -> R.string.search_reason_lecture_room_building
+                    }
+                )
+            }
+        }
+    }
+
+    var data: Map<String, String>? = null
 }

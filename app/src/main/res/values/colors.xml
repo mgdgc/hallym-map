@@ -45,4 +45,16 @@
     <color name="chip_normal">#E5E5E5</color>
     <color name="chip_selected">#D1D1D1</color>
 
+    <!--  Highlight color  -->
+    <color name="highlight_pink">#FF2D55</color>
+    <color name="highlight_green">#32C85A</color>
+    <color name="highlight_yellow">#FFCC00</color>
+    <color name="highlight_mint">#00C7BE</color>
+    <color name="highlight_blue">#0078FF</color>
+    <color name="highlight_pink_bg">#4DFF2D55</color>
+    <color name="highlight_green_bg">#4D32C85A</color>
+    <color name="highlight_yellow_bg">#4DFFCC00</color>
+    <color name="highlight_mint_bg">#4D00C7BE</color>
+    <color name="highlight_blue_bg">#4D0078FF</color>
+
 </resources>

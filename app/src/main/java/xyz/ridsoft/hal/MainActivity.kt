@@ -10,14 +10,19 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.ViewAnimationUtils
+import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import xyz.ridsoft.hal.api.ApplicationPermissionManager
 import xyz.ridsoft.hal.databinding.ActivityMainBinding
 import xyz.ridsoft.hal.map.MapFragment
+import xyz.ridsoft.hal.model.MapPoint
 import xyz.ridsoft.hal.more.MoreFragment
 import xyz.ridsoft.hal.my.MyPlaceFragment
 import xyz.ridsoft.hal.recommend.RecommendFragment
@@ -27,11 +32,13 @@ import kotlin.math.hypot
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var behavior: BottomSheetBehavior<ConstraintLayout>
 
     private lateinit var mapFragment: MapFragment
     private lateinit var myPlaceFragment: MyPlaceFragment
     private lateinit var recommendFragment: RecommendFragment
     private lateinit var moreFragment: MoreFragment
+    private lateinit var bottomSheetFragment: MainBottomSheetFragment
 
     private lateinit var searchIcon: Icon
     private lateinit var addIcon: Icon
@@ -62,6 +69,16 @@ class MainActivity : AppCompatActivity() {
         initFragments()
         initView()
         requestPermission()
+
+        behavior = BottomSheetBehavior.from(view.findViewById(R.id.layoutMainBottomSheet))
+        behavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        bottomSheetFragment = MainBottomSheetFragment()
+
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.layoutMainBottomSheet, bottomSheetFragment)
+        transaction.commit()
+
     }
 
     private fun initView() {
@@ -74,29 +91,34 @@ class MainActivity : AppCompatActivity() {
         editIcon = Icon.createWithResource(this, R.drawable.baseline_edit_24)
         likeIcon = Icon.createWithResource(this, R.drawable.baseline_thumb_up_24)
 
-        binding.mainBottomNav.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
+        binding.mainBottomNav.setOnItemSelectedListener {
+            return@setOnItemSelectedListener when (it.itemId) {
                 R.id.navCurrent -> {
                     fragmentTransaction(mapFragment)
                     binding.mainFAB.setImageIcon(searchIcon)
+                    true
                 }
 
                 R.id.navMy -> {
                     fragmentTransaction(myPlaceFragment)
                     binding.mainFAB.setImageIcon(editIcon)
+                    true
                 }
 
                 R.id.navFacilities -> {
                     fragmentTransaction(recommendFragment)
                     binding.mainFAB.setImageIcon(searchIcon)
+                    true
                 }
 
                 R.id.navMore -> {
                     fragmentTransaction(moreFragment)
                     binding.mainFAB.setImageIcon(likeIcon)
+                    true
                 }
+
+                else -> false
             }
-            true
         }
 
         binding.mainFAB.setOnClickListener {
@@ -183,6 +205,15 @@ class MainActivity : AppCompatActivity() {
         })
 
         anim.start()
+    }
+
+    fun showBottomSheet(mapPoint: MapPoint) {
+        bottomSheetFragment.setData(mapPoint)
+        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+    fun hideBottomSheet() {
+        behavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     override fun onResume() {

@@ -6,11 +6,41 @@ import xyz.ridsoft.hal.model.Facility
 import xyz.ridsoft.hal.model.Place
 import kotlin.reflect.typeOf
 
-class DefaultMapData(val context: Context) {
+class DataManager(val context: Context) {
 
     companion object {
-        final val DEFAULT_FACILITY_FILE_NAME = "default_facility_data.json"
-        final val DEFAULT_PLACE_FILE_NAME = "default_place_data.json"
+        const val DEFAULT_FACILITY_FILE_NAME = "default_facility_data.json"
+        const val DEFAULT_PLACE_FILE_NAME = "default_place_data.json"
+
+        var facilities: Array<Facility>? = null
+        var places: Array<Place>? = null
+        val facilitiesById: Map<Int, Facility>
+            get() {
+                val map = mutableMapOf<Int, Facility>()
+                for (f in facilities!!) {
+                    map[f.id] = f
+                }
+                return map
+            }
+
+        val placesById: Map<Int, Place>
+            get() {
+                val map = mutableMapOf<Int, Place>()
+                for (p in places!!) {
+                    map[p.id] = p
+                }
+                return map
+            }
+    }
+
+    init {
+        if (facilities == null) {
+            facilities = getDefaultFacilityData()
+        }
+
+        if (places == null) {
+            places = getDefaultPlaceData()
+        }
     }
 
     private fun readDefaultFile(filename: String): String? {

@@ -8,7 +8,8 @@
     "latitude": 37.8865527,
     "longitude": 127.738236,
     "name": "블루포트",
-    "searchTag": "인문,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,노맛,아이스,hot,cold,iced,drink"
+    "searchTag": "인문,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,노맛,아이스,hot,cold,iced,drink",
+    "buildingNo": 2
   },
   {
     "floor": 1,
@@ -19,7 +20,8 @@
     "latitude": 37.8878977,
     "longitude": 127.7384231,
     "name": "블루포트",
-    "searchTag": "사회,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,노맛,아이스,hot,cold,iced,drink"
+    "searchTag": "사회,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,노맛,아이스,hot,cold,iced,drink",
+    "buildingNo": 10
   },
   {
     "floor": 1,
@@ -30,7 +32,8 @@
     "latitude": 37.8853754,
     "longitude": 127.7358675,
     "name": "텀브커피",
-    "searchTag": "생명,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,아이스,hot,cold,iced,drink"
+    "searchTag": "생명,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,아이스,hot,cold,iced,drink",
+    "buildingNo": 8
   },
   {
     "floor": 2,
@@ -41,7 +44,8 @@
     "latitude": 37.8865138,
     "longitude": 127.7399687,
     "name": "브레댄코",
-    "searchTag": "clc,식당,학생,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,아이스,hot,cold,iced,drink"
+    "searchTag": "clc,식당,학생,카페,커피,cafe,coffee,아메리카노,라떼,음료,더워,아이스,hot,cold,iced,drink",
+    "buildingNo": 9
   },
   {
     "floor": 1,
@@ -52,7 +56,8 @@
     "latitude": 37.8868557,
     "longitude": 127.740162,
     "name": "우체국",
-    "searchTag": "우체국,우편취급국,캠라센,clc,택배,우편"
+    "searchTag": "우체국,우편취급국,캠라센,clc,택배,우편",
+    "buildingNo": 9
   },
   {
     "floor": 2,
@@ -63,7 +68,8 @@
     "latitude": 37.8867769,
     "longitude": 127.7400621,
     "name": "GS25",
-    "searchTag": "편의점,식당,캠라센,clc,택배,문구,가지 않습니다,사지 않습니다"
+    "searchTag": "편의점,식당,캠라센,clc,택배,문구,가지않습니다,사지않습니다",
+    "buildingNo": 9
   },
   {
     "floor": 4,
@@ -74,7 +80,8 @@
     "latitude": 37.8860284,
     "longitude": 127.7366001,
     "name": "GS25",
-    "searchTag": "편의점,자연,과학,택배,문구,가지 않습니다,사지 않습니다"
+    "searchTag": "편의점,자연,과학,택배,문구,가지않습니다,사지않습니다",
+    "buildingNo": 7
   },
   {
     "floor": 2,
@@ -85,7 +92,8 @@
     "latitude": 37.8864618,
     "longitude": 127.740073,
     "name": "구내서점",
-    "searchTag": "서점,서적,전공,책,문구,문구점,문방구,캠라센,학생복지관,clc"
+    "searchTag": "서점,서적,전공,책,문구,문구점,문방구,캠라센,학생복지관,clc",
+    "buildingNo": 9
   },
   {
     "floor": 2,
@@ -96,7 +104,8 @@
     "latitude": 37.8868767,
     "longitude": 127.7400138,
     "name": "학생식당",
-    "searchTag": "중식,밥,아침,석식,급식,아워홈,식사,학생복지관,캠라센,clc"
+    "searchTag": "중식,밥,아침,석식,급식,아워홈,식사,학생복지관,캠라센,clc",
+    "buildingNo": 9
   },
   {
     "floor": 2,
@@ -107,7 +116,8 @@
     "latitude": 37.886616,
     "longitude": 127.7385648,
     "name": "교직원식당",
-    "searchTag": "중식,밥,아침,석식,급식,아워홈,식사,별관,인문"
+    "searchTag": "중식,밥,아침,석식,급식,아워홈,식사,별관,인문",
+    "buildingNo": 5
   },
   {
     "floor": 4,
@@ -118,7 +128,8 @@
     "latitude": 37.88496,
     "longitude": 127.73692,
     "name": "인쇄점",
-    "searchTag": "인쇄,복사,출력,애드투페이퍼,copy,print,도서관,일송"
+    "searchTag": "인쇄,복사,출력,애드투페이퍼,copy,print,도서관,일송",
+    "buildingNo": 17
   },
   {
     "floor": 4,
@@ -129,6 +140,7 @@
     "latitude": 37.88625,
     "longitude": 127.73698,
     "name": "인쇄점",
-    "searchTag": "인쇄,복사,출력,애드투페이퍼,copy,print,인문,자연"
+    "searchTag": "인쇄,복사,출력,애드투페이퍼,copy,print,인문,자연",
+    "buildingNo": 6
   }
 ]

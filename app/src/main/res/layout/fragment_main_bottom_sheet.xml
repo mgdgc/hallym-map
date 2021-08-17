@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutMapBottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:background="@color/bg_secondary"
+    android:elevation="16dp"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="84dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <FrameLayout
+        android:id="@+id/layoutMainBottomSheetHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_secondary"
+        android:elevation="2dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/layoutMapBottomSheetIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/ic_circle_bg">
+
+                <ImageView
+                    android:id="@+id/imgMapBottomSheetIcon"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="8dp"
+                    tools:src="@drawable/baseline_local_cafe_24">
+
+                </ImageView>
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/txtMapBottomSheetTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:alpha="0.6"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                tools:text="Cafe">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtMapBottomSheetDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:alpha="0.40"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="2km">
+
+        </TextView>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

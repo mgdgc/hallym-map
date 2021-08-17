@@ -13,6 +13,24 @@ abstract class MapPoint(
     var searchTag: String? = null
     var kr: String? = null
     var en: String? = null
+    var buildingNo: Int = Place.DEFAULT_BUILDING_NUMBER
+
+    fun getLocalizedString(context: Context): String {
+        val locales = context.resources.configuration.locales
+        var locale = "en_US"
+        for (j in 0 until locales.size()) {
+            if (arrayOf("ko_KR", "en_US").contains(locales[j].toString())) {
+                locale = locales[j].toString()
+                break
+            }
+        }
+
+        return when (locale) {
+            "ko_KR" -> kr ?: name
+            "en_US" -> en ?: name
+            else -> name
+        }
+    }
 }
 
 class Place(
@@ -27,7 +45,6 @@ class Place(
     }
 
     var legacyName: String? = null
-    var buildingNo: Int = DEFAULT_BUILDING_NUMBER
     var facilityId: Array<Int>? = null
 
 }

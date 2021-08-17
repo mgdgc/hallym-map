@@ -59,6 +59,7 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
             binding.editFacilityKr.text.clear()
             binding.editFacilityEn.text.clear()
             binding.editFacilityTag.text.clear()
+            binding.editFacilityBuildingNo.text.clear()
         }
 
         binding.buttonFacilityPlace.setOnClickListener {
@@ -167,6 +168,8 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
             val floor: Int = binding.editFacilityFloor.text.toString().toInt()
             val kr: String = binding.editFacilityKr.text.toString()
             val en: String = binding.editFacilityEn.text.toString()
+            val buildingNoStr = binding.editFacilityBuildingNo.text.toString()
+            val buildingNo: Int = if (buildingNoStr.isEmpty()) 0 else buildingNoStr.toInt()
             val tag: String = binding.editFacilityTag.text.toString()
             val type: Facility.Companion.FacilityType =
                 Facility.Companion.FacilityType.getArray()[binding.spinnerFacilityCategory.selectedItemPosition]
@@ -176,6 +179,7 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
             facility!!.kr = if (kr.isNotEmpty()) kr else null
             facility!!.en = if (en.isNotEmpty()) en else null
             facility!!.searchTag = if (tag.isNotEmpty()) tag else null
+            facility!!.buildingNo = buildingNo
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -197,6 +201,7 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
                 .append("(en): " + facility!!.en + "\n")
                 .append("floor: " + facility!!.floor + "\n")
                 .append("type: " + facility!!.type + "\n")
+                .append("buildingNo: " + facility!!.buildingNo + "\n")
                 .append("searchTag: " + facility!!.searchTag + "\n\n\n")
                 .append("--- Json ---\n\n")
                 .append(Gson().toJson(facility))
@@ -213,6 +218,7 @@ class FacilityJsonBuilderActivity : AppCompatActivity() {
         binding.editFacilityEn.setText(obj.en)
         binding.editFacilityLat.setText(obj.latitude.toString())
         binding.editFacilityLon.setText(obj.longitude.toString())
+        binding.editFacilityBuildingNo.setText(obj.buildingNo.toString())
         binding.editFacilityTag.setText(obj.searchTag)
         var i = 0
         for (f in Facility.Companion.FacilityType.getArray()) {

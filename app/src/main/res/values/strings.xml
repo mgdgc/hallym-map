@@ -45,6 +45,18 @@
     <string name="search_building">Searching building</string>
     <string name="search_facility">Searching facility</string>
     <string name="search_lecture_room">Searching lecture room</string>
+    <string name="search_facility_related_description">&lt;name&gt;, &lt;floor&gt;f</string>
+    <string name="search_facility_default_description">No nearby information.</string>
+    <string name="search_reason_name">The name contains the keyword.</string>
+    <string name="search_reason_tag">The keyword seems to describe this facility.</string>
+    <string name="search_reason_lecture_room">Lecture room number</string>
+    <string name="search_reason_lecture_room_building">The lecture room may be in this building.</string>
+    <string name="search_reason_type">The type of the facility</string>
+    <string name="search_lecture_room_building">Building\nNo.</string>
+    <string name="search_lecture_room_floor">Floor\n</string>
+    <string name="search_lecture_room_number">Room\nNo.</string>
+    <string name="search_lecture_room_unit">Unit\n</string>
+    <string name="search_not_found">No search results</string>
 
     <!--  Place  -->
     <!--  Facility  -->
@@ -65,4 +77,5 @@
     <string name="des_map_kakao">Kakao Map</string>
     <string name="des_row_more_user_img">User Image</string>
     <string name="des_row_section_button">Section Button</string>
+
 </resources>
