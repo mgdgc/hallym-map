@@ -1,8 +1,11 @@
 package xyz.ridsoft.hal.map
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.graphics.drawable.LayerDrawable
 import android.os.*
 import androidx.fragment.app.Fragment
@@ -22,8 +25,10 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay
 import org.osmdroid.views.overlay.ItemizedIconOverlay.OnItemGestureListener
 import org.osmdroid.views.overlay.Overlay
 import org.osmdroid.views.overlay.OverlayItem
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import xyz.ridsoft.hal.MainActivity
 import xyz.ridsoft.hal.R
+import xyz.ridsoft.hal.api.ApplicationPermissionManager
 import xyz.ridsoft.hal.data.DataManager
 import xyz.ridsoft.hal.data.GeoCoordinate
 import xyz.ridsoft.hal.databinding.FragmentMapBinding
@@ -75,24 +80,23 @@ class MapFragment : Fragment() {
         initChipView()
 
         binding.buttonMapCurrent.setOnClickListener {
-            // TODO
-//            val permissionManager = ApplicationPermissionManager(requireContext())
-//            if (permissionManager.checkPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION)
-//                == PackageManager.PERMISSION_GRANTED
-//            ) {
-//                val myOverlay = MyLocationNewOverlay(binding.mapView)
-//                myOverlay.enableFollowLocation()
-//                myOverlay.enableMyLocation()
-//                myOverlay.setPersonIcon(
-//                    BitmapFactory.decodeResource(
-//                        resources,
-//                        R.drawable.ic_map_person_icon
-//                    )
-//                )
-//                binding.mapView.overlays.add(myOverlay)
-//            } else {
-//                permissionManager.requestPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-//            }
+            val permissionManager = ApplicationPermissionManager(requireContext())
+            if (permissionManager.checkPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                val myOverlay = MyLocationNewOverlay(binding.mapView)
+                myOverlay.enableFollowLocation()
+                myOverlay.enableMyLocation()
+                myOverlay.setPersonIcon(
+                    BitmapFactory.decodeResource(
+                        resources,
+                        R.drawable.ic_map_person
+                    )
+                )
+                binding.mapView.overlays.add(myOverlay)
+            } else {
+                permissionManager.requestPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
         }
 
     }
