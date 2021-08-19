@@ -45,20 +45,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editIcon: Icon
     private lateinit var likeIcon: Icon
 
-    var activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        runOnUiThread {
-            Handler(mainLooper).postDelayed({
-                performCircularHideAnimation()
-            }, 50)
-        }
-        if (it.resultCode == RESULT_OK) {
-            it.data?.let { intent ->
-                if (intent.hasExtra("result")) {
-//                    Toast.makeText(this, intent.getStringExtra("result"), Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -166,45 +152,49 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun performCircularRevealAnimation() {
-        val cx = binding.layoutMainCircularReveal.width / 2
-        val cy = binding.layoutMainCircularReveal.height / 2
+        runOnUiThread {
+            val cx = binding.layoutMainCircularReveal.width / 2
+            val cy = binding.layoutMainCircularReveal.height / 2
 
-        val finalRadius = hypot(cx.toDouble() * 2, cy.toDouble() * 2).toFloat()
+            val finalRadius = hypot(cx.toDouble() * 2, cy.toDouble() * 2).toFloat()
 
-        val anim = ViewAnimationUtils.createCircularReveal(
-            binding.layoutMainCircularReveal,
-            binding.mainFAB.x.toInt() + binding.mainFAB.width / 2,
-            binding.mainFAB.y.toInt() + binding.mainFAB.height / 2,
-            0f,
-            finalRadius
-        )
+            val anim = ViewAnimationUtils.createCircularReveal(
+                binding.layoutMainCircularReveal,
+                binding.mainFAB.x.toInt() + binding.mainFAB.width / 2,
+                binding.mainFAB.y.toInt() + binding.mainFAB.height / 2,
+                0f,
+                finalRadius
+            )
 
-        binding.layoutMainCircularReveal.visibility = View.VISIBLE
-        anim.start()
+            binding.layoutMainCircularReveal.visibility = View.VISIBLE
+            anim.start()
+        }
     }
 
     fun performCircularHideAnimation() {
-        val cx = binding.layoutMainCircularReveal.width / 2
-        val cy = binding.layoutMainCircularReveal.height / 2
+        runOnUiThread {
+            val cx = binding.layoutMainCircularReveal.width / 2
+            val cy = binding.layoutMainCircularReveal.height / 2
 
-        val initialRadius = hypot(cx.toDouble() * 2, cy.toDouble() * 2).toFloat()
+            val initialRadius = hypot(cx.toDouble() * 2, cy.toDouble() * 2).toFloat()
 
-        val anim = ViewAnimationUtils.createCircularReveal(
-            binding.layoutMainCircularReveal,
-            binding.mainFAB.x.toInt() + binding.mainFAB.width / 2,
-            binding.mainFAB.y.toInt() + binding.mainFAB.height / 2,
-            initialRadius,
-            0f
-        )
+            val anim = ViewAnimationUtils.createCircularReveal(
+                binding.layoutMainCircularReveal,
+                binding.mainFAB.x.toInt() + binding.mainFAB.width / 2,
+                binding.mainFAB.y.toInt() + binding.mainFAB.height / 2,
+                initialRadius,
+                0f
+            )
 
-        anim.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                binding.layoutMainCircularReveal.visibility = View.INVISIBLE
-            }
-        })
+            anim.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    binding.layoutMainCircularReveal.visibility = View.INVISIBLE
+                }
+            })
 
-        anim.start()
+            anim.start()
+        }
     }
 
     fun showBottomSheet(mapPoint: MapPoint) {
@@ -219,6 +209,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         binding.mainBottomNav.selectedItemId = 0
+        fragmentTransaction(mapFragment)
     }
 
     private fun requestPermission() {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import xyz.ridsoft.hal.common.EmptyFooter
@@ -12,8 +13,10 @@ import xyz.ridsoft.hal.databinding.RowSearchBinding
 import xyz.ridsoft.hal.databinding.RowSearchLectureRoomBinding
 import xyz.ridsoft.hal.model.MapPoint
 
-class SearchRecyclerViewAdapter(val context: Context) :
+class SearchAdapter(val context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    var onItemClickListener: ((view: View, position: Int) -> Unit)? = null
 
     var data: ArrayList<SearchResult> = ArrayList()
         set(value) {
@@ -51,12 +54,16 @@ class SearchRecyclerViewAdapter(val context: Context) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder.itemViewType == SearchViewHolder.VIEW_TYPE) {
-            Log.e("result", "SearchViewHolder")
             val viewHolder = holder as SearchViewHolder
             viewHolder.bind(context, data[position])
 
+            viewHolder.onItemClickListener = { v ->
+                this.onItemClickListener?.let {
+                    it(v, position)
+                }
+            }
+
         } else if (holder.itemViewType == SearchLectureRoomViewHolder.VIEW_TYPE) {
-            Log.e("result", "SearchLectureRoomViewHolder")
             val viewHolder = holder as SearchLectureRoomViewHolder
             viewHolder.bind(context, data[position])
         }

@@ -12,10 +12,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import org.osmdroid.config.Configuration
+import org.osmdroid.events.MapEventsReceiver
+import org.osmdroid.events.MapListener
 import org.osmdroid.library.BuildConfig
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.BoundingBox
@@ -23,6 +28,7 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.overlay.ItemizedIconOverlay
 import org.osmdroid.views.overlay.ItemizedIconOverlay.OnItemGestureListener
+import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Overlay
 import org.osmdroid.views.overlay.OverlayItem
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
@@ -42,19 +48,47 @@ class MapFragment : Fragment() {
     private lateinit var binding: FragmentMapBinding
 
     private var markerData: MutableMap<String, MapPoint> = mutableMapOf()
-
     private var overlays: MutableMap<Facility.Companion.FacilityType, Overlay> = mutableMapOf()
 
+    private var activityResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            Handler(Looper.getMainLooper()).postDelayed({
+                (activity as MainActivity).performCircularHideAnimation()
+            }, 50)
+            if (it.resultCode == AppCompatActivity.RESULT_OK) {
+                it.data?.let { intent ->
+                    if (intent.hasExtra(SearchActivity.INT_RESULT_ID)) {
+                        val result = intent.getIntExtra(SearchActivity.INT_RESULT_ID, -1)
+                        if (result < 0) {
+                            return@registerForActivityResult
+                        }
+
+                        val point = (DataManager.facilitiesById + DataManager.placesById)[result]
+                        point?.let { f ->
+                            removeAllPin()
+
+                            val overlay = convertToOverlay(arrayOf(f))
+                            addOverlayPin(overlay)
+                        }
+                    }
+                }
+            }
+        }
+
     public var onClickListener: ((View) -> Unit) = {
+        // Haptic feedback
         val vibrator = requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             vibrator.vibrate(VibrationEffect.createOneShot(30, 70))
         }
 
+        // Activity transition animation
         (activity as MainActivity).performCircularRevealAnimation()
+        // Start activity
         val intent = Intent(requireActivity(), SearchActivity::class.java)
-        (activity as MainActivity).activityResultLauncher.launch(intent)
+        activityResultLauncher.launch(intent)
 
+        // Transition animation
         activity?.overridePendingTransition(0, R.anim.anim_fade_out)
     }
 
@@ -119,6 +153,21 @@ class MapFragment : Fragment() {
         val startPoint =
             GeoPoint(GeoCoordinate.UNIVERSITY.latitude, GeoCoordinate.UNIVERSITY.longitude)
         binding.mapView.controller.setCenter(startPoint)
+        binding.mapView.setOnClickListener {
+            binding.mapView.overlays.removeIf { overlay ->
+                !overlays.containsValue(overlay)
+            }
+        }
+
+        val receiver = object : MapEventsReceiver {
+            override fun singleTapConfirmedHelper(p: GeoPoint?): Boolean {
+                removeAllPin()
+                return true
+            }
+            override fun longPressHelper(p: GeoPoint?): Boolean { return false }
+        }
+        val eventOverlay = MapEventsOverlay(receiver)
+        binding.mapView.overlays.add(eventOverlay)
 
         val box = BoundingBox(37.8898, 127.7431, 37.8827, 127.7333)
         binding.mapView.setScrollableAreaLimitDouble(box)
@@ -180,6 +229,13 @@ class MapFragment : Fragment() {
     private fun removeOverlayPin(overlay: Overlay) {
         binding.mapView.overlays.remove(overlay)
         binding.mapView.invalidate()
+    }
+
+    private fun removeAllPin() {
+        binding.mapView.overlays.removeIf { overlay ->
+            overlay !is MapEventsOverlay
+        }
+        binding.chipMapTag.clearCheck()
     }
 
     private fun convertToOverlay(mapPoints: Array<MapPoint>): Overlay {

@@ -142,5 +142,17 @@
     "name": "인쇄점",
     "searchTag": "인쇄,복사,출력,애드투페이퍼,copy,print,인문,자연",
     "buildingNo": 6
+  },
+  {
+    "floor": 1,
+    "type": "STUDY_ROOM",
+    "buildingNo": 1,
+    "en": "SW Village",
+    "id": 30519,
+    "kr": "소프트웨어 빌리지",
+    "latitude": 37.88643,
+    "longitude": 127.73589,
+    "name": "소프트웨어 빌리지",
+    "searchTag": "공학관,소프트웨어,북카페,스터디룸,software,sw,study"
   }
 ]

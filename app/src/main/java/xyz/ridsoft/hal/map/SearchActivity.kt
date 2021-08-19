@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.*
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,8 +18,12 @@ import xyz.ridsoft.hal.model.Facility
 
 class SearchActivity : AppCompatActivity() {
 
+    companion object {
+        const val INT_RESULT_ID = "id"
+    }
+
     private lateinit var binding: ActivitySearchBinding
-    private lateinit var adapter: SearchRecyclerViewAdapter
+    private lateinit var adapter: SearchAdapter
 
     private var recentKeyword = ArrayList<String>()
 
@@ -84,9 +88,7 @@ class SearchActivity : AppCompatActivity() {
             )
         }
 
-        adapter = SearchRecyclerViewAdapter(this)
-
-        binding.rvSearch.adapter = adapter
+        adapter = SearchAdapter(this)
         binding.rvSearch.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvSearch.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -97,6 +99,16 @@ class SearchActivity : AppCompatActivity() {
                 inputManager.hideSoftInputFromWindow(binding.searchView.windowToken, 0)
             }
         })
+
+        adapter.onItemClickListener = { _, position ->
+            val intent = Intent().apply {
+                this.putExtra(INT_RESULT_ID, adapter.data[position].id)
+            }
+            setResult(RESULT_OK, intent)
+            finish()
+        }
+
+        binding.rvSearch.adapter = adapter
 
         runOnUiThread {
             Handler(mainLooper).postDelayed({
