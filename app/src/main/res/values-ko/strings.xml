@@ -11,6 +11,8 @@
     <string name="deny">거부</string>
     <string name="open">열기</string>
     <string name="proceed">진행</string>
+    <string name="granted">권한 허용됨</string>
+    <string name="denied">권한 거부됨</string>
 
     <!--  MainActivity  -->
     <string name="bottom_nav_current">지도</string>
@@ -24,6 +26,9 @@
     <string name="permission_location">위치</string>
     <string name="permission_location_explain">&lt;app_name&gt;은 사용자에게 정확한 위치 정보를 제공하기 위해 위치 정보 권한을 요청합니다.</string>
 
+    <!--  MapFragment  -->
+    <string name="map_fab_search">검색</string>
+
     <!--  MoreFragment  -->
     <string name="more_user_default_name">사용자</string>
     <string name="more_section_application">애플리케이션</string>
@@ -31,8 +36,8 @@
     <string name="more_section_data">데이터 관리</string>
     <string name="more_privacy_policy">개인정보처리정책</string>
     <string name="more_privacy_policy_message">개인정보처리정책은 웹브라우저를 통해 제공됩니다. 링크를 여시겠습니까?</string>
-    <string name="more_delete_favorite">내 장소 삭제</string>
-    <string name="more_delete_favorite_message">\'내 장소\'를 모두 지우시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.</string>
+    <string name="more_delete_favorite">좋아요 초기화</string>
+    <string name="more_delete_favorite_message">\'좋아요\'한 장소를 모두 지우시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.</string>
     <string name="more_delete_all">모든 데이터 삭제</string>
     <string name="more_delete_all_message">모든 데이터를 지우시겠습니까?\n\n이 작업은 사용자의 데이터를 포함하여 애플리케이션의 모든 데이터를 제거하는 작업입니다. \n\n실행 이후에는 되돌릴 수 없습니다.</string>
     <string name="more_section_report">문의</string>
@@ -59,6 +64,9 @@
     <string name="search_lecture_room_unit">분반</string>
     <string name="search_not_found">검색 결과가 없습니다.</string>
 
+    <!--  FavoriteFragment  -->
+    <string name="favorite_empty">\'좋아요\'로 등록한 장소가 없습니다.\n\n지도 핀에서 ♥를 눌러 등록해주세요.</string>
+
     <!--  Place  -->
     <!--  Facility  -->
     <string name="facility_cafe">카페</string>
@@ -75,7 +83,6 @@
 
     <!--  Content descriptions  -->
     <string name="des_main_fab">찾기 버튼</string>
-    <string name="des_map_kakao">카카오맵</string>
     <string name="des_row_more_user_img">사용자 사진</string>
     <string name="des_row_section_button">섹션 버튼</string>
 </resources>

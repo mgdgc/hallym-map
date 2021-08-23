@@ -60,20 +60,24 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtMapBottomSheetDistance"
+        <FrameLayout
+            android:id="@+id/layoutMapBottomSheetFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:alpha="0.40"
-            android:textColor="@color/text_primary"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:text="2km">
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/background_selectable_circular">
 
-        </TextView>
+            <ImageView
+                android:id="@+id/imgMapBottomSheetFavorite"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/baseline_favorite_24">
+
+            </ImageView>
+
+        </FrameLayout>
 
     </FrameLayout>
 

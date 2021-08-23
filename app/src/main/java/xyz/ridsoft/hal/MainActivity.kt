@@ -3,29 +3,23 @@ package xyz.ridsoft.hal
 import android.Manifest
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.drawable.Icon
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.view.ViewAnimationUtils
-import android.widget.FrameLayout
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import xyz.ridsoft.hal.api.ApplicationPermissionManager
+import xyz.ridsoft.hal.data.DataManager
 import xyz.ridsoft.hal.databinding.ActivityMainBinding
 import xyz.ridsoft.hal.map.MapFragment
 import xyz.ridsoft.hal.model.MapPoint
 import xyz.ridsoft.hal.more.MoreFragment
-import xyz.ridsoft.hal.my.MyPlaceFragment
-import xyz.ridsoft.hal.recommend.RecommendFragment
+import xyz.ridsoft.hal.favorite.FavoriteFragment
+import xyz.ridsoft.hal.recommend.FacilityFragment
 import kotlin.math.hypot
 
 
@@ -35,22 +29,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var behavior: BottomSheetBehavior<ConstraintLayout>
 
     private lateinit var mapFragment: MapFragment
-    private lateinit var myPlaceFragment: MyPlaceFragment
-    private lateinit var recommendFragment: RecommendFragment
+    private lateinit var favoriteFragment: FavoriteFragment
+    private lateinit var facilityFragment: FacilityFragment
     private lateinit var moreFragment: MoreFragment
     private lateinit var bottomSheetFragment: MainBottomSheetFragment
-
-    private lateinit var searchIcon: Icon
-    private lateinit var addIcon: Icon
-    private lateinit var editIcon: Icon
-    private lateinit var likeIcon: Icon
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        DataManager(this)
 
         initFragments()
         initView()
@@ -70,36 +60,26 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         binding.mainBottomNav.background = null
         binding.mainBottomNav.isSelected = false
-        binding.mainBottomNav.itemTextAppearanceActive
-
-        searchIcon = Icon.createWithResource(this, R.drawable.baseline_search_24)
-        addIcon = Icon.createWithResource(this, R.drawable.baseline_add_24)
-        editIcon = Icon.createWithResource(this, R.drawable.baseline_edit_24)
-        likeIcon = Icon.createWithResource(this, R.drawable.baseline_thumb_up_24)
 
         binding.mainBottomNav.setOnItemSelectedListener {
             return@setOnItemSelectedListener when (it.itemId) {
                 R.id.navCurrent -> {
-                    fragmentTransaction(mapFragment)
-                    binding.mainFAB.setImageIcon(searchIcon)
+                    replaceFragment(mapFragment)
                     true
                 }
 
                 R.id.navMy -> {
-                    fragmentTransaction(myPlaceFragment)
-                    binding.mainFAB.setImageIcon(editIcon)
+                    replaceFragment(favoriteFragment)
                     true
                 }
 
                 R.id.navFacilities -> {
-                    fragmentTransaction(recommendFragment)
-                    binding.mainFAB.setImageIcon(searchIcon)
+                    replaceFragment(facilityFragment)
                     true
                 }
 
                 R.id.navMore -> {
-                    fragmentTransaction(moreFragment)
-                    binding.mainFAB.setImageIcon(likeIcon)
+                    replaceFragment(moreFragment)
                     true
                 }
 
@@ -107,51 +87,34 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.mainFAB.setOnClickListener {
-            when (binding.mainBottomNav.selectedItemId) {
-                R.id.navCurrent -> mapFragment.onClickListener(it)
-                R.id.navMy -> myPlaceFragment.onClickListener(it)
-                R.id.navFacilities -> recommendFragment.onClickListener(it)
-                R.id.navMore -> moreFragment.onClickListener(it)
-                else -> return@setOnClickListener
-            }
-        }
     }
 
     private fun initFragments() {
         mapFragment = MapFragment()
         moreFragment = MoreFragment()
-        myPlaceFragment = MyPlaceFragment()
-        recommendFragment = RecommendFragment()
+        favoriteFragment = FavoriteFragment()
+        facilityFragment = FacilityFragment()
 
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.mainContentLayout, mapFragment)
         transaction.commit()
     }
 
-    private fun fragmentTransaction(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.mainContentLayout, fragment)
         transaction.commit()
     }
 
-    fun hideFloatingActionButton(hide: Boolean) {
-        if (hide) {
-            binding.mainFAB.hide()
-        } else {
-            binding.mainFAB.show()
-        }
-    }
-
-    fun hideBottomNavigationView(hide: Boolean) {
-        if (hide) {
-            binding.mainBAB.performHide()
-        } else {
+    fun setBottomNavigationViewVisibility(visible: Boolean) {
+        if (visible) {
             binding.mainBAB.performShow()
+        } else {
+            binding.mainBAB.performHide()
         }
     }
 
-    fun performCircularRevealAnimation() {
+    fun performCircularRevealAnimation(view: View) {
         runOnUiThread {
             val cx = binding.layoutMainCircularReveal.width / 2
             val cy = binding.layoutMainCircularReveal.height / 2
@@ -160,8 +123,8 @@ class MainActivity : AppCompatActivity() {
 
             val anim = ViewAnimationUtils.createCircularReveal(
                 binding.layoutMainCircularReveal,
-                binding.mainFAB.x.toInt() + binding.mainFAB.width / 2,
-                binding.mainFAB.y.toInt() + binding.mainFAB.height / 2,
+                view.x.toInt() + view.height / 2,
+                view.y.toInt() + view.height / 2,
                 0f,
                 finalRadius
             )
@@ -171,7 +134,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun performCircularHideAnimation() {
+    fun performCircularHideAnimation(view: View) {
         runOnUiThread {
             val cx = binding.layoutMainCircularReveal.width / 2
             val cy = binding.layoutMainCircularReveal.height / 2
@@ -180,8 +143,8 @@ class MainActivity : AppCompatActivity() {
 
             val anim = ViewAnimationUtils.createCircularReveal(
                 binding.layoutMainCircularReveal,
-                binding.mainFAB.x.toInt() + binding.mainFAB.width / 2,
-                binding.mainFAB.y.toInt() + binding.mainFAB.height / 2,
+                view.x.toInt() + view.height / 2,
+                view.y.toInt() + view.height / 2,
                 initialRadius,
                 0f
             )
@@ -202,14 +165,30 @@ class MainActivity : AppCompatActivity() {
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
-    fun hideBottomSheet() {
-        behavior.state = BottomSheetBehavior.STATE_HIDDEN
+    fun selectPage(position: Int) {
+        when (position) {
+            0 -> {
+                replaceFragment(mapFragment)
+                binding.mainBottomNav.selectedItemId = R.id.navCurrent
+            }
+            1 -> {
+                replaceFragment(favoriteFragment)
+                binding.mainBottomNav.selectedItemId = R.id.navMy
+            }
+            2 -> {
+                replaceFragment(facilityFragment)
+                binding.mainBottomNav.selectedItemId = R.id.navFacilities
+            }
+            3 -> {
+                replaceFragment(moreFragment)
+                binding.mainBottomNav.selectedItemId = R.id.navMore
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        binding.mainBottomNav.selectedItemId = 0
-        fragmentTransaction(mapFragment)
+        selectPage(0)
     }
 
     private fun requestPermission() {
@@ -228,9 +207,9 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Granted", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.granted, Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, "Denied", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.denied, Toast.LENGTH_SHORT).show()
         }
     }
 

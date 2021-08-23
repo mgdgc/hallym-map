@@ -70,16 +70,6 @@
 
         </com.google.android.material.bottomappbar.BottomAppBar>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/mainFAB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/des_main_fab"
-            android:src="@drawable/baseline_search_24"
-            app:layout_anchor="@+id/mainBAB">
-
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

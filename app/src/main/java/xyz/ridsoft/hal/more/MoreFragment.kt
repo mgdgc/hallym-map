@@ -3,13 +3,11 @@ package xyz.ridsoft.hal.more
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.DisplayMetrics
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import xyz.ridsoft.hal.MainActivity
@@ -24,10 +22,6 @@ class MoreFragment : Fragment() {
 
     companion object {
         public const val TAG = "more"
-    }
-
-    public var onClickListener: ((View) -> Unit) = {
-
     }
 
     private lateinit var binding: FragmentMoreBinding
@@ -61,8 +55,7 @@ class MoreFragment : Fragment() {
         binding.rvMore.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                (activity as MainActivity).hideBottomNavigationView(dy > 0)
-                (activity as MainActivity).hideFloatingActionButton(dy > 0)
+                (activity as MainActivity).setBottomNavigationViewVisibility(dy <= 0)
             }
         })
 

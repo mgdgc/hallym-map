@@ -27,6 +27,7 @@ class SharedPreferencesManager(val context: Context) {
 
     fun removeFavorites() {
         val favPref = context.getSharedPreferences(SharedPreferencesKeys.FAVORITE_PREF, 0).edit()
+        favPref.clear()
         favPref.apply()
     }
 

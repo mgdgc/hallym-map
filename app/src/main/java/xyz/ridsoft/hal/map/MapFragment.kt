@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
+import org.osmdroid.api.IGeoPoint
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.events.MapListener
@@ -35,6 +36,7 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import xyz.ridsoft.hal.MainActivity
 import xyz.ridsoft.hal.R
 import xyz.ridsoft.hal.api.ApplicationPermissionManager
+import xyz.ridsoft.hal.api.HapticFeedback
 import xyz.ridsoft.hal.data.DataManager
 import xyz.ridsoft.hal.data.GeoCoordinate
 import xyz.ridsoft.hal.databinding.FragmentMapBinding
@@ -53,7 +55,7 @@ class MapFragment : Fragment() {
     private var activityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             Handler(Looper.getMainLooper()).postDelayed({
-                (activity as MainActivity).performCircularHideAnimation()
+                (activity as MainActivity).performCircularHideAnimation(binding.appbarMap)
             }, 50)
             if (it.resultCode == AppCompatActivity.RESULT_OK) {
                 it.data?.let { intent ->
@@ -69,28 +71,17 @@ class MapFragment : Fragment() {
 
                             val overlay = convertToOverlay(arrayOf(f))
                             addOverlayPin(overlay)
+                            binding.mapView.controller.setCenter(
+                                GeoPoint(
+                                    point.latitude,
+                                    point.longitude
+                                )
+                            )
                         }
                     }
                 }
             }
         }
-
-    public var onClickListener: ((View) -> Unit) = {
-        // Haptic feedback
-        val vibrator = requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createOneShot(30, 70))
-        }
-
-        // Activity transition animation
-        (activity as MainActivity).performCircularRevealAnimation()
-        // Start activity
-        val intent = Intent(requireActivity(), SearchActivity::class.java)
-        activityResultLauncher.launch(intent)
-
-        // Transition animation
-        activity?.overridePendingTransition(0, R.anim.anim_fade_out)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,15 +100,17 @@ class MapFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMapBinding.bind(view)
 
-        initDefaultData()
         initMapView()
         initChipView()
 
-        binding.buttonMapCurrent.setOnClickListener {
+        // On Current location button click
+        // Ask for GPS permission
+        binding.fabMapMyLocation.setOnClickListener {
             val permissionManager = ApplicationPermissionManager(requireContext())
             if (permissionManager.checkPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED
             ) {
+                // Create MyLocationOverlay if permission granted
                 val myOverlay = MyLocationNewOverlay(binding.mapView)
                 myOverlay.enableFollowLocation()
                 myOverlay.enableMyLocation()
@@ -133,12 +126,21 @@ class MapFragment : Fragment() {
             }
         }
 
-    }
+        // Search Floating Action Button click
+        binding.layoutMapSearchButton.setOnClickListener {
+            // Haptic feedback
+            HapticFeedback(requireContext()).touchFeedback()
 
-    private fun initDefaultData() {
-        val mapData = DataManager(requireContext())
-        DataManager.places = mapData.getDefaultPlaceData() ?: arrayOf()
-        DataManager.facilities = mapData.getDefaultFacilityData() ?: arrayOf()
+            // Activity transition animation
+            (activity as MainActivity).performCircularRevealAnimation(binding.appbarMap)
+            // Start activity
+            val intent = Intent(requireActivity(), SearchActivity::class.java)
+            activityResultLauncher.launch(intent)
+
+            // Transition animation
+            activity?.overridePendingTransition(0, R.anim.anim_fade_out)
+        }
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -164,7 +166,10 @@ class MapFragment : Fragment() {
                 removeAllPin()
                 return true
             }
-            override fun longPressHelper(p: GeoPoint?): Boolean { return false }
+
+            override fun longPressHelper(p: GeoPoint?): Boolean {
+                return false
+            }
         }
         val eventOverlay = MapEventsOverlay(receiver)
         binding.mapView.overlays.add(eventOverlay)
@@ -276,9 +281,5 @@ class MapFragment : Fragment() {
             },
             requireActivity().applicationContext
         )
-    }
-
-    override fun onDetach() {
-        super.onDetach()
     }
 }

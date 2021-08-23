@@ -40,6 +40,7 @@
     <color name="bg_secondary">#ffffff</color>
     <color name="bg_tertiary">#e0e0e0</color>
     <color name="bg_selected">#BDBDBD</color>
+    <color name="bg_ripple">#4D000000</color>
 
     <!--  ChipView color  -->
     <color name="chip_normal">#E5E5E5</color>

@@ -10,10 +10,6 @@
         android:icon="@drawable/baseline_favorite_24"
         android:title="@string/bottom_nav_my_place" />
     <item
-        android:id="@+id/navPlaceholder"
-        android:enabled="false"
-        android:title="" />
-    <item
         android:id="@+id/navFacilities"
         android:icon="@drawable/baseline_local_cafe_24"
         android:title="@string/bottom_nav_recommend" />

@@ -10,6 +10,8 @@
     <string name="deny">Deny</string>
     <string name="open">Open</string>
     <string name="proceed">Proceed</string>
+    <string name="granted">Permission granted</string>
+    <string name="denied">Permission denied</string>
 
     <!--  MainActivity  -->
     <string name="bottom_nav_current">Map</string>
@@ -22,6 +24,9 @@
     <string name="permission_allow">Allow</string>
     <string name="permission_location">Location</string>
     <string name="permission_location_explain">&lt;app_name&gt; requests location permission to help you find exact location.</string>
+
+    <!--  MapFragment  -->
+    <string name="map_fab_search">Search</string>
 
     <!--  MoreFragment  -->
     <string name="more_user_default_name">User</string>
@@ -58,6 +63,9 @@
     <string name="search_lecture_room_unit">Unit\n</string>
     <string name="search_not_found">No search results</string>
 
+    <!--  FavoriteFragment  -->
+    <string name="favorite_empty">No favorite places.\n\nPress ♥ on map to register favorite places.</string>
+
     <!--  Place  -->
     <!--  Facility  -->
     <string name="facility_cafe">Cafe</string>
@@ -74,7 +82,6 @@
 
     <!--  Content descriptions  -->
     <string name="des_main_fab">Find button</string>
-    <string name="des_map_kakao">Kakao Map</string>
     <string name="des_row_more_user_img">User Image</string>
     <string name="des_row_section_button">Section Button</string>
 
