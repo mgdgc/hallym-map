@@ -33,7 +33,7 @@ class MainBottomSheetFragment : Fragment() {
         binding = FragmentMainBottomSheetBinding.bind(view)
 
         binding.layoutMainBottomSheetHeader.setOnClickListener {
-            (requireActivity() as MainActivity)
+            (requireActivity() as MainActivity).hideBottomSheet()
         }
     }
 

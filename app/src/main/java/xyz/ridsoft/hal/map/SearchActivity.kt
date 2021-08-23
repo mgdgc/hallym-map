@@ -20,6 +20,7 @@ class SearchActivity : AppCompatActivity() {
 
     companion object {
         const val INT_RESULT_ID = "id"
+        const val STRING_QUERY = "query"
     }
 
     private lateinit var binding: ActivitySearchBinding
@@ -44,7 +45,13 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun getIntentData() {
-
+        val query = intent.getStringExtra(STRING_QUERY)
+        query?.let {
+            binding.searchView.setQuery(query, true)
+            recentKeyword.add(it)
+            val q = it.split(" ")
+            search(q)
+        }
     }
 
     private fun initDefaultData() {

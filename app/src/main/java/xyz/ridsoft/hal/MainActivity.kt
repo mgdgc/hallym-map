@@ -165,6 +165,10 @@ class MainActivity : AppCompatActivity() {
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
+    fun hideBottomSheet() {
+        behavior.state = BottomSheetBehavior.STATE_HIDDEN
+    }
+
     fun selectPage(position: Int) {
         when (position) {
             0 -> {

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -54,17 +55,22 @@ class MapFragment : Fragment() {
 
     private var activityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            // Perform hide animation
             Handler(Looper.getMainLooper()).postDelayed({
-                (activity as MainActivity).performCircularHideAnimation(binding.appbarMap)
+                (activity as MainActivity).performCircularHideAnimation(binding.cardMapActionBar)
             }, 50)
+
+            // Handling search result data
             if (it.resultCode == AppCompatActivity.RESULT_OK) {
                 it.data?.let { intent ->
                     if (intent.hasExtra(SearchActivity.INT_RESULT_ID)) {
+                        // If no result, do nothing
                         val result = intent.getIntExtra(SearchActivity.INT_RESULT_ID, -1)
                         if (result < 0) {
                             return@registerForActivityResult
                         }
 
+                        // Add a pin on map
                         val point = (DataManager.facilitiesById + DataManager.placesById)[result]
                         point?.let { f ->
                             removeAllPin()
@@ -126,20 +132,31 @@ class MapFragment : Fragment() {
             }
         }
 
-        // Search Floating Action Button click
-        binding.layoutMapSearchButton.setOnClickListener {
-            // Haptic feedback
-            HapticFeedback(requireContext()).touchFeedback()
+        binding.searchViewMap.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.searchViewMap.clearFocus()
 
-            // Activity transition animation
-            (activity as MainActivity).performCircularRevealAnimation(binding.appbarMap)
-            // Start activity
-            val intent = Intent(requireActivity(), SearchActivity::class.java)
-            activityResultLauncher.launch(intent)
+                // Haptic feedback
+                HapticFeedback(requireContext()).touchFeedback()
 
-            // Transition animation
-            activity?.overridePendingTransition(0, R.anim.anim_fade_out)
-        }
+                // Activity transition animation
+                (activity as MainActivity).performCircularRevealAnimation(binding.cardMapActionBar)
+                // Start activity
+                val intent = Intent(requireActivity(), SearchActivity::class.java)
+                intent.putExtra(SearchActivity.STRING_QUERY, query)
+                activityResultLauncher.launch(intent)
+
+                // Transition animation
+                activity?.overridePendingTransition(0, R.anim.anim_fade_out)
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
 
     }
 
@@ -159,6 +176,7 @@ class MapFragment : Fragment() {
             binding.mapView.overlays.removeIf { overlay ->
                 !overlays.containsValue(overlay)
             }
+            (activity as MainActivity).hideBottomSheet()
         }
 
         val receiver = object : MapEventsReceiver {
