@@ -30,6 +30,27 @@
 <br>
 
 ### 3. 데이터
+* 건물과 시설 데이터는 앱 내에 json으로 저장된 데이터를 기본으로 사용합니다.
+```json
+{
+    "floor": 1,
+    "type": "STUDY_ROOM",
+    "buildingNo": 1,
+    "en": "SW Village",
+    "id": 30519,
+    "kr": "소프트웨어 빌리지",
+    "latitude": 37.88643,
+    "longitude": 127.73589,
+    "name": "소프트웨어 빌리지",
+    "searchTag": "공학관,소프트웨어,software,sw"
+  }
+```
+* 그러나 지도 데이터가 업데이트 될 때마다 앱을 업데이트하는 것은 비효율적이므로, SpreadSheet를 이용하여 최신 정보를 유지합니다.
+* SpreadSheet의 데이터는 [Jsoup](https://jsoup.org)으로 파싱합니다.
+```kotlin
+const val URL = "..." // SpreadSheet web URL
 
-
+// Jsoup으로 파싱
+Jsoup.connect(URL).get()
+```
 
