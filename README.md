@@ -49,6 +49,8 @@ HallymMap은 사용자가 직접 편집하고 기여할 수 있는 오픈소스 
 
 ## 사용된 라이브러리
 * osmdroid: https://github.com/osmdroid/osmdroid
+* gson: https://github.com/google/gson
+* jsoup: https://jsoup.org
 * Material Icons: https://fonts.google.com/icons
 <br>
 
