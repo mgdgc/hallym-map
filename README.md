@@ -42,7 +42,8 @@
 * 🔍 검색 기능을 통해 강의실 번호와 같이 원하는 장소를 검색해 보세요.
 * 👍 즐겨 찾는 장소를 등록하여 빠르게 접근할 수 있습니다.
 <br>
-<br>HallymMap은 사용자가 직접 편집하고 기여할 수 있는 오픈소스 지도 [OpenStreetMap](https://www.openstreetmap.org/) 을 사용합니다.
+
+HallymMap은 사용자가 직접 편집하고 기여할 수 있는 오픈소스 지도 [OpenStreetMap](https://www.openstreetmap.org)을 사용합니다.
 <br>
 <br>
 
