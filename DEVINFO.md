@@ -14,16 +14,16 @@
 
 * 이후 4번의 큰 디자인 변경을 통해 현재와 같은 디자인을 갖추게 되었습니다.
 <br><br><img src="/res/dev/img_05-1.png" width="720px"/>
-  * Version 1
+  * `Version 1`
     * 최초 버전
-  * Version 2
+  * `Version 2`
     * MainActivity의 FloatingActionButton 제거
     * MapFragment에 FloatingActionButton 추가
     * 한손 조작 편의성을 위해 Control bar를 아래로 배치
-  * Version 3
+  * `Version 3`
     * 검색 버튼과 내 위치 버튼의 위치를 교환
     * '좋아요'한 장소가 없을 경우 알림 메시지 출력
-  * Version 4
+  * `Version 4`
     * 검색 버튼 삭제 및 검색바 추가
     * SearchActivity로 전환 시 원형 애니메이션 시작 위치 변경
 
@@ -46,6 +46,7 @@
   }
 ```
 * 그러나 지도 데이터가 업데이트 될 때마다 앱을 업데이트하는 것은 비효율적이므로, SpreadSheet를 이용하여 최신 정보를 유지합니다.
+* 셀룰러 데이터 사용과 앱의 부하를 최소화하기 위해 앱 접속시 매번 업데이트를 진행하지 않습니다. 따라서 최신 데이터가 표시되기까지 최대 이틀이 걸릴 수도 있습니다.
 * SpreadSheet의 데이터는 [Jsoup](https://jsoup.org)으로 파싱합니다.
 ```kotlin
 const val URL = "..." // SpreadSheet web URL
