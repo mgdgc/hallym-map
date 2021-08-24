@@ -26,15 +26,30 @@
 ~~Android: [Google Play](https://play.google.com/store/apps/details?id=xyz.ridsoft.hal)~~
 
 ## 스크린샷
-
+### 라이트 모드
+<img alt="Screenshot" src="/res/screenshots/light_01.png" width="180px"/> <img alt="Screenshot" src="/res/screenshots/light_02.png" width="180px"/> <img alt="Screenshot" src="/res/screenshots/light_03.png" width="180px"/> <img alt="Screenshot" src="/res/screenshots/light_04.png" width="180px"/>
+<br>
+### 다크 모드
+<img alt="Screenshot" src="/res/screenshots/dark_01.png" width="180px"/> <img alt="Screenshot" src="/res/screenshots/dark_02.png" width="180px"/> <img alt="Screenshot" src="/res/screenshots/dark_03.png" width="180px"/> <img alt="Screenshot" src="/res/screenshots/dark_04.png" width="180px"/>
 <br>
 
 ## 설명
+한림대학교 학생과 방문자를 위한 지도 애플리케이션입니다.
+<br>교내 시설 정보를 확인하고 검색할 수 있도록 도와줍니다.
+<br>
+* 🗺 학교 지도를 확인할 수 있습니다.
+* 📍 주요 시설의 위치 정보를 제공합니다.
+* 🔍 검색 기능을 통해 강의실 번호와 같이 원하는 장소를 검색해 보세요.
+* 👍 즐겨 찾는 장소를 등록하여 빠르게 접근할 수 있습니다.
+<br>
 
+HallymMap은 사용자가 직접 편집하고 기여할 수 있는 오픈소스 지도 [OpenStreetMap](https://www.openstreetmap.org)을 사용합니다.
+<br>
 <br>
 
 ## 사용된 라이브러리
-
+* osmdroid: https://github.com/osmdroid/osmdroid
+* Material Icons: https://fonts.google.com/icons
 <br>
 
 ## 개발 내용
@@ -48,5 +63,3 @@
 [개인정보처리방침](/PRIVACY.md)에서 확인하십시오.
 
 <br>
-
-## 라이선스
