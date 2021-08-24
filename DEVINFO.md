@@ -5,7 +5,16 @@
 <br><img src="/res/dev/img_01.png" width="720px"/>
 * 업데이트 전, 후 지도 비교
 <br><img src="/res/dev/img_02.png" width="180px"/> <img src="/res/dev/img_03.png" width="180px"/>
+<br>
 
-### 2. 앱 레이아웃 디자인
-* 
+### 2. 앱 디자인
+* HallymMap은 '지도', '좋아요', '시설', '더보기'의 4가지 탭으로 이루어져 있습니다.
+* 화면은 MainActivity에 BottomNavigationBar을 통해 각 탭별 Fragment를 전환하도록 되어 있습니다.
+<br><br><img src="/res/dev/img_04.png" width="720px"/>
+
+* 이후 4번의 큰 디자인 변경을 통해 현재와 같은 디자인을 갖추게 되었습니다.
+<br><br><img src="/res/dev/img_05.png" width="720px"/>
+
+
+
 
