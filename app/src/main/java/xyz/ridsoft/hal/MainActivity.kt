@@ -3,7 +3,10 @@ package xyz.ridsoft.hal
 import android.Manifest
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Bundle
 import android.view.View
 import android.view.ViewAnimationUtils
@@ -12,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
 import xyz.ridsoft.hal.api.ApplicationPermissionManager
 import xyz.ridsoft.hal.data.DataManager
 import xyz.ridsoft.hal.databinding.ActivityMainBinding
@@ -19,7 +23,7 @@ import xyz.ridsoft.hal.map.MapFragment
 import xyz.ridsoft.hal.model.MapPoint
 import xyz.ridsoft.hal.more.MoreFragment
 import xyz.ridsoft.hal.favorite.FavoriteFragment
-import xyz.ridsoft.hal.recommend.FacilityFragment
+import xyz.ridsoft.hal.facilities.FacilityFragment
 import kotlin.math.hypot
 
 
@@ -40,8 +44,6 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        DataManager(this)
-
         initFragments()
         initView()
         requestPermission()
@@ -54,6 +56,31 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.layoutMainBottomSheet, bottomSheetFragment)
         transaction.commit()
+
+        initData()
+    }
+
+    private fun initData() {
+        val dataManager = DataManager(this)
+
+        dataManager.onUpdateStartListener = {
+            Snackbar.make(binding.layoutMain, R.string.update_started, Snackbar.LENGTH_SHORT)
+                .show()
+        }
+
+        dataManager.onUpdateFinishListener = {
+
+        }
+
+        if (dataManager.isUpdateNecessary()) {
+            val connectivityManager = getSystemService(ConnectivityManager::class.java)
+            connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: Network) {
+                    super.onAvailable(network)
+                    dataManager.updateData()
+                }
+            })
+        }
 
     }
 
@@ -123,7 +150,7 @@ class MainActivity : AppCompatActivity() {
 
             val anim = ViewAnimationUtils.createCircularReveal(
                 binding.layoutMainCircularReveal,
-                view.x.toInt() + view.height / 2,
+                view.x.toInt() + view.width / 2,
                 view.y.toInt() + view.height / 2,
                 0f,
                 finalRadius
@@ -143,7 +170,7 @@ class MainActivity : AppCompatActivity() {
 
             val anim = ViewAnimationUtils.createCircularReveal(
                 binding.layoutMainCircularReveal,
-                view.x.toInt() + view.height / 2,
+                view.x.toInt() + view.width / 2,
                 view.y.toInt() + view.height / 2,
                 initialRadius,
                 0f
@@ -188,6 +215,10 @@ class MainActivity : AppCompatActivity() {
                 binding.mainBottomNav.selectedItemId = R.id.navMore
             }
         }
+    }
+
+    fun addMapPointToMap(mapPoints: Array<MapPoint>) {
+        mapFragment.addMapPoint(mapPoints)
     }
 
     override fun onResume() {
