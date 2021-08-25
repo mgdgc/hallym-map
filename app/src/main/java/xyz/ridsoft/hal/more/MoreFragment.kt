@@ -16,7 +16,7 @@ import xyz.ridsoft.hal.databinding.FragmentMoreBinding
 import xyz.ridsoft.hal.developer.FacilityJsonBuilderActivity
 import xyz.ridsoft.hal.developer.JsonBuilderActivity
 import xyz.ridsoft.hal.value.SharedPreferencesManager
-import xyz.ridsoft.hal.value.URL
+import xyz.ridsoft.hal.value.DefaultURLs
 
 class MoreFragment : Fragment() {
 
@@ -96,7 +96,7 @@ class MoreFragment : Fragment() {
                 alert.setTitle(R.string.more_privacy_policy)
                     .setMessage(R.string.more_privacy_policy_message)
                     .setPositiveButton(R.string.open) { dialog, _ ->
-                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(URL.PRIVACY_POLICY)))
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(DefaultURLs.PRIVACY_POLICY)))
                         dialog.dismiss()
                     }
                     .setNegativeButton(R.string.cancel) { dialog, _ ->
@@ -114,12 +114,11 @@ class MoreFragment : Fragment() {
                         dialog.dismiss()
                     }
                     .setNeutralButton(R.string.proceed) { dialog, _ ->
-                        SharedPreferencesManager(requireContext()).removeAll()
+                        SharedPreferencesManager(requireContext()).removeFavorites()
                         dialog.dismiss()
                     }
                     .setCancelable(true)
                     .show()
-                SharedPreferencesManager(requireContext()).removeFavorites()
             }
 
             "delete_all" -> {
@@ -134,6 +133,24 @@ class MoreFragment : Fragment() {
                         dialog.dismiss()
                     }
                     .setCancelable(true)
+                    .show()
+            }
+
+            "report_issue", "report_place" -> {
+                val alert = AlertDialog.Builder(requireContext())
+                if (id == "report_issue") {
+                    alert.setTitle(R.string.more_report_issue)
+                        .setMessage(R.string.more_report_issue_content)
+                } else if (id == "report_place") {
+                    alert.setTitle(R.string.more_report_place)
+                        .setMessage(R.string.more_report_place_content)
+                }
+                alert.setPositiveButton(R.string.open) { dialog, _ ->
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://ridsoft.xyz/service.html"))
+                    startActivity(intent)
+                    dialog.dismiss()
+                }
+                    .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
                     .show()
             }
 

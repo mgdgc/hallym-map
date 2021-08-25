@@ -10,10 +10,6 @@ class MoreMenuDefaultData(val context: Context) {
     public fun getDefaultData(): Array<TableData> {
         val data = ArrayList<TableData>()
 
-        // User
-        val user = TableData("user", "", null, R.drawable.baseline_account_circle_24)
-        data.add(user)
-
         // Application
         val sectionApp =
             TableData("section_app", context.getString(R.string.more_section_application))

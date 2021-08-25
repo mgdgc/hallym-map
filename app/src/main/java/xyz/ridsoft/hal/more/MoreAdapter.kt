@@ -1,29 +1,21 @@
 package xyz.ridsoft.hal.more
 
 import android.content.Context
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import xyz.ridsoft.hal.R
 import xyz.ridsoft.hal.common.EmptyFooter
 import xyz.ridsoft.hal.common.SectionHeader
 import xyz.ridsoft.hal.databinding.RowEmptyFooterBinding
 import xyz.ridsoft.hal.databinding.RowMoreMenuBinding
-import xyz.ridsoft.hal.databinding.RowMoreUserBinding
 import xyz.ridsoft.hal.databinding.RowSectionHeaderBinding
 import xyz.ridsoft.hal.model.TableData
-import xyz.ridsoft.hal.value.SharedPreferencesKeys
-import kotlin.math.sin
 
 class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val VIEW_TYPE_ROW = R.layout.row_more_menu
-        private const val VIEW_TYPE_USER = R.layout.row_more_user
         private const val VIEW_TYPE_SECTION = R.layout.row_section_header
         private const val VIEW_TYPE_FOOTER = R.layout.row_empty_footer
     }
@@ -34,9 +26,6 @@ class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            VIEW_TYPE_USER -> MoreUserViewHolder(
-                RowMoreUserBinding.inflate(LayoutInflater.from(context), parent, false)
-            )
 
             VIEW_TYPE_ROW -> MoreMenuViewHolder(
                 RowMoreMenuBinding.inflate(LayoutInflater.from(context), parent, false)
@@ -71,29 +60,6 @@ class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
 
             viewHolder.binding.txtRowSectionTitle.text = data[position].title
 
-        } else if (holder.itemViewType == VIEW_TYPE_USER) {
-            val viewHolder = holder as MoreUserViewHolder
-
-            // User icon
-            data[position].icon?.let { viewHolder.binding.imgRowMoreUser.setImageResource(it) }
-
-            // User name
-            viewHolder.binding.txtRowMoreUserName.text = context.getSharedPreferences(
-                SharedPreferencesKeys.USER_PREF,
-                0
-            ).getString(
-                SharedPreferencesKeys.STRING_USER_NAME,
-                context.resources.getString(R.string.more_user_default_name)
-            )
-
-            // User Description
-            // TODO
-            viewHolder.binding.txtRowMoreUserContent.text = "즐겨찾기한 항목 0"
-
-            // Edit button
-            viewHolder.binding.imgRowMoreUserEdit.setOnClickListener {
-                //TODO
-            }
         }
     }
 
@@ -103,7 +69,7 @@ class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
 
     override fun getItemViewType(position: Int): Int {
         super.getItemViewType(position)
-        return if (position == 0) VIEW_TYPE_USER else if (position == data.size) VIEW_TYPE_FOOTER else {
+        return if (position == data.size) VIEW_TYPE_FOOTER else {
             when (data[position].itemType) {
                 TableData.Companion.ItemType.DIVIDER -> VIEW_TYPE_SECTION
                 TableData.Companion.ItemType.NORMAL -> VIEW_TYPE_ROW
@@ -112,10 +78,13 @@ class MoreAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    public fun setData(data: Array<TableData>) {
+    fun setData(data: Array<TableData>) {
+        val size = data.size
         this.data.clear()
+        notifyItemRangeRemoved(0, size)
+
         this.data.addAll(data)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(0, data.size)
     }
 
     public fun addData(data: Array<TableData>) {

@@ -4,15 +4,22 @@ import android.content.Context
 
 class SharedPreferencesKeys {
     companion object {
-        public const val USER_PREF = "user"
-        public const val STRING_USER_NAME = "name"
+        const val USER_PREF = "user"
+        const val STRING_USER_NAME = "name"
 
-        public const val DEVELOPER_PREF = "developer"
-        public const val BOOL_DEV_MENU_ENABLE = "dev_menu"
-        public const val STRING_FACILITY_JSON = "facilities"
-        public const val STRING_PLACE_JSON = "places"
+        const val APP_PREF = "app"
+        const val INT_LAST_UPDATE = "last_update"
 
-        public const val FAVORITE_PREF = "favorites"
+        const val MAP_PREF = "map"
+        const val STRING_UPDATED_PLACES = "updated_places"
+        const val STRING_UPDATED_FACILITIES = "updated_facilities"
+
+        const val DEVELOPER_PREF = "developer"
+        const val BOOL_DEV_MENU_ENABLE = "dev_menu"
+        const val STRING_FACILITY_JSON = "facilities"
+        const val STRING_PLACE_JSON = "places"
+
+        const val FAVORITE_PREF = "favorites"
     }
 }
 
@@ -20,9 +27,14 @@ class SharedPreferencesManager(val context: Context) {
 
     fun removeAll() {
         val userPref = context.getSharedPreferences(SharedPreferencesKeys.USER_PREF, 0).edit()
-        userPref.remove(SharedPreferencesKeys.STRING_USER_NAME)
-        removeFavorites()
+        userPref.clear()
         userPref.apply()
+
+        val appPref = context.getSharedPreferences(SharedPreferencesKeys.APP_PREF, 0).edit()
+        appPref.clear()
+        appPref.apply()
+
+        removeFavorites()
     }
 
     fun removeFavorites() {
