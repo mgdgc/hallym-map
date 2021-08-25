@@ -8,21 +8,18 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.drawable.LayerDrawable
 import android.os.*
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
-import org.osmdroid.api.IGeoPoint
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapEventsReceiver
-import org.osmdroid.events.MapListener
 import org.osmdroid.library.BuildConfig
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.BoundingBox
@@ -43,7 +40,6 @@ import xyz.ridsoft.hal.data.GeoCoordinate
 import xyz.ridsoft.hal.databinding.FragmentMapBinding
 import xyz.ridsoft.hal.model.Facility
 import xyz.ridsoft.hal.model.MapPoint
-import xyz.ridsoft.hal.model.Place
 import kotlin.collections.ArrayList
 
 class MapFragment : Fragment() {
@@ -53,11 +49,13 @@ class MapFragment : Fragment() {
     private var markerData: MutableMap<String, MapPoint> = mutableMapOf()
     private var overlays: MutableMap<Facility.Companion.FacilityType, Overlay> = mutableMapOf()
 
+    private var mapPointsToAdd: ArrayList<MapPoint> = arrayListOf()
+
     private var activityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             // Perform hide animation
             Handler(Looper.getMainLooper()).postDelayed({
-                (activity as MainActivity).performCircularHideAnimation(binding.cardMapActionBar)
+                (activity as MainActivity).performCircularHideAnimation(binding.layoutMapSearch)
             }, 50)
 
             // Handling search result data
@@ -89,11 +87,6 @@ class MapFragment : Fragment() {
             }
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        DataManager(requireContext())
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -123,7 +116,7 @@ class MapFragment : Fragment() {
                 myOverlay.setPersonIcon(
                     BitmapFactory.decodeResource(
                         resources,
-                        R.drawable.ic_map_person
+                        R.drawable.ic_map_my_location
                     )
                 )
                 binding.mapView.overlays.add(myOverlay)
@@ -140,7 +133,7 @@ class MapFragment : Fragment() {
                 HapticFeedback(requireContext()).touchFeedback()
 
                 // Activity transition animation
-                (activity as MainActivity).performCircularRevealAnimation(binding.cardMapActionBar)
+                (activity as MainActivity).performCircularRevealAnimation(binding.layoutMapSearch)
                 // Start activity
                 val intent = Intent(requireActivity(), SearchActivity::class.java)
                 intent.putExtra(SearchActivity.STRING_QUERY, query)
@@ -261,7 +254,7 @@ class MapFragment : Fragment() {
         binding.chipMapTag.clearCheck()
     }
 
-    private fun convertToOverlay(mapPoints: Array<MapPoint>): Overlay {
+    private fun convertToOverlay(mapPoints: Array<MapPoint>, context: Context = requireContext()): Overlay {
         val overlayList = ArrayList<OverlayItem>()
 
         for (i in mapPoints.indices) {
@@ -269,7 +262,7 @@ class MapFragment : Fragment() {
 
             val overlayItem = OverlayItem(mapPoints[i].name, "snippet", geoPoint)
             val markerDrawable =
-                ContextCompat.getDrawable(requireContext(), R.drawable.ic_map_marker)
+                ContextCompat.getDrawable(context, R.drawable.ic_map_marker)
             overlayItem.setMarker(markerDrawable)
 
             overlayList.add(overlayItem)
@@ -297,7 +290,21 @@ class MapFragment : Fragment() {
                 }
 
             },
-            requireActivity().applicationContext
+            context.applicationContext
         )
+    }
+
+    fun addMapPoint(mapPoint: Array<MapPoint>) {
+        mapPointsToAdd.addAll(mapPoint)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (mapPointsToAdd.isNotEmpty()) {
+            val overlay = convertToOverlay(mapPointsToAdd.toTypedArray(), context)
+            addOverlayPin(overlay)
+            Log.e("onAttach", binding.mapView.overlays.size.toString())
+            mapPointsToAdd.clear()
+        }
     }
 }
