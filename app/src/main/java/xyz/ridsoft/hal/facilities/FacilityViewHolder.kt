@@ -1,6 +1,5 @@
-package xyz.ridsoft.hal.recommend
+package xyz.ridsoft.hal.facilities
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

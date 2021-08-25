@@ -1,4 +1,4 @@
-package xyz.ridsoft.hal.recommend
+package xyz.ridsoft.hal.facilities
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.LayerDrawable
@@ -54,7 +54,7 @@ class FacilityFragment : Fragment() {
 
         adapter.onItemClickListener = { _, position ->
             (activity as MainActivity).selectPage(0)
-            // TODO
+            (activity as MainActivity).addMapPointToMap(arrayOf(adapter.data[position]))
         }
     }
 

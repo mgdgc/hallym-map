@@ -256,6 +256,11 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent()
+        setResult(RESULT_CANCELED, intent)
+    }
 }
 
 data class SearchResult(var id: Int, var reason: Reason) {

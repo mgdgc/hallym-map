@@ -86,4 +86,5 @@ class FavoriteFragment : Fragment() {
         super.onResume()
         initData()
     }
+
 }

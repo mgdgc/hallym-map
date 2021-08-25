@@ -7,6 +7,7 @@
     tools:context=".map.MapFragment">
 
     <FrameLayout
+        android:id="@+id/layoutMapSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
@@ -33,42 +34,6 @@
                 app:queryHint="@string/search_place_holder">
 
             </androidx.appcompat.widget.SearchView>
-
-            <LinearLayout
-                android:id="@+id/layoutMapSearchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/background_button"
-                android:elevation="8dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingStart="12dp"
-                android:paddingEnd="16dp"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    android:alpha="0.78"
-                    android:src="@drawable/baseline_search_24"
-                    app:tint="@color/black">
-
-                </ImageView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/map_fab_search"
-                    android:textColor="@color/text_primary">
-
-                </TextView>
-
-            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 

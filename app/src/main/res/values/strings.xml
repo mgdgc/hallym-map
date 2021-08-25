@@ -18,6 +18,7 @@
     <string name="bottom_nav_my_place">My Places</string>
     <string name="bottom_nav_recommend">Recommend</string>
     <string name="bottom_nav_more">More</string>
+    <string name="update_started">Updating data</string>
 
     <!--  ApplicationPermissionManager  -->
     <string name="permission_deny">Deny</string>
@@ -40,10 +41,12 @@
     <string name="more_delete_all">Delete all data</string>
     <string name="more_delete_all_message">Would you like to delete all data?\n\nThis work includes removing your preferences, as well as application data, and it is irreversible.</string>
     <string name="more_section_report">Report</string>
-    <string name="more_report_issue">Report bugs</string>
+    <string name="more_report_issue">Report issue</string>
     <string name="more_report_place">Report place</string>
     <string name="more_change_log">Change log</string>
     <string name="more_dev_menu">Developer Menu</string>
+    <string name="more_report_issue_content">Would you like to open the service link?</string>
+    <string name="more_report_place_content">Would you like to open the service link?</string>
 
     <!--  SearchActivity  -->
     <string name="search_place_holder">Lecture room, building name, …</string>

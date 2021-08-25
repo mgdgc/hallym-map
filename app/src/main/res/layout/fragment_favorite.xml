@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_primary"
     tools:context=".favorite.FavoriteFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,7 @@
         android:id="@+id/layoutFavoriteNoItem"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/bg_secondary"
+        android:background="@color/bg_primary"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

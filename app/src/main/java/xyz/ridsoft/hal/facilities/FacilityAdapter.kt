@@ -1,4 +1,4 @@
-package xyz.ridsoft.hal.recommend
+package xyz.ridsoft.hal.facilities
 
 import android.content.Context
 import android.view.LayoutInflater
