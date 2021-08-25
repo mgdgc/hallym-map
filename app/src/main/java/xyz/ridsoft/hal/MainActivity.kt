@@ -32,10 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var behavior: BottomSheetBehavior<ConstraintLayout>
 
-    private lateinit var mapFragment: MapFragment
-    private lateinit var favoriteFragment: FavoriteFragment
-    private lateinit var facilityFragment: FacilityFragment
-    private lateinit var moreFragment: MoreFragment
+    private var fragments: MutableMap<Int, Fragment> = mutableMapOf()
     private lateinit var bottomSheetFragment: MainBottomSheetFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,41 +86,23 @@ class MainActivity : AppCompatActivity() {
         binding.mainBottomNav.isSelected = false
 
         binding.mainBottomNav.setOnItemSelectedListener {
-            return@setOnItemSelectedListener when (it.itemId) {
-                R.id.navCurrent -> {
-                    replaceFragment(mapFragment)
-                    true
-                }
-
-                R.id.navMy -> {
-                    replaceFragment(favoriteFragment)
-                    true
-                }
-
-                R.id.navFacilities -> {
-                    replaceFragment(facilityFragment)
-                    true
-                }
-
-                R.id.navMore -> {
-                    replaceFragment(moreFragment)
-                    true
-                }
-
-                else -> false
+            fragments[it.itemId]?.let { fragment ->
+                replaceFragment(fragment)
+                return@setOnItemSelectedListener true
             }
+            false
         }
 
     }
 
     private fun initFragments() {
-        mapFragment = MapFragment()
-        moreFragment = MoreFragment()
-        favoriteFragment = FavoriteFragment()
-        facilityFragment = FacilityFragment()
+        fragments[R.id.navCurrent] = MapFragment()
+        fragments[R.id.navMore] = MoreFragment()
+        fragments[R.id.navMy] = FavoriteFragment()
+        fragments[R.id.navFacilities] = FacilityFragment()
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.mainContentLayout, mapFragment)
+        transaction.add(R.id.mainContentLayout, fragments[R.id.navCurrent]!!)
         transaction.commit()
     }
 
@@ -199,31 +178,32 @@ class MainActivity : AppCompatActivity() {
     fun selectPage(position: Int) {
         when (position) {
             0 -> {
-                replaceFragment(mapFragment)
+                replaceFragment(fragments[R.id.navCurrent]!!)
                 binding.mainBottomNav.selectedItemId = R.id.navCurrent
             }
             1 -> {
-                replaceFragment(favoriteFragment)
+                replaceFragment(fragments[R.id.navMy]!!)
                 binding.mainBottomNav.selectedItemId = R.id.navMy
             }
             2 -> {
-                replaceFragment(facilityFragment)
+                replaceFragment(fragments[R.id.navFacilities]!!)
                 binding.mainBottomNav.selectedItemId = R.id.navFacilities
             }
             3 -> {
-                replaceFragment(moreFragment)
+                replaceFragment(fragments[R.id.navMore]!!)
                 binding.mainBottomNav.selectedItemId = R.id.navMore
             }
         }
     }
 
     fun addMapPointToMap(mapPoints: Array<MapPoint>) {
-        mapFragment.addMapPoint(mapPoints)
+        (fragments[R.id.navCurrent] as MapFragment).addMapPoint(mapPoints)
     }
 
     override fun onResume() {
         super.onResume()
-        selectPage(0)
+        val selected = fragments[binding.mainBottomNav.selectedItemId]!!
+        replaceFragment(selected)
     }
 
     private fun requestPermission() {
