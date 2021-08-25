@@ -1,18 +1,21 @@
 ## 개발 내용
 
 ### 1. 지도 업데이트
-* 오픈스트리트맵의 학교 지도에 최신 정보가 적용되어 있지 않아 우선 정보를 업데이트했습니다.
+* 오픈스트리트맵의 학교 지도에 최신 정보가 적용되어 있지 않아 정보를 업데이트했습니다.
 <br><img src="/res/dev/img_01.png" width="720px"/>
-* 업데이트 전, 후 지도 비교
-<br><img src="/res/dev/img_02.png" width="180px"/> <img src="/res/dev/img_03.png" width="180px"/>
+#### 업데이트 전, 후 지도 비교
+<br><img src="/res/dev/img_02.png" width="360px"/> <img src="/res/dev/img_03.png" width="360px"/>
 <br>
+
+---
 
 ### 2. 앱 디자인
 * HallymMap은 '지도', '좋아요', '시설', '더보기'의 4가지 탭으로 이루어져 있습니다.
-* 화면은 MainActivity에 BottomNavigationBar을 통해 각 탭별 Fragment를 전환하도록 되어 있습니다.
+* 하단의 NavigationBar를 통해 MainActivity에 각 탭별 Fragment를 전환합니다.
+  * 검색 등의 기능은 심화적인 기능 구현을 위해 별도의 Activity로 동작합니다.
 <br><br><img src="/res/dev/img_04-1.png" width="720px"/>
 
-* 이후 4번의 큰 디자인 변경을 통해 현재와 같은 디자인을 갖추게 되었습니다.
+#### 디자인 변화
 <br><br><img src="/res/dev/img_05-1.png" width="720px"/>
   * `Version 1`
     * 최초 버전
@@ -27,9 +30,12 @@
     * 검색 버튼 삭제 및 검색바 추가
     * SearchActivity로 전환 시 원형 애니메이션 시작 위치 변경
 
-<br>
+<br><br>
+
+---
 
 ### 3. 데이터
+#### 1) 지도 데이터
 * 건물과 시설 데이터는 앱 내에 json으로 저장된 데이터를 기본으로 사용합니다.
 ```json
 {
@@ -53,5 +59,25 @@ const val URL = "..." // SpreadSheet web URL
 
 // Jsoup으로 파싱
 Jsoup.connect(URL).get()
+```
+#### 2) 데이터의 저장
+* HallymMap은 안드로이드에서 제공하는 Key-Value 형식의 SharedPreference에 모든 데이터를 저장합니다.
+  * 앱 설정 데이터
+  * 지도 업데이트 데이터
+  * 개발자 모드 데이터
+  * '좋아요'한 장소 데이터
+  * ~~사용자 데이터~~ *제거됨*
+```text
+(예시)
+"app" preference
+  ┗ "initialized": true
+  ┗ "updated": true
+  ┗ ...
+
+"map" preference
+  ┗ "place_keys": "{48253, 82190, 67963, ...}"
+  ┗ "48253": "{"id": 48253, "name": "SW Village", "latitude": 37.88643, "longitude": 127.73589}"
+  ┗ "82189": "{"id": 82189, "name": "학생식당", "latitude": 37.8868767, "longitude": 127.7400138}"
+  ┗ ...
 ```
 
