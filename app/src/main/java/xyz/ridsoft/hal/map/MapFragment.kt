@@ -298,12 +298,11 @@ class MapFragment : Fragment() {
         mapPointsToAdd.addAll(mapPoint)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onResume() {
+        super.onResume()
         if (mapPointsToAdd.isNotEmpty()) {
-            val overlay = convertToOverlay(mapPointsToAdd.toTypedArray(), context)
+            val overlay = convertToOverlay(mapPointsToAdd.toTypedArray(), requireContext())
             addOverlayPin(overlay)
-            Log.e("onAttach", binding.mapView.overlays.size.toString())
             mapPointsToAdd.clear()
         }
     }

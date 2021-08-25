@@ -4,9 +4,6 @@ import android.content.Context
 
 class SharedPreferencesKeys {
     companion object {
-        const val USER_PREF = "user"
-        const val STRING_USER_NAME = "name"
-
         const val APP_PREF = "app"
         const val INT_LAST_UPDATE = "last_update"
 
@@ -26,10 +23,6 @@ class SharedPreferencesKeys {
 class SharedPreferencesManager(val context: Context) {
 
     fun removeAll() {
-        val userPref = context.getSharedPreferences(SharedPreferencesKeys.USER_PREF, 0).edit()
-        userPref.clear()
-        userPref.apply()
-
         val appPref = context.getSharedPreferences(SharedPreferencesKeys.APP_PREF, 0).edit()
         appPref.clear()
         appPref.apply()
