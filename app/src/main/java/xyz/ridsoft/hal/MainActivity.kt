@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -217,21 +218,40 @@ class MainActivity : AppCompatActivity() {
         if (permissionManager.checkPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION) !=
             PackageManager.PERMISSION_GRANTED
         ) {
-            permissionManager.requestPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            Toast.makeText(this, R.string.denied, Toast.LENGTH_SHORT).show()
+        }
+        permissionManager.onShouldShowRequestPermissionRationale = {
+            val alert = AlertDialog.Builder(this)
+            alert.setTitle(R.string.permission_location)
+                .setMessage(
+                    resources.getString(R.string.permission_location_explain)
+                        .replace("<app_name>", resources.getString(R.string.app_name))
+                )
+                .setPositiveButton(R.string.permission_allow) { dialogInterface, i ->
+                    permissionManager.requestPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                    dialogInterface.dismiss()
+                }
+                .show()
         }
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, R.string.granted, Toast.LENGTH_SHORT).show()
-        } else {
+        if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, R.string.denied, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun showPermissionDeniedSnackBar() {
+        Snackbar.make(
+            binding.layoutMain,
+            R.string.permission_location_explain_again,
+            Snackbar.LENGTH_LONG
+        )
+            .setAction(R.string.close) { }
+            .show()
     }
 
 }

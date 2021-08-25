@@ -164,11 +164,13 @@ class SearchActivity : AppCompatActivity() {
 
                     // Also add related building info.
                     lectureRoomData.data?.get("building")?.let {
-                        val relative = SearchResult(
-                            it.toInt(),
-                            SearchResult.Companion.Reason.LECTURE_ROOM_BUILDING
-                        )
-                        result.add(relative)
+                        if (DataManager.placesById.contains(it.toInt())) {
+                            val relative = SearchResult(
+                                it.toInt(),
+                                SearchResult.Companion.Reason.LECTURE_ROOM_BUILDING
+                            )
+                            result.add(relative)
+                        }
                     }
                     return@forEach
                 }
@@ -180,11 +182,11 @@ class SearchActivity : AppCompatActivity() {
                 var tag = false
 
                 queries.forEach { q ->
-                    if (!p.name.contains(q) && p.legacyName?.contains(q) == false) {
+                    if (!p.name.contains(q, true) && p.legacyName?.contains(q, true) == false) {
                         name = false
                     }
-                    val tags = p.searchTag?.split(",")
-                    if (tags?.contains(q) == true) tag = true
+                    val tags = p.searchTag?.lowercase()?.split(",")
+                    if (tags?.contains(q.lowercase()) == true) tag = true
                 }
 
                 if (name) result.add(SearchResult(p.id, SearchResult.Companion.Reason.NAME))
@@ -199,14 +201,14 @@ class SearchActivity : AppCompatActivity() {
 
                 queries.forEach { q ->
                     // Search name
-                    if (!p.name.contains(q)) name = false
+                    if (!p.name.contains(q, true)) name = false
 
                     // Search type
                     if (Facility.Companion.FacilityType.getString(this@SearchActivity, p.type) == q) type = true
 
                     // Search tag
-                    val tags = p.searchTag?.split(",")
-                    if (tags?.contains(q) == true) tag = true
+                    val tags = p.searchTag?.lowercase()?.split(",")
+                    if (tags?.contains(q.lowercase()) == true) tag = true
                 }
 
                 if (name) result.add(SearchResult(p.id, SearchResult.Companion.Reason.NAME))

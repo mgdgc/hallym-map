@@ -121,7 +121,7 @@ class MapFragment : Fragment() {
                 )
                 binding.mapView.overlays.add(myOverlay)
             } else {
-                permissionManager.requestPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                (activity as MainActivity).showPermissionDeniedSnackBar()
             }
         }
 

@@ -28,6 +28,8 @@
     <string name="permission_allow">Allow</string>
     <string name="permission_location">Location</string>
     <string name="permission_location_explain">&lt;app_name&gt; requests location permission to help you find exact location.</string>
+    <string name="permission_location_explain_again">Location features are disabled.</string>
+    <string name="permission_change">Change</string>
 
     <!--  MapFragment  -->
     <string name="map_fab_search">Search</string>

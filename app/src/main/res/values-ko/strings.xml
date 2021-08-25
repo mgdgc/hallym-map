@@ -29,6 +29,8 @@
     <string name="permission_allow">허용</string>
     <string name="permission_location">위치</string>
     <string name="permission_location_explain">&lt;app_name&gt;은 사용자에게 정확한 위치 정보를 제공하기 위해 위치 정보 권한을 요청합니다.</string>
+    <string name="permission_location_explain_again">위치 관련 기능을 사용하시려면 권한을 허용해주십시오.</string>
+    <string name="permission_change">변경</string>
 
     <!--  MapFragment  -->
     <string name="map_fab_search">검색</string>

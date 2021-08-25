@@ -16,7 +16,7 @@ class ApplicationPermissionManager(val context: Context) {
         const val PERMISSION_REQUEST_CODE = 111
     }
 
-    var onRequestResponseListener: ((Int) -> Unit)? = null
+    var onShouldShowRequestPermissionRationale: (() -> Unit)? = null
 
     fun checkPermissionGranted(permission: String): Int {
         return ContextCompat.checkSelfPermission(context, permission)
@@ -24,20 +24,14 @@ class ApplicationPermissionManager(val context: Context) {
 
     fun requestPermission(permission: String) {
         if (checkPermissionGranted(permission) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, permission)) {
-                // 한번 거부를 눌렀다가 권한을 요청하는 경우
-                val alert = AlertDialog.Builder(context)
-                alert.setTitle(R.string.permission_location)
-                    .setMessage(
-                        context.resources.getString(R.string.permission_location_explain)
-                            .replace("<app_name>", context.resources.getString(R.string.app_name)))
-                    .setNegativeButton(R.string.permission_deny, DialogInterface.OnClickListener { dialogInterface, i ->
-
-                    })
-                    .setPositiveButton(R.string.permission_allow, DialogInterface.OnClickListener { dialogInterface, i ->
-                        request(permission)
-                    })
-                    .show()
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    context as Activity,
+                    permission
+                )
+            ) {
+                onShouldShowRequestPermissionRationale?.let {
+                    it()
+                }
             } else {
                 request(permission)
             }
@@ -45,7 +39,11 @@ class ApplicationPermissionManager(val context: Context) {
     }
 
     private fun request(permission: String) {
-        ActivityCompat.requestPermissions(context as Activity, arrayOf(permission), PERMISSION_REQUEST_CODE)
+        ActivityCompat.requestPermissions(
+            context as Activity,
+            arrayOf(permission),
+            PERMISSION_REQUEST_CODE
+        )
     }
 
 
