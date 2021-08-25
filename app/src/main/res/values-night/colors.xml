@@ -6,7 +6,7 @@
     <color name="bg_secondary">#1C1C1C</color>
     <color name="bg_tertiary">#5E5E5E</color>
     <color name="bg_selected">#3E3E3E</color>
-    <color name="bg_ripple">#4Dffffff</color>
+    <color name="bg_ripple">#ffffff</color>
 
     <!--  text color  -->
     <color name="text_primary">#ffffff</color>

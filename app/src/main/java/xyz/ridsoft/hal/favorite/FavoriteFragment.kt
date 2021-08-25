@@ -50,8 +50,10 @@ class FavoriteFragment : Fragment() {
         binding.rvMyPlace.adapter = adapter
 
         adapter.onItemClickListener = { _, position ->
-            // TODO
+            val data = adapter.data[position]
             (activity as MainActivity).selectPage(0)
+            (activity as MainActivity).addMapPointToMap(arrayOf(data))
+            (activity as MainActivity).showBottomSheet(data)
         }
 
         adapter.onDeleteButtonClickListener = { id, position ->

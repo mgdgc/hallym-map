@@ -71,7 +71,8 @@ class MainActivity : AppCompatActivity() {
 
         if (dataManager.isUpdateNecessary()) {
             val connectivityManager = getSystemService(ConnectivityManager::class.java)
-            connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
+            connectivityManager.registerDefaultNetworkCallback(object :
+                ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(network: Network) {
                     super.onAvailable(network)
                     dataManager.updateData()
@@ -202,8 +203,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
         val selected = fragments[binding.mainBottomNav.selectedItemId]!!
         replaceFragment(selected)
+
+        if (binding.layoutMainCircularReveal.visibility == View.VISIBLE) {
+            performCircularHideAnimation(binding.layoutMainCircularReveal)
+        }
     }
 
     private fun requestPermission() {

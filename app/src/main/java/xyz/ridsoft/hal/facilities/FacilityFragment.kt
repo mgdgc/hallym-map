@@ -53,8 +53,10 @@ class FacilityFragment : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         adapter.onItemClickListener = { _, position ->
+            val data = adapter.data[position]
             (activity as MainActivity).selectPage(0)
-            (activity as MainActivity).addMapPointToMap(arrayOf(adapter.data[position]))
+            (activity as MainActivity).addMapPointToMap(arrayOf(data))
+            (activity as MainActivity).showBottomSheet(data)
         }
     }
 

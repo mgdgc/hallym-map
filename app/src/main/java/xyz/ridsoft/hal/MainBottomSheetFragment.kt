@@ -11,6 +11,7 @@ import xyz.ridsoft.hal.databinding.FragmentMainBottomSheetBinding
 import xyz.ridsoft.hal.model.Facility
 import xyz.ridsoft.hal.model.MapPoint
 import xyz.ridsoft.hal.model.Place
+import java.lang.StringBuilder
 
 class MainBottomSheetFragment : Fragment() {
 
@@ -32,7 +33,7 @@ class MainBottomSheetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBottomSheetBinding.bind(view)
 
-        binding.layoutMainBottomSheetHeader.setOnClickListener {
+        binding.buttonBottomSheetClose.setOnClickListener {
             (requireActivity() as MainActivity).hideBottomSheet()
         }
     }
@@ -74,6 +75,28 @@ class MainBottomSheetFragment : Fragment() {
             )
             manager.setFavoriteData(facility.id, !manager.getFavoriteData(facility.id))
         }
+
+        val builder = StringBuilder()
+        val related = DataManager.placesById[facility.buildingNo]
+        if (related != null) {
+            builder.append(
+                requireContext().getString(R.string.bottom_sheet_located_in)
+                    .replace("<building>", related.getLocalizedString(requireContext()))
+            )
+                .append("\n\n")
+        }
+
+        facility.searchTag?.let {
+            val tags = it.split(",")
+            for (i in 0 until 5) {
+                if (i < tags.size) {
+                    builder.append("#").append(tags[i]).append(" ")
+                }
+            }
+        }
+
+
+        binding.txtBottomSheetContent.text = builder.toString()
     }
 
     private fun handlePlaceData(place: Place) {

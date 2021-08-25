@@ -12,7 +12,7 @@ import xyz.ridsoft.hal.model.Facility
 
 class FavoriteAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var data: ArrayList<Facility> = ArrayList()
+    var data: ArrayList<Facility> = ArrayList()
 
     var onItemClickListener: ((view: View, position: Int) -> Unit)? = null
     var onDeleteButtonClickListener: ((id: Int, position: Int) -> Unit)? = null

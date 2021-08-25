@@ -6,6 +6,7 @@
     <string name="no">no</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
     <string name="allow">Allow</string>
     <string name="deny">Deny</string>
     <string name="open">Open</string>
@@ -19,6 +20,8 @@
     <string name="bottom_nav_recommend">Recommend</string>
     <string name="bottom_nav_more">More</string>
     <string name="update_started">Updating data</string>
+    <string name="bottom_sheet_favorite">Like</string>
+    <string name="bottom_sheet_located_in">Located in &lt;building&gt;</string>
 
     <!--  ApplicationPermissionManager  -->
     <string name="permission_deny">Deny</string>

@@ -1,84 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutMapBottomSheet"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:background="@color/bg_secondary"
-    android:elevation="16dp"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:paddingBottom="8dp"
     app:behavior_hideable="true"
-    app:behavior_peekHeight="84dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <FrameLayout
-        android:id="@+id/layoutMainBottomSheetHeader"
-        android:layout_width="0dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_secondary"
-        android:elevation="2dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="?android:attr/actionBarSize"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <FrameLayout
-                android:id="@+id/layoutMapBottomSheetIcon"
+            <LinearLayout
+                android:id="@+id/layoutBottomSheetHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:background="@drawable/ic_circle_bg">
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/imgMapBottomSheetIcon"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_margin="8dp"
-                    tools:src="@drawable/baseline_local_cafe_24">
+                <FrameLayout
+                    android:id="@+id/layoutMapBottomSheetIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/ic_circle_bg">
 
-                </ImageView>
+                    <ImageView
+                        android:id="@+id/imgMapBottomSheetIcon"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_margin="8dp"
+                        tools:src="@drawable/baseline_local_cafe_24">
 
-            </FrameLayout>
+                    </ImageView>
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtMapBottomSheetTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:alpha="0.6"
+                    android:textColor="@color/text_primary"
+                    android:textSize="20sp"
+                    tools:text="Cafe">
+
+                </TextView>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/txtMapBottomSheetTitle"
-                android:layout_width="wrap_content"
+                android:id="@+id/txtBottomSheetContent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:alpha="0.6"
+                android:alpha="0.7"
+                android:padding="24dp"
                 android:textColor="@color/text_primary"
-                android:textSize="20sp"
-                tools:text="Cafe">
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutBottomSheetHeader"
+                tools:text="Content">
 
             </TextView>
 
-        </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/layoutMapBottomSheetFavorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/background_selectable_circular">
-
-            <ImageView
-                android:id="@+id/imgMapBottomSheetFavorite"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+            <LinearLayout
+                android:id="@+id/layoutMapBottomSheetFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
                 android:layout_margin="8dp"
-                android:src="@drawable/baseline_favorite_24">
+                android:background="@drawable/background_selectable_rectangular"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtBottomSheetContent">
 
-            </ImageView>
+                <ImageView
+                    android:id="@+id/imgMapBottomSheetFavorite"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/baseline_favorite_24">
 
-        </FrameLayout>
+                </ImageView>
 
-    </FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/bottom_sheet_favorite"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                </TextView>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/buttonBottomSheetClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/background_button"
+                android:elevation="2dp"
+                android:paddingStart="16dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="6dp"
+                android:text="@string/close"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+            </TextView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
