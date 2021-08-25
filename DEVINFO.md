@@ -72,9 +72,12 @@ Jsoup.connect(URL).get()
 "app" preference
   ┗ "initialized": true
   ┗ "updated": true
+  ┗ ...
 
 "map" preference
   ┗ "place_keys": "{48253, 82190, 67963, ...}"
-  ┗ "48253": "{"id" : 48253, "name": "SW Village", ""}"
+  ┗ "48253": "{"id": 48253, "name": "SW Village", "latitude": 37.88643, "longitude": 127.73589}"
+  ┗ "82189": "{"id": 82189, "name": "학생식당", "latitude": 37.8868767, "longitude": 127.7400138}"
+  ┗ ...
 ```
 
