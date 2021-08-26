@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.widget.Toast
@@ -24,6 +26,7 @@ import xyz.ridsoft.hal.model.MapPoint
 import xyz.ridsoft.hal.more.MoreFragment
 import xyz.ridsoft.hal.favorite.FavoriteFragment
 import xyz.ridsoft.hal.facilities.FacilityFragment
+import xyz.ridsoft.hal.map.MapBottomSheetFragment
 import kotlin.math.hypot
 
 
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var behavior: BottomSheetBehavior<ConstraintLayout>
 
     private var fragments: MutableMap<Int, Fragment> = mutableMapOf()
-    private lateinit var bottomSheetFragment: MainBottomSheetFragment
+    private lateinit var bottomSheetFragment: MapBottomSheetFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         behavior = BottomSheetBehavior.from(view.findViewById(R.id.layoutMainBottomSheet))
         behavior.state = BottomSheetBehavior.STATE_HIDDEN
 
-        bottomSheetFragment = MainBottomSheetFragment()
+        bottomSheetFragment = MapBottomSheetFragment()
 
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.layoutMainBottomSheet, bottomSheetFragment)
@@ -207,9 +210,12 @@ class MainActivity : AppCompatActivity() {
         val selected = fragments[binding.mainBottomNav.selectedItemId]!!
         replaceFragment(selected)
 
-        if (binding.layoutMainCircularReveal.visibility == View.VISIBLE) {
-            performCircularHideAnimation(binding.layoutMainCircularReveal)
-        }
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (binding.layoutMainCircularReveal.visibility == View.VISIBLE) {
+                // Perform hide animation
+                performCircularHideAnimation(binding.layoutMainCircularReveal)
+            }
+        }, 500)
     }
 
     private fun requestPermission() {

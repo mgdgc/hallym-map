@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
+import xyz.ridsoft.hal.MainActivity
 import xyz.ridsoft.hal.R
 import xyz.ridsoft.hal.data.DataManager
 import xyz.ridsoft.hal.databinding.ActivitySearchBinding
@@ -178,7 +179,7 @@ class SearchActivity : AppCompatActivity() {
 
                 queries.forEach { q ->
                     if (!p.name.contains(q, true)
-                        && (p.legacyName == null || p.legacyName!!.equals(q, true))) {
+                        && !(p.legacyName != null && p.legacyName!!.equals(q, true))) {
                         name = false
                     }
                     val tags = p.searchTag?.lowercase()?.split(",")
@@ -259,6 +260,7 @@ class SearchActivity : AppCompatActivity() {
         val intent = Intent()
         setResult(RESULT_CANCELED, intent)
     }
+
 }
 
 data class SearchResult(var id: Int, var reason: Reason) {

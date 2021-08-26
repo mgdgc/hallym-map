@@ -1,10 +1,12 @@
-package xyz.ridsoft.hal
+package xyz.ridsoft.hal.map
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import xyz.ridsoft.hal.MainActivity
+import xyz.ridsoft.hal.R
 import xyz.ridsoft.hal.etc.HapticFeedback
 import xyz.ridsoft.hal.data.DataManager
 import xyz.ridsoft.hal.databinding.FragmentMainBottomSheetBinding
@@ -13,7 +15,7 @@ import xyz.ridsoft.hal.model.MapPoint
 import xyz.ridsoft.hal.model.Place
 import java.lang.StringBuilder
 
-class MainBottomSheetFragment : Fragment() {
+class MapBottomSheetFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBottomSheetBinding
 
