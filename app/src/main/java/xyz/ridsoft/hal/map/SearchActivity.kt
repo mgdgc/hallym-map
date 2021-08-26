@@ -136,12 +136,7 @@ class SearchActivity : AppCompatActivity() {
                 }
                 return false
             }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // TODO
-                return true
-            }
-
+            override fun onQueryTextChange(newText: String?): Boolean { return true }
         })
     }
 
@@ -182,7 +177,8 @@ class SearchActivity : AppCompatActivity() {
                 var tag = false
 
                 queries.forEach { q ->
-                    if (!p.name.contains(q, true) && p.legacyName?.contains(q, true) == false) {
+                    if (!p.name.contains(q, true)
+                        && (p.legacyName == null || p.legacyName!!.equals(q, true))) {
                         name = false
                     }
                     val tags = p.searchTag?.lowercase()?.split(",")

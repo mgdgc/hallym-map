@@ -160,6 +160,17 @@ class DataManager(val context: Context) {
         // Notify update started
         onUpdateStartListener?.let { it() }
 
+        // Save updated date
+        val pref = context.getSharedPreferences(SharedPreferencesKeys.APP_PREF, 0)
+        val prefEdit = pref.edit()
+
+        val cal = Calendar.getInstance()
+        val today = cal.get(Calendar.DAY_OF_YEAR)
+
+        prefEdit.putInt(SharedPreferencesKeys.INT_LAST_UPDATE, today)
+        prefEdit.apply()
+
+
         CoroutineScope(Dispatchers.IO).launch {
             // Parse data from web
             val parser = MapDataParser()
@@ -198,17 +209,6 @@ class DataManager(val context: Context) {
             // Reinitialize global data
             DataManager.places = getDefaultPlaceData()
             DataManager.facilities = getDefaultFacilityData()
-
-            // Save updated date
-            val pref = context.getSharedPreferences(SharedPreferencesKeys.APP_PREF, 0)
-            val prefEdit = pref.edit()
-
-            val cal = Calendar.getInstance()
-            val today = cal.get(Calendar.DAY_OF_YEAR)
-
-            prefEdit.putInt(SharedPreferencesKeys.INT_LAST_UPDATE, today)
-            prefEdit.apply()
-
             // Notify update finished
             onUpdateFinishListener?.let { it() }
 
