@@ -1,34 +1,119 @@
 [
   {
-    "buildingNo": 1,
-    "legacyName": "성호관",
-    "en": "College of Engineering",
     "id": 1,
+    "buildingNo": 1,
+    "name": "공학관",
+    "legacyName": "성호관",
     "kr": "공학관",
+    "en": "College of Engineering",
     "latitude": 37.88633,
     "longitude": 127.73577,
-    "name": "공학관",
-    "searchTag": "공대,공학,소프트웨어,sw,software,전자,컴퓨터,computer,engineer,컨텐츠,전자,iot,빅데이터"
+    "searchTag": "공대,공학,소프트웨어,sw,software,전자,컴퓨터,computer,engineer,컨텐츠,전자,iot,빅데이터,인공지능,ai"
   },
   {
-    "buildingNo": 2,
-    "legacyName": "연암관",
-    "en": "College of Humanities",
     "id": 2,
+    "buildingNo": 2,
+    "name": "대학본부ㆍ인문1관",
+    "legacyName": "연암관",
     "kr": "대학본부ㆍ인문1관",
+    "en": "College of Humanities",
     "latitude": 37.88654,
     "longitude": 127.73798,
-    "name": "대학본부ㆍ인문1관",
-    "searchTag": "인문관,인문,1관,본부,중앙,대학원,human,literature"
+    "searchTag": "인문관,인문,1관,본부,중앙,대학원,human,literature,미디어,컨텐츠,콘텐츠"
   },
   {
-    "buildingNo": 3,
-    "en": "College of Medicine",
     "id": 3,
+    "buildingNo": 3,
+    "name": "의학관",
     "kr": "의학관",
+    "en": "College of Medicine",
     "latitude": 37.88596,
     "longitude": 127.73732,
-    "name": "의학관",
     "searchTag": "의학,약학,의과,의대,medicine,medical,메디컬"
+  },
+  {
+    "id": 4,
+    "buildingNo": 4,
+    "name": "인문2관",
+    "legacyName": "단재관",
+    "kr": "인문2관",
+    "en": "College of Humanities 2",
+    "latitude": 37.88643,
+    "longitude": 127.73748,
+    "searchTag": "인문관,인문,2관,human,literature,미디어,컨텐츠,콘텐츠"
+  },
+  {
+    "id": 5,
+    "buildingNo": 5,
+    "name": "대학본부별관",
+    "legacyName": "반계관",
+    "kr": "대학본부별관",
+    "en": "Administration Annex",
+    "latitude": 37.88673,
+    "longitude": 127.73876,
+    "searchTag": "대학,본부,별관,장비지원,교직원,식당"
+  },
+  {
+    "id": 6,
+    "buildingNo": 6,
+    "name": "실험동물센터",
+    "kr": "실험동물센터",
+    "en": "Laboratory Animal Resources Center",
+    "latitude": 37.88641,
+    "longitude": 127.73709
+  },
+  {
+    "id": 7,
+    "buildingNo": 7,
+    "name": "자연과학관",
+    "legacyName": "율곡관",
+    "kr": "자연과학관",
+    "en": "College of Natural Sciences",
+    "latitude": 37.88581,
+    "longitude": 127.73688,
+    "searchTag": "자연대,자연과학,과학,자대,화학,물리,chemical,physic,science"
+  },
+  {
+    "id": 8,
+    "buildingNo": 8,
+    "name": "생명과학관",
+    "kr": "생명과학관",
+    "en": "Life Sciences",
+    "latitude": 37.88521,
+    "longitude": 127.73594,
+    "searchTag": "생명과학,생명,과학,바이오,메디컬,언어,청각,life,science,bio,medical"
+  },
+  {
+    "id": 9,
+    "buildingNo": 9,
+    "name": "Campus Life Center",
+    "legacyName": "학생복지관",
+    "kr": "Campus Life Center",
+    "en": "Campus Life Center",
+    "latitude": 37.88663,
+    "longitude": 127.74017,
+    "searchTag": "캠퍼스,라이프,학생,복지,김유정,학생,식당,동아리,동방,clc,캠라센"
+  },
+  {
+    "id": 10,
+    "buildingNo": 10,
+    "name": "사회ㆍ경영1관",
+    "legacyName": "다산관",
+    "kr": "사회ㆍ경영1관",
+    "en": "College of Social Sciences & Business 1",
+    "latitude": 37.88842,
+    "longitude": 127.73837,
+    "searchTag": "사회,경영,사회대,경영대,사회과학,법대,법학,law"
+  },
+  {
+    "id": 13,
+    "buildingNo": 13,
+    "name": "사회ㆍ경영2관",
+    "legacyName": "담헌관",
+    "kr": "사회ㆍ경영2관",
+    "en": "College of Social Sciences & Business 2",
+    "latitude": 37.88790,
+    "longitude": 127.73829,
+    "searchTag": "사회,경영,사회대,경영대,사회과학,법대,법학,law"
   }
 ]
