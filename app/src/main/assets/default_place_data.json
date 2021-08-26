@@ -1,13 +1,34 @@
 [
   {
     "buildingNo": 1,
-    "legacyName": "37.88633",
+    "legacyName": "성호관",
     "en": "College of Engineering",
     "id": 1,
     "kr": "공학관",
     "latitude": 37.88633,
     "longitude": 127.73577,
     "name": "공학관",
-    "searchTag": "공대"
+    "searchTag": "공대,공학,소프트웨어,sw,software,전자,컴퓨터,computer,engineer,컨텐츠,전자,iot,빅데이터"
+  },
+  {
+    "buildingNo": 2,
+    "legacyName": "연암관",
+    "en": "College of Humanities",
+    "id": 2,
+    "kr": "대학본부ㆍ인문1관",
+    "latitude": 37.88654,
+    "longitude": 127.73798,
+    "name": "대학본부ㆍ인문1관",
+    "searchTag": "인문관,인문,1관,본부,중앙,대학원,human,literature"
+  },
+  {
+    "buildingNo": 3,
+    "en": "College of Medicine",
+    "id": 3,
+    "kr": "의학관",
+    "latitude": 37.88596,
+    "longitude": 127.73732,
+    "name": "의학관",
+    "searchTag": "의학,약학,의과,의대,medicine,medical,메디컬"
   }
 ]

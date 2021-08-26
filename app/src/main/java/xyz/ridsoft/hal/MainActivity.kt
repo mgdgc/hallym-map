@@ -218,7 +218,7 @@ class MainActivity : AppCompatActivity() {
         if (permissionManager.checkPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION) !=
             PackageManager.PERMISSION_GRANTED
         ) {
-            Toast.makeText(this, R.string.denied, Toast.LENGTH_SHORT).show()
+            permissionManager.requestPermission(Manifest.permission.ACCESS_FINE_LOCATION)
         }
         permissionManager.onShouldShowRequestPermissionRationale = {
             val alert = AlertDialog.Builder(this)
