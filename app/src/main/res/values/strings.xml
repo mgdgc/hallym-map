@@ -22,6 +22,8 @@
     <string name="update_started">Updating data</string>
     <string name="bottom_sheet_favorite">Like</string>
     <string name="bottom_sheet_located_in">Located in &lt;building&gt;</string>
+    <string name="bottom_sheet_locate">Location: </string>
+    <string name="bottom_sheet_type">Facility type: </string>
 
     <!--  ApplicationPermissionManager  -->
     <string name="permission_deny">Deny</string>

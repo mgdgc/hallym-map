@@ -23,6 +23,8 @@
     <string name="update_started">지도 데이터 업데이트중</string>
     <string name="bottom_sheet_favorite">좋아요</string>
     <string name="bottom_sheet_located_in">&lt;building&gt;에 위치</string>
+    <string name="bottom_sheet_locate">위치: </string>
+    <string name="bottom_sheet_type">시설 종류: </string>
 
     <!--  ApplicationPermissionManager  -->
     <string name="permission_deny">거부</string>

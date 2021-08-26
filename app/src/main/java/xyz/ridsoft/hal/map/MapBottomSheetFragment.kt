@@ -79,12 +79,18 @@ class MapBottomSheetFragment : Fragment() {
         }
 
         val builder = StringBuilder()
+
+        builder.append(requireContext().getString(R.string.bottom_sheet_type) + " ")
+            .append(Facility.Companion.FacilityType.getString(requireContext(), facility.type))
+            .append("\n\n")
+
         val related = DataManager.placesById[facility.buildingNo]
         if (related != null) {
-            builder.append(
-                requireContext().getString(R.string.bottom_sheet_located_in)
-                    .replace("<building>", related.getLocalizedString(requireContext()))
-            )
+            builder.append(requireContext().getString(R.string.bottom_sheet_locate))
+                .append(
+                    requireContext().getString(R.string.bottom_sheet_located_in)
+                        .replace("<building>", related.getLocalizedString(requireContext()))
+                )
                 .append("\n\n")
         }
 
