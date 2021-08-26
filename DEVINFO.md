@@ -14,9 +14,11 @@
 * 하단의 NavigationBar를 통해 MainActivity에 각 탭별 Fragment를 전환합니다.
   * 검색 등의 기능은 심화적인 기능 구현을 위해 별도의 Activity로 동작합니다.
 <br><br><img src="/res/dev/img_04-1.png" width="720px"/>
+<br><br>
 
 #### 디자인 변화
-<br><br><img src="/res/dev/img_05-1.png" width="720px"/>
+<img src="/res/dev/img_05-1.png" width="720px"/>
+
   * `Version 1`
     * 최초 버전
   * `Version 2`
@@ -29,6 +31,16 @@
   * `Version 4`
     * 검색 버튼 삭제 및 검색바 추가
     * SearchActivity로 전환 시 원형 애니메이션 시작 위치 변경
+
+<br>
+
+#### User Interface
+<img src="/res/screenshots/ss_01.png" width="160px"/> <img src="/res/screenshots/ss_02.png" width="160px"/> <img src="/res/screenshots/ss_03.png" width="160px"/> <img src="/res/screenshots/ss_04.gif" width="160px"/> 
+
+* `Screenshot 1`: 한 손으로도 접근이 쉬운 하단 `Chip`을 통해 지도에 시설별로 `핀`을 고정할 수 있습니다.
+* `Screenshot 2`: `핀`을 선택하면 나타나는 `Bottom Sheet`에서 해당 장소의 정보를 한 눈에 확인할 수 있습니다.
+* `Screenshot 3`: 특정 검색 결과는 알기 쉬운 방법으로 사용자에게 표시됩니다.
+* `Screenshot 4`: 간단한 애니메이션으로 사용자가 한 공간에서 연속적인 작업을 하는 것 처럼 느끼게 해줍니다.
 
 <br><br>
 
