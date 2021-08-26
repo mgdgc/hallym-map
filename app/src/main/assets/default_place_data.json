@@ -29,7 +29,7 @@
     "en": "College of Medicine",
     "latitude": 37.88596,
     "longitude": 127.73732,
-    "searchTag": "의학,약학,의과,의대,medicine,medical,메디컬"
+    "searchTag": "의학,약학,의예과,의대,medicine,medical,메디컬,의과"
   },
   {
     "id": 4,
@@ -106,6 +106,26 @@
     "searchTag": "사회,경영,사회대,경영대,사회과학,법대,법학,law"
   },
   {
+    "id": 11,
+    "buildingNo": 11,
+    "name": "일송아트홀",
+    "kr": "일송아트홀",
+    "en": "Ilsong Art Hall",
+    "latitude": 37.88696,
+    "longitude": 127.73700,
+    "searchTag": "일송,아트홀,강당,문화,ilsong,art,auditorium"
+  },
+  {
+    "id": 12,
+    "buildingNo": 12,
+    "name": "창업보육센터",
+    "kr": "창업보육센터",
+    "en": "Business Incubation Center",
+    "latitude": 37.88493,
+    "longitude": 127.73568,
+    "searchTag": "일송,아트홀,강당,문화,ilsong,art,auditorium"
+  },
+  {
     "id": 13,
     "buildingNo": 13,
     "name": "사회ㆍ경영2관",
@@ -115,5 +135,99 @@
     "latitude": 37.88790,
     "longitude": 127.73829,
     "searchTag": "사회,경영,사회대,경영대,사회과학,법대,법학,law"
+  },
+  {
+    "id": 14,
+    "buildingNo": 14,
+    "name": "국제관",
+    "kr": "국제관",
+    "en": "International Hall",
+    "latitude": 37.88790,
+    "longitude": 127.73829,
+    "searchTag": "국제,외국어,international,foreign"
+  },
+  {
+    "id": 15,
+    "buildingNo": 15,
+    "name": "국제회의관",
+    "legacyName": "고령화사회교육센터",
+    "kr": "국제회의관",
+    "en": "International Conference Hall",
+    "latitude": 37.88413,
+    "longitude": 127.73846,
+    "searchTag": "국제,회의,고령사회,international,foreign,conference"
+  },
+  {
+    "id": 16,
+    "buildingNo": 16,
+    "name": "기초교육관",
+    "legacyName": "퇴계관",
+    "kr": "기초교육관",
+    "en": "College of General Education",
+    "latitude": 37.88847,
+    "longitude": 127.73786,
+    "searchTag": "기초,일반,교양,general,education,기초교육,일반교양"
+  },
+  {
+    "id": 17,
+    "buildingNo": 17,
+    "name": "일송기념도서관",
+    "legacyName": "일송창의비전관",
+    "kr": "일송기념도서관",
+    "en": "Ilsong Memorial Library",
+    "latitude": 37.88489,
+    "longitude": 127.73730,
+    "searchTag": "일송,기념,도서관,열람,복사,논문,스터디,전자정보,시청각,ilsong,library,copy,media,auditor,study"
+  },
+  {
+    "id": 17,
+    "buildingNo": 17,
+    "name": "한림레크리에이션센터",
+    "kr": "한림레크리에이션센터",
+    "en": "Hallym Recreation Center",
+    "latitude": 37.88438,
+    "longitude": 127.73880,
+    "searchTag": "스포츠센터,스포츠,체육,레크리에이션,sports,physical,p.e,pe,체대"
+  },
+  {
+    "id": 19,
+    "buildingNo": 19,
+    "name": "학군단",
+    "legacyName": "ROTC",
+    "kr": "학군단",
+    "en": "ROTC",
+    "latitude": 37.88840,
+    "longitude": 127.73909,
+    "searchTag": "학군,rotc"
+  },
+  {
+    "id": 21,
+    "buildingNo": 21,
+    "name": "한림중개의과학연구원",
+    "kr": "한림중개의과학연구원",
+    "en": "Hallym Clinical and Translational Science Institute",
+    "latitude": 37.88602,
+    "longitude": 127.73777,
+    "searchTag": "의과학,의학,연구,의예과,의대,의과,메디컬,medical,clinic,medicine"
+  },
+  {
+    "id": 22,
+    "buildingNo": 22,
+    "name": "산학협력관",
+    "kr": "산학협력관",
+    "en": "Industry-Academic Cooperation Center",
+    "latitude": 37.88739,
+    "longitude": 127.73804,
+    "searchTag": "산업,산학,협력,industry,cooperation"
+  },
+  {
+    "id": 23,
+    "buildingNo": 23,
+    "name": "도헌글로벌스쿨",
+    "kr": "도헌글로벌스쿨",
+    "en": "Doheon Global School",
+    "latitude": 37.88461,
+    "longitude": 127.73645,
+    "searchTag": "글로벌,도헌,외국,국제,global,doheon"
   }
 ]
