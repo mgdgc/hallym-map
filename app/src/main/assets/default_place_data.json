@@ -180,8 +180,8 @@
     "searchTag": "일송,기념,도서관,열람,복사,논문,스터디,전자정보,시청각,ilsong,library,copy,media,auditor,study"
   },
   {
-    "id": 17,
-    "buildingNo": 17,
+    "id": 18,
+    "buildingNo": 18,
     "name": "한림레크리에이션센터",
     "kr": "한림레크리에이션센터",
     "en": "Hallym Recreation Center",
@@ -229,5 +229,15 @@
     "latitude": 37.88461,
     "longitude": 127.73645,
     "searchTag": "글로벌,도헌,외국,국제,global,doheon"
+  },
+  {
+    "id": 31,
+    "buildingNo": 31,
+    "name": "학생생활관 8관",
+    "kr": "학생생활관 8관",
+    "en": "Student Residence Hall 8",
+    "latitude": 37.88709,
+    "longitude": 127.74133,
+    "searchTag": "학생생활관,8관,기숙사,hb"
   }
 ]

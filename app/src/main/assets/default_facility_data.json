@@ -154,5 +154,65 @@
     "longitude": 127.73589,
     "name": "소프트웨어 빌리지",
     "searchTag": "공학관,소프트웨어,빌리지,software,sw,북카페,스터디룸,study,공대,공학,컨텐츠,전자,iot,빅데이터"
+  },
+  {
+    "id": 89388,
+    "name": "스터디룸(도서관)",
+    "kr": "스터디룸(도서관)",
+    "en": "Study Room",
+    "type": "STUDY_ROOM",
+    "buildingNo": 17,
+    "floor": 2,
+    "latitude": 37.88464,
+    "longitude": 127.73720,
+    "searchTag": "일송,기념,도서관,스터디,study,library,ilsong"
+  },
+  {
+    "id": 89389,
+    "name": "스터디룸(도서관)",
+    "kr": "스터디룸(도서관)",
+    "en": "Study Room",
+    "type": "STUDY_ROOM",
+    "buildingNo": 17,
+    "floor": 3,
+    "latitude": 37.88483,
+    "longitude": 127.73708,
+    "searchTag": "일송,기념,도서관,스터디,study,library,ilsong"
+  },
+  {
+    "id": 89390,
+    "name": "디지털 스터디룸(도서관)",
+    "kr": "디지털 스터디룸(도서관)",
+    "en": "Study Room",
+    "type": "STUDY_ROOM",
+    "buildingNo": 17,
+    "floor": 4,
+    "latitude": 37.88487,
+    "longitude": 127.73701,
+    "searchTag": "일송,기념,도서관,스터디,study,library,ilsong"
+  },
+  {
+    "id": 89391,
+    "name": "스터디룸(도서관)",
+    "kr": "스터디룸(도서관)",
+    "en": "Study Room",
+    "type": "STUDY_ROOM",
+    "buildingNo": 17,
+    "floor": 5,
+    "latitude": 37.88496,
+    "longitude": 127.73689,
+    "searchTag": "일송,기념,도서관,스터디,study,library,ilsong"
+  },
+  {
+    "id": 19987,
+    "name": "스터디룸(8관)",
+    "kr": "스터디룸(8관)",
+    "en": "Study Room",
+    "type": "STUDY_ROOM",
+    "buildingNo": 31,
+    "floor": 1,
+    "latitude": 37.88704,
+    "longitude": 127.74138,
+    "searchTag": "학생생활관,기숙사,8관,스터디,study,residence"
   }
 ]
