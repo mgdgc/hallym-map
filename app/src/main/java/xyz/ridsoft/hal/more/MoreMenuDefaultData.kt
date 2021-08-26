@@ -2,6 +2,7 @@ package xyz.ridsoft.hal.more
 
 import android.content.Context
 import xyz.ridsoft.hal.R
+import xyz.ridsoft.hal.etc.ApplicationInfo
 import xyz.ridsoft.hal.model.TableData
 import xyz.ridsoft.hal.value.SharedPreferencesKeys
 
@@ -16,11 +17,13 @@ class MoreMenuDefaultData(val context: Context) {
         sectionApp.itemType = TableData.Companion.ItemType.DIVIDER
         data.add(sectionApp)
 
+        val version = "v${ApplicationInfo(context).getVersionName()}"
+
         val appInfo =
             TableData(
                 "app_info",
                 context.getString(R.string.app_name),
-                content = "v0.1",
+                content = version,
                 icon = R.drawable.ic_hm_foreground,
                 iconBackgroundColor = R.drawable.icon_app_icon_bg
             )

@@ -12,8 +12,8 @@ android {
         applicationId "xyz.ridsoft.hal"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 21082500
-        versionName "1.0"
+        versionCode 21082600
+        versionName '1.0-rc1'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -52,4 +52,32 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/txtAppInfoBuilid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="21082600">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtAppInfoVersion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtAppInfoBuilid"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="v1.0">
+
+    </TextView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

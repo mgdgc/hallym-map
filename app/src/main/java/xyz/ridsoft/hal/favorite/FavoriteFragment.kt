@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import xyz.ridsoft.hal.MainActivity
 import xyz.ridsoft.hal.R
-import xyz.ridsoft.hal.api.HapticFeedback
+import xyz.ridsoft.hal.etc.HapticFeedback
 import xyz.ridsoft.hal.data.DataManager
 import xyz.ridsoft.hal.databinding.FragmentFavoriteBinding
-import xyz.ridsoft.hal.model.Facility
 
 class FavoriteFragment : Fragment() {
 

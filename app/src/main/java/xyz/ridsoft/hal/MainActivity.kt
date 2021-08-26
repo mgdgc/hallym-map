@@ -3,7 +3,6 @@ package xyz.ridsoft.hal
 import android.Manifest
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Network
@@ -17,7 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
-import xyz.ridsoft.hal.api.ApplicationPermissionManager
+import xyz.ridsoft.hal.etc.ApplicationPermissionManager
 import xyz.ridsoft.hal.data.DataManager
 import xyz.ridsoft.hal.databinding.ActivityMainBinding
 import xyz.ridsoft.hal.map.MapFragment

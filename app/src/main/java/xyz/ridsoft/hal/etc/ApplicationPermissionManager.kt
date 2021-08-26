@@ -1,14 +1,10 @@
-package xyz.ridsoft.hal.api
+package xyz.ridsoft.hal.etc
 
-import android.Manifest
 import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import xyz.ridsoft.hal.R
 
 class ApplicationPermissionManager(val context: Context) {
 

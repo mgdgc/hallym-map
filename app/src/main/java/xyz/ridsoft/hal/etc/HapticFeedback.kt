@@ -1,4 +1,4 @@
-package xyz.ridsoft.hal.api
+package xyz.ridsoft.hal.etc
 
 import android.content.Context
 import android.os.Build

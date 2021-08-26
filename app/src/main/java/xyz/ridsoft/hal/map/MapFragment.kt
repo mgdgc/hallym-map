@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.drawable.LayerDrawable
 import android.os.*
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,8 +32,8 @@ import org.osmdroid.views.overlay.OverlayItem
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import xyz.ridsoft.hal.MainActivity
 import xyz.ridsoft.hal.R
-import xyz.ridsoft.hal.api.ApplicationPermissionManager
-import xyz.ridsoft.hal.api.HapticFeedback
+import xyz.ridsoft.hal.etc.ApplicationPermissionManager
+import xyz.ridsoft.hal.etc.HapticFeedback
 import xyz.ridsoft.hal.data.DataManager
 import xyz.ridsoft.hal.data.GeoCoordinate
 import xyz.ridsoft.hal.databinding.FragmentMapBinding

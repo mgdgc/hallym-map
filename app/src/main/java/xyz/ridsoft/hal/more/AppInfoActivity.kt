@@ -1,12 +1,17 @@
 package xyz.ridsoft.hal.more
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import xyz.ridsoft.hal.databinding.ActivityAppInfoBinding
 import xyz.ridsoft.hal.developer.FacilityJsonBuilderActivity
 import xyz.ridsoft.hal.developer.JsonBuilderActivity
+import xyz.ridsoft.hal.etc.ApplicationInfo
 import xyz.ridsoft.hal.value.SharedPreferencesKeys
 
 class AppInfoActivity : AppCompatActivity() {
@@ -15,6 +20,7 @@ class AppInfoActivity : AppCompatActivity() {
 
     private var clicked = 0
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAppInfoBinding.inflate(layoutInflater)
@@ -44,5 +50,15 @@ class AppInfoActivity : AppCompatActivity() {
                 clicked++
             }
         }
+
+        val appInfo = ApplicationInfo(this)
+        binding.txtAppInfoVersion.text = appInfo.getVersionName()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            binding.txtAppInfoBuilid.text = appInfo.getLongVersionCode().toString()
+        } else {
+            binding.txtAppInfoBuilid.text = appInfo.getVersionCode().toString()
+        }
     }
+
 }
