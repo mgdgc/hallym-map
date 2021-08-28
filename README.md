@@ -16,14 +16,18 @@
 4. [사용된 라이브러리](#사용된-라이브러리)
 5. [개발 내용](#개발-내용)
 6. [개인정보처리방침](#개인정보처리방침)
-7. [라이선스](#라이선스)
 
-<br>
+<br><br>
 
 ## 설치
-<img alt="Project Icon" src="/app/src/main/ic_launcher-playstore.png" width="120" height="120"/>
+<img alt="Project Icon" src="/app/src/main/ic_launcher-playstore.png" width="240" height="240"/>
 
-Android: [Google Play](https://play.google.com/store/apps/details?id=xyz.ridsoft.hal) (사전 체험 진행중)
+**Android: [Google Play](https://play.google.com/store/apps/details?id=xyz.ridsoft.hal) (사전 체험 진행중)**
+
+<br>`안드로이드 10 (Q)` 이상 권장
+<br>`안드로이드 7 (N)` 이상 요구됨
+
+<br><br>
 
 ## 스크린샷
 ### 라이트 모드
