@@ -23,7 +23,7 @@
 ## 설치
 <img alt="Project Icon" src="/app/src/main/ic_launcher-playstore.png" width="120" height="120"/>
 
-~~Android: [Google Play](https://play.google.com/store/apps/details?id=xyz.ridsoft.hal)~~
+Android: [Google Play](https://play.google.com/store/apps/details?id=xyz.ridsoft.hal) (사전 체험 진행중)
 
 ## 스크린샷
 ### 라이트 모드
