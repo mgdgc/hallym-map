@@ -41,11 +41,10 @@ class SearchViewHolder(val binding: RowSearchBinding) : RecyclerView.ViewHolder(
             val related = DataManager.placesById[mapPoint.buildingNo]
 
             related?.let {
-                binding.txtSearchDescription.append(
-                    "${context.getString(R.string.search_facility_related_description)
+                binding.txtSearchDescription.text = context.getString(R.string.search_facility_related_description)
                         .replace("<name>", it.getLocalizedString(context))
-                        .replace("<floor>", mapPoint.floor.toString())}\n\n"
-                )
+                        .replace("<floor>", mapPoint.floor.toString())
+                binding.txtSearchDescription.append("\n\n")
             }
             binding.txtSearchDescription.append(data.reason.toString(context))
 
