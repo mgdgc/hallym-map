@@ -97,6 +97,18 @@
   },
   {
     "floor": 2,
+    "type": "STORE_STATIONERY",
+    "en": "Book Store",
+    "id": 67964,
+    "kr": "구내서점 (문구)",
+    "latitude": 37.8864618,
+    "longitude": 127.740073,
+    "name": "구내서점",
+    "searchTag": "서점,서적,전공,책,문구,문구점,문방구,캠라센,학생복지관,clc,학생,복지,김유정",
+    "buildingNo": 9
+  },
+  {
+    "floor": 2,
     "type": "CAFETERIA",
     "en": "Cafeteria (Student)",
     "id": 82189,
