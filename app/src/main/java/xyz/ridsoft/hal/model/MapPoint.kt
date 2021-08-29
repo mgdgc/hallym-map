@@ -3,6 +3,7 @@ package xyz.ridsoft.hal.model
 import android.content.Context
 import com.google.gson.Gson
 import xyz.ridsoft.hal.R
+import xyz.ridsoft.hal.data.DataManager
 
 abstract class MapPoint(
     open var id: Int,
@@ -65,11 +66,25 @@ class Facility(
 
             companion object {
 
-                fun getArray(): Array<FacilityType> {
+                fun getRawArray(): Array<FacilityType> {
                     return arrayOf(
                         CAFE, STUDY_ROOM, STORE_CONVENIENCE, STORE_BOOK, STORE_STATIONERY,
                         ATM, CAFETERIA, PRINTER, POST, VENDING_MACHINE, ETC
                     )
+                }
+
+                fun getArray(): Array<FacilityType> {
+                    val types = ArrayList<FacilityType>()
+                    val raw = getRawArray()
+                    for (t in raw) {
+                        for (f in DataManager.facilities!!) {
+                            if (f.type == t) {
+                                types.add(t)
+                                break
+                            }
+                        }
+                    }
+                    return types.toTypedArray()
                 }
 
                 fun getString(context: Context, facilityType: FacilityType): String {
