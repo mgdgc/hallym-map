@@ -219,13 +219,13 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun decodeLectureRoomNumber(q: String): SearchResult? {
-        val regex = Regex("^[A-Za-z]?[0-9]{4,5}(-[0-5]{1,2})?\$")
+        val regex = Regex("^[A-Za-z]?[0-9]{4,5}[A-Za-z]?(-[0-5]{1,2})?\$")
         var lectureRoom = q
 
         if (lectureRoom.matches(regex)) {
             val data = mutableMapOf<String, String>()
 
-            if (lectureRoom.matches(Regex("^[A-Za-z][0-9]{4,5}(-[0-5]{1,2})?\$"))) {
+            if (lectureRoom.matches(Regex("^[A-Za-z][0-9]{4,5}[A-Za-z]?(-[0-5]{1,2})?\$"))) {
                 data["pre"] = lectureRoom.slice(0 until 1)
                 lectureRoom = lectureRoom.removeRange(0 until 1)
             }
