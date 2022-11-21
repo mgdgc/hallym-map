@@ -1,5 +1,7 @@
 # HallymMap
 
+<img alt="Project Icon" src="sw_exhibit_hm.png" width="720"/>
+
 <img alt="Project Icon" src="/app/src/main/ic_hm_playstore_image.png" width="720"/>
 
 > 학교 지도와 건물, 강의실 위치, 편의시설 정보를 제공하는 안드로이드 애플리케이션입니다.
